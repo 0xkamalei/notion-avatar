@@ -3,17 +3,12 @@ import Image from 'next/legacy/image';
 import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import UserMenu from '@/components/Auth/UserMenu';
-import AuthModal from '@/components/Auth/AuthModal';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
-import { useAuth } from '@/contexts/AuthContext';
 import Decoration from './decoration';
 
 export default function Header() {
   const { t } = useTranslation('common');
   const router = useRouter();
-  const { user, subscription, credits, signOut, isLoading } = useAuth();
-  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [showMobileLanguageMenu, setShowMobileLanguageMenu] = useState(false);
 
@@ -131,7 +126,6 @@ export default function Header() {
             </span>
           </Link>
           <LanguageSwitcher />
-          <UserMenu onLoginClick={() => setIsAuthModalOpen(true)} />
         </nav>
 
         {/* Mobile Menu Button */}
@@ -385,133 +379,12 @@ export default function Header() {
                     )}
                   </div>
                 </div>
-
-                {/* User Settings - Flat Layout */}
-                <div className="pt-4 border-t border-gray-200">
-                  {isLoading ? (
-                    <div className="px-4 py-3">
-                      <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-full bg-gray-200 animate-pulse" />
-                        <div className="flex-1">
-                          <div className="h-4 bg-gray-200 rounded animate-pulse w-24 mb-2" />
-                          <div className="h-3 bg-gray-200 rounded animate-pulse w-32" />
-                        </div>
-                      </div>
-                    </div>
-                  ) : !user ? (
-                    <div className="px-4 py-3">
-                      <button
-                        onClick={() => {
-                          setIsAuthModalOpen(true);
-                          setIsMobileMenuOpen(false);
-                        }}
-                        type="button"
-                        className="w-full px-4 py-2 bg-black text-white text-sm font-medium rounded-lg hover:bg-gray-800 transition-colors"
-                      >
-                        {t('menu.signIn')}
-                      </button>
-                    </div>
-                  ) : (
-                    <div className="space-y-1">
-                      {/* User Info */}
-                      <div className="px-4 py-3 border-b border-gray-100">
-                        <div className="flex items-center gap-3 mb-2">
-                          {user.user_metadata?.avatar_url ? (
-                            // eslint-disable-next-line @next/next/no-img-element
-                            <img
-                              src={user.user_metadata.avatar_url}
-                              alt="Avatar"
-                              className="w-10 h-10 rounded-full border border-gray-200"
-                              referrerPolicy="no-referrer"
-                            />
-                          ) : (
-                            <div className="w-10 h-10 rounded-full bg-gray-900 flex items-center justify-center text-white text-sm font-medium">
-                              {(
-                                user.user_metadata?.full_name ||
-                                user.user_metadata?.name ||
-                                user.email
-                              )
-                                ?.charAt(0)
-                                .toUpperCase()}
-                            </div>
-                          )}
-                          <div className="flex-1 min-w-0">
-                            <p className="font-medium text-gray-900 truncate">
-                              {user.user_metadata?.full_name ||
-                                user.user_metadata?.name ||
-                                user.email}
-                            </p>
-                            <p className="text-sm text-gray-500 truncate">
-                              {user.email}
-                            </p>
-                          </div>
-                        </div>
-                        <div className="flex items-center gap-2 mt-2">
-                          <span
-                            className={`px-2 py-0.5 text-xs font-medium rounded-full ${
-                              subscription?.plan_type === 'monthly' ||
-                              subscription?.plan_type === 'yearly'
-                                ? 'bg-black text-white'
-                                : 'bg-gray-100 text-gray-600'
-                            }`}
-                          >
-                            {subscription?.plan_type === 'monthly' ||
-                            subscription?.plan_type === 'yearly'
-                              ? t('menu.pro')
-                              : t('menu.free')}
-                          </span>
-                          {credits > 0 && (
-                            <span className="text-xs text-gray-500">
-                              {credits} {t('menu.credits')}
-                            </span>
-                          )}
-                        </div>
-                      </div>
-
-                      {/* Menu Items */}
-                      <div className="py-1">
-                        <Link
-                          href="/account"
-                          onClick={() => setIsMobileMenuOpen(false)}
-                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
-                        >
-                          {t('menu.accountSettings')}
-                        </Link>
-                        <Link
-                          href="/pricing"
-                          onClick={() => setIsMobileMenuOpen(false)}
-                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
-                        >
-                          {t('menu.upgradePlan')}
-                        </Link>
-                      </div>
-
-                      {/* Sign Out */}
-                      <div className="border-t border-gray-100 pt-1">
-                        <button
-                          onClick={() => {
-                            signOut();
-                            setIsMobileMenuOpen(false);
-                          }}
-                          type="button"
-                          className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors"
-                        >
-                          {t('menu.signOut')}
-                        </button>
-                      </div>
-                    </div>
-                  )}
-                </div>
               </nav>
             </div>
           </div>
         </div>
       </div>
       <Decoration className="absolute top-0 right-0 w-24 sm:w-28 md:w-36 pointer-events-none" />
-      <AuthModal
-        isOpen={isAuthModalOpen}
-        onClose={() => setIsAuthModalOpen(false)}
-      />
     </header>
   );
 }

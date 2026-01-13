@@ -38,3 +38,5 @@ yarn-error.log*
 supabase/.temp
 
 scripts/local
+
+.env

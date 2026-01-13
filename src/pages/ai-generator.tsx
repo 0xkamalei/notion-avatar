@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
@@ -7,8 +7,6 @@ import { GetStaticPropsContext } from 'next';
 import toast, { Toaster } from 'react-hot-toast';
 
 import { AIGenerationMode, AIGenerateResponse } from '@/types/ai';
-import { useAIUsage } from '@/hooks/useAIUsage';
-import { useAuth } from '@/contexts/AuthContext';
 
 import dynamic from 'next/dynamic';
 import Header from '@/components/Header';
@@ -18,26 +16,10 @@ import ImageUploader from '@/components/AIGenerator/ImageUploader';
 import TextInput from '@/components/AIGenerator/TextInput';
 import GeneratingStatus from '@/components/AIGenerator/GeneratingStatus';
 import GeneratedResult from '@/components/AIGenerator/GeneratedResult';
-import DailyLimitBanner from '@/components/AIGenerator/DailyLimitBanner';
 import ProductHuntBanner from '@/components/ProductHuntBanner';
 import Image from 'next/legacy/image';
 
 // 延迟加载非首屏组件
-const AuthModal = dynamic(() => import('@/components/Auth/AuthModal'), {
-  loading: () => null,
-});
-const UpgradeModal = dynamic(
-  () => import('@/components/Pricing/UpgradeModal'),
-  {
-    loading: () => null,
-  },
-);
-const PricingPlans = dynamic(
-  () => import('@/components/Pricing/PricingPlans'),
-  {
-    loading: () => null,
-  },
-);
 const ExamplesShowcase = dynamic(
   () => import('@/components/AIGenerator/ExamplesShowcase'),
   { loading: () => null },
@@ -52,42 +34,13 @@ export default function AIGeneratorPage({
 }: AIGeneratorPageProps) {
   const { t } = useTranslation('common');
   const router = useRouter();
-  const { user, isLoading: isAuthLoading } = useAuth();
   const [mode, setMode] = useState<AIGenerationMode>('photo2avatar');
   const [inputImage, setInputImage] = useState<string>('');
   const [inputText, setInputText] = useState<string>('');
   const [generatedImage, setGeneratedImage] = useState<string | null>(null);
   const [isGenerating, setIsGenerating] = useState(false);
-  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
-  const [isUpgradeModalOpen, setIsUpgradeModalOpen] = useState(false);
-
-  const { usageState, incrementUsage, checkUsage } = useAIUsage();
-
-  // Check for success/canceled query params from Stripe
-  useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.get('success') === 'true') {
-      toast.success('Payment successful! You can now generate more avatars.');
-      // Clean up URL
-      window.history.replaceState({}, '', '/ai-generator');
-      // Refresh usage
-      checkUsage();
-    }
-  }, [checkUsage]);
 
   const handleGenerate = async () => {
-    // Check if user is authenticated
-    if (!user) {
-      setIsAuthModalOpen(true);
-      return;
-    }
-
-    // Check usage limits
-    if (!usageState.isUnlimited && usageState.remaining <= 0) {
-      setIsUpgradeModalOpen(true);
-      return;
-    }
-
     if (mode === 'photo2avatar' && !inputImage) {
       toast.error(t('ai.uploadTip'));
       return;
@@ -115,19 +68,8 @@ export default function AIGeneratorPage({
 
       const data: AIGenerateResponse = await response.json();
 
-      if (response.status === 401) {
-        setIsAuthModalOpen(true);
-        return;
-      }
-
-      if (response.status === 402) {
-        setIsUpgradeModalOpen(true);
-        return;
-      }
-
       if (data.success && data.image) {
         setGeneratedImage(data.image);
-        await incrementUsage();
         toast.success('Avatar generated successfully!');
       } else {
         throw new Error(data.error || 'Unknown error');
@@ -150,9 +92,6 @@ export default function AIGeneratorPage({
     link.click();
     document.body.removeChild(link);
   };
-
-  const canGenerate = usageState.isUnlimited || usageState.remaining > 0;
-  const isDisabled = !canGenerate && !!user;
 
   const scrollToGenerator = () => {
     const element = document.getElementById('ai-generator');
@@ -206,61 +145,6 @@ export default function AIGeneratorPage({
       ? `${baseUrl}${pagePath}`
       : `${baseUrl}/${locale}${pagePath}`;
 
-  const plans = useMemo(
-    () => [
-      {
-        name: t('pricing.plans.free.name'),
-        price: t('pricing.plans.free.price'),
-        period: t('pricing.plans.free.period'),
-        description: t('pricing.plans.free.description'),
-        features: [
-          t('pricing.plans.free.features.1'),
-          t('pricing.plans.free.features.2'),
-          t('pricing.plans.free.features.3'),
-          t('pricing.plans.free.features.4'),
-        ],
-        buttonText: t('pricing.plans.free.buttonText'),
-        buttonVariant: 'secondary' as const,
-        priceType: null,
-      },
-      {
-        name: t('pricing.plans.pro.name'),
-        price: t('pricing.plans.pro.price'),
-        period: t('pricing.plans.pro.period'),
-        description: t('pricing.plans.pro.description'),
-        features: [
-          t('pricing.plans.pro.features.1'),
-          t('pricing.plans.pro.features.2'),
-          t('pricing.plans.pro.features.3'),
-          t('pricing.plans.pro.features.4'),
-          t('pricing.plans.pro.features.5'),
-          t('pricing.plans.pro.features.6'),
-        ],
-        buttonText: t('pricing.plans.pro.buttonText'),
-        buttonVariant: 'primary' as const,
-        priceType: 'monthly',
-        popular: true,
-      },
-      {
-        name: t('pricing.plans.credits.name'),
-        price: t('pricing.plans.credits.price'),
-        period: t('pricing.plans.credits.period'),
-        description: t('pricing.plans.credits.description'),
-        features: [
-          t('pricing.plans.credits.features.1'),
-          t('pricing.plans.credits.features.2'),
-          t('pricing.plans.credits.features.3'),
-          t('pricing.plans.credits.features.4'),
-          t('pricing.plans.credits.features.5'),
-        ],
-        buttonText: t('pricing.plans.credits.buttonText'),
-        buttonVariant: 'secondary' as const,
-        priceType: 'credits',
-      },
-    ],
-    [t],
-  );
-
   const renderContent = () => {
     if (isGenerating) {
       return <GeneratingStatus />;
@@ -279,12 +163,11 @@ export default function AIGeneratorPage({
     return (
       <div className="w-full flex flex-col items-center animate-in fade-in slide-in-from-bottom-4 duration-500">
         {mode === 'photo2avatar' ? (
-          <ImageUploader onImageSelect={setInputImage} disabled={isDisabled} />
+          <ImageUploader onImageSelect={setInputImage} />
         ) : (
           <TextInput
             value={inputText}
             onChange={setInputText}
-            disabled={isDisabled}
           />
         )}
 
@@ -298,33 +181,8 @@ export default function AIGeneratorPage({
           type="button"
           className="mt-8 py-3 px-12 rounded-full bg-black text-white font-bold text-lg hover:scale-105 active:scale-95 transition-all disabled:opacity-50 disabled:hover:scale-100 disabled:cursor-not-allowed shadow-lg hover:shadow-xl"
         >
-          {!user ? `${t('ai.generate')} (Sign In Required)` : t('ai.generate')}
+          {t('ai.generate')}
         </button>
-
-        {user && (
-          <DailyLimitBanner
-            remaining={usageState.remaining}
-            total={usageState.total}
-            isUnlimited={usageState.isUnlimited}
-            freeRemaining={usageState.freeRemaining}
-            paidCredits={usageState.paidCredits}
-          />
-        )}
-
-        {!user && !isAuthLoading && (
-          <div className="mt-6 text-center">
-            <p className="text-gray-600 mb-2">
-              Sign in to start generating avatars
-            </p>
-            <button
-              onClick={() => setIsAuthModalOpen(true)}
-              type="button"
-              className="text-black font-medium hover:underline"
-            >
-              Sign In / Sign Up
-            </button>
-          </div>
-        )}
       </div>
     );
   };
@@ -440,18 +298,6 @@ export default function AIGeneratorPage({
         <ProductHuntBanner />
         <Header />
         <Toaster position="top-center" />
-        <AuthModal
-          isOpen={isAuthModalOpen}
-          onClose={() => setIsAuthModalOpen(false)}
-        />
-        <UpgradeModal
-          isOpen={isUpgradeModalOpen}
-          onClose={() => setIsUpgradeModalOpen(false)}
-          onLoginClick={() => {
-            setIsUpgradeModalOpen(false);
-            setIsAuthModalOpen(true);
-          }}
-        />
 
         <main className="flex-grow container mx-auto px-4 py-12">
           {/* Enhanced Hero Section */}
@@ -582,18 +428,6 @@ export default function AIGeneratorPage({
 
           {/* Examples Showcase Section */}
           <ExamplesShowcase onApplyPrompt={handleApplyPrompt} />
-
-          {/* Pricing Section */}
-          <section className="py-16 mb-12 animate-in fade-in slide-in-from-bottom-4 duration-500 delay-300">
-            <div className="container mx-auto px-4 md:px-8">
-              <PricingPlans
-                plans={plans}
-                title={t('ai.pricing.title')}
-                description={t('ai.pricing.description')}
-                onAuthRequired={() => setIsAuthModalOpen(true)}
-              />
-            </div>
-          </section>
 
           {/* FAQ Section */}
           <section className="py-16 mb-12 animate-in fade-in slide-in-from-bottom-4 duration-500 delay-400">

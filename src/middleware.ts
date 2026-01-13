@@ -1,8 +1,8 @@
-import { NextRequest } from 'next/server';
-import { updateSession } from '@/lib/supabase/middleware';
+import { NextRequest, NextResponse } from 'next/server';
 
 export async function middleware(request: NextRequest) {
-  return updateSession(request);
+  // Local mode: No session management required
+  return NextResponse.next();
 }
 
 export const config = {
