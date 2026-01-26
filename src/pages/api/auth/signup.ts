@@ -1,5 +1,15 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { createClient } from '@/lib/supabase/server';
+import { z } from 'zod';
+
+const signupSchema = z.object({
+  username: z
+    .string()
+    .min(2, 'Username must be at least 2 characters')
+    .max(50, 'Username must be at most 50 characters'),
+  email: z.string().email('Invalid email address'),
+  password: z.string().min(6, 'Password must be at least 6 characters'),
+});
 
 export default async function handler(
   req: NextApiRequest,
@@ -9,19 +19,13 @@ export default async function handler(
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const { username, email, password } = req.body;
+  const parseResult = signupSchema.safeParse(req.body);
 
-  if (!username || !email || !password) {
-    return res
-      .status(400)
-      .json({ error: 'Username, email and password are required' });
+  if (!parseResult.success) {
+    return res.status(400).json({ error: parseResult.error.issues[0].message });
   }
 
-  if (username.length < 2) {
-    return res
-      .status(400)
-      .json({ error: 'Username must be at least 2 characters' });
-  }
+  const { username, email, password } = parseResult.data;
 
   try {
     const supabase = createClient(req, res);

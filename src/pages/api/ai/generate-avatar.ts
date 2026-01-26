@@ -1,13 +1,35 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { generateAvatar } from '@/lib/gemini';
-import { AIGenerateRequest, AIGenerateResponse } from '@/types/ai';
+import { AIGenerateResponse } from '@/types/ai';
 import { estimateGenerationUsage, getPricingConfig } from '@/lib/billing';
+import { z } from 'zod';
 import {
   createClient,
   createServiceClient,
   base64ToBuffer,
   uploadImageToStorage,
 } from '@/lib/supabase/server';
+
+const generateSchema = z
+  .object({
+    mode: z.enum(['photo2avatar', 'text2avatar']),
+    style: z
+      .enum(['notion', 'ghibli', 'oil_painting'])
+      .optional()
+      .default('notion'),
+    image: z.string().optional(),
+    description: z.string().optional(),
+  })
+  .refine(
+    (data) => {
+      if (data.mode === 'photo2avatar' && !data.image) return false;
+      if (data.mode === 'text2avatar' && !data.description) return false;
+      return true;
+    },
+    {
+      message: 'Missing required fields for the selected mode',
+    },
+  );
 
 export default async function handler(
   req: NextApiRequest,
@@ -21,28 +43,16 @@ export default async function handler(
   }
 
   try {
-    const { mode, style, image, description } = req.body as AIGenerateRequest;
+    const parseResult = generateSchema.safeParse(req.body);
 
-    if (!mode || (mode !== 'photo2avatar' && mode !== 'text2avatar')) {
+    if (!parseResult.success) {
       return res.status(400).json({
         success: false,
-        error: 'Invalid generation mode',
+        error: parseResult.error.issues[0].message,
       });
     }
 
-    if (mode === 'photo2avatar' && !image) {
-      return res.status(400).json({
-        success: false,
-        error: 'Image is required for photo2avatar mode',
-      });
-    }
-
-    if (mode === 'text2avatar' && !description) {
-      return res.status(400).json({
-        success: false,
-        error: 'Description is required for text2avatar mode',
-      });
-    }
+    const { mode, style, image, description } = parseResult.data;
 
     const supabase = createClient(req, res);
     const {
@@ -165,7 +175,7 @@ export default async function handler(
     console.error('API Error:', error);
     return res.status(500).json({
       success: false,
-      error: error instanceof Error ? error.message : 'Internal Server Error',
+      error: 'Internal Server Error',
     });
   }
 }

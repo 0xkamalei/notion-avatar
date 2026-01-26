@@ -50,7 +50,8 @@
     "remark": "15.0.1",
     "remark-gfm": "4.0.1",
     "remark-html": "16.0.1",
-    "stripe": "20.1.0"
+    "stripe": "20.1.0",
+    "zod": "4.3.6"
   },
   "devDependencies": {
     "@commitlint/cli": "13.2.1",

@@ -25,6 +25,12 @@ export default async function handler(
   // If redirectTo is login page, redirect to home instead
   let redirectTo = typeof next === 'string' ? decodeURIComponent(next) : '/';
 
+  // Security: Prevent open redirect
+  // Ensure redirectTo starts with / and does not start with // (protocol relative)
+  if (!redirectTo.startsWith('/') || redirectTo.startsWith('//')) {
+    redirectTo = '/';
+  }
+
   // Prevent redirecting back to login page
   if (redirectTo.includes('/auth/login')) {
     // Extract locale from referer or default to 'en'
