@@ -22,12 +22,15 @@ import Footer from '@/components/Footer';
 import Modal from '@/components/Modal/Common';
 import FaviconLinks from '@/components/SEO/FaviconLinks';
 import { useUsageHistory } from '@/hooks/useAccountData';
+import { useAIUsage } from '@/hooks/useAIUsage';
 
 interface AccountPageProps {
   initialUsageHistory: Array<{
     id: string;
     generation_mode: string;
     created_at: string;
+    credits_charged?: number;
+    used_free?: boolean;
     image_path?: string;
     image_url?: string;
   }>;
@@ -37,6 +40,7 @@ export default function AccountPage({ initialUsageHistory }: AccountPageProps) {
   const { t } = useTranslation('common');
   const router = useRouter();
   const { user, credits, isLoading, signOut, refreshSubscription } = useAuth();
+  const { usageState } = useAIUsage();
 
   const {
     data: usageHistory = initialUsageHistory,
@@ -229,7 +233,20 @@ export default function AccountPage({ initialUsageHistory }: AccountPageProps) {
                   {t('account.buyMore')}
                 </Link>
               </div>
-              <p className="text-gray-600 mt-4">{t('account.siteFreeQuota')}</p>
+              <div className="mt-4 text-sm text-gray-600 space-y-1">
+                <p>{t('account.siteFreeQuota')}</p>
+                {usageState.isLoading ? (
+                  <p>{t('auth.loading')}</p>
+                ) : (
+                  <p>
+                    {t('account.usage.availableToday', {
+                      remaining: usageState.remaining,
+                      freeRemaining: usageState.freeRemaining || 0,
+                      paidCredits: usageState.paidCredits || 0,
+                    })}
+                  </p>
+                )}
+              </div>
             </div>
 
             {/* Promo Code Section */}
@@ -383,9 +400,22 @@ export default function AccountPage({ initialUsageHistory }: AccountPageProps) {
                               ? t('ai.photo2avatar')
                               : t('ai.text2avatar')}
                           </p>
-                          <p className="text-sm text-gray-500">
-                            {new Date(record.created_at).toLocaleString()}
-                          </p>
+                          <div className="flex items-center gap-2 text-sm text-gray-500">
+                            <span>
+                              {new Date(record.created_at).toLocaleString()}
+                            </span>
+                            {record.used_free ? (
+                              <span className="px-2 py-0.5 rounded-full bg-gray-100 text-gray-700 text-xs">
+                                {t('account.usage.usedSiteFree')}
+                              </span>
+                            ) : record.credits_charged ? (
+                              <span className="px-2 py-0.5 rounded-full bg-gray-100 text-gray-700 text-xs">
+                                {t('account.usage.usedCredits', {
+                                  credits: record.credits_charged,
+                                })}
+                              </span>
+                            ) : null}
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -395,7 +425,7 @@ export default function AccountPage({ initialUsageHistory }: AccountPageProps) {
                 <p className="text-gray-500 text-center py-8">
                   {t('account.noGenerationsYet')}{' '}
                   <Link
-                    href="/ai-generator"
+                    href="/ai-avatar/notion"
                     className="text-black font-medium hover:underline"
                   >
                     {t('account.createFirstAvatar')}
@@ -499,6 +529,8 @@ export async function getServerSideProps(
     id: string;
     generation_mode: string;
     created_at: string;
+    credits_charged?: number;
+    used_free?: boolean;
     image_path?: string;
     image_url?: string;
   }> = [];
@@ -520,7 +552,9 @@ export async function getServerSideProps(
 
     const { data: usageData } = await supabase
       .from('usage_records')
-      .select('id, generation_mode, created_at, image_path')
+      .select(
+        'id, generation_mode, created_at, image_path, credits_charged, used_free',
+      )
       .eq('user_id', user.id)
       .order('created_at', { ascending: false })
       .limit(10);

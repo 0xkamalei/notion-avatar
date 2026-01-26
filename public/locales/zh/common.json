@@ -259,7 +259,12 @@
     "credits": "积分",
     "creditsRemaining": "剩余积分",
     "buyMore": "购买更多",
-    "siteFreeQuota": "全站每日共享 1 次免费生成（每日重置）。",
+    "siteFreeQuota": "新用户每日免费：每个账号每天 1 次，且受全站每日总限额影响（每日重置）。",
+    "usage": {
+      "availableToday": "今日可用：{{remaining}}（每日免费 {{freeRemaining}} + 积分 {{paidCredits}}）",
+      "usedSiteFree": "每日免费",
+      "usedCredits": "消耗 {{credits}} 积分"
+    },
     "downloading": "下载中...",
     "recentGenerations": "最近生成",
     "noGenerationsYet": "还没有生成记录。",

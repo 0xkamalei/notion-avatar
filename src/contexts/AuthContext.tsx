@@ -142,46 +142,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   };
 
-  const signInWithGithub = async () => {
-    const savedRedirect =
-      typeof window !== 'undefined'
-        ? sessionStorage.getItem('auth_redirect')
-        : null;
-
-    const pathname =
-      typeof window !== 'undefined' ? window.location.pathname : '/';
-    const localeMatch = pathname.match(/^\/(zh|zh-TW|ko|ja|es|fr|de|ru|pt)/);
-    const locale = localeMatch ? localeMatch[1] : 'en';
-    const homePath = locale === 'en' ? '/' : `/${locale}`;
-
-    let next = savedRedirect || homePath;
-    if (!savedRedirect && pathname && !pathname.includes('/auth/login')) {
-      next = pathname;
-    }
-
-    if (next.includes('/auth/login')) {
-      next = homePath;
-    }
-
-    if (typeof window !== 'undefined') {
-      sessionStorage.removeItem('auth_redirect');
-    }
-
-    const response = await fetch('/api/auth/signin', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ provider: 'github', next }),
-    });
-
-    const data = await response.json();
-
-    if (data.url) {
-      window.location.href = data.url;
-    } else if (data.error) {
-      throw new Error(data.error);
-    }
-  };
-
   const signInWithEmail = async (email: string, password: string) => {
     try {
       const response = await fetch('/api/auth/signin', {
@@ -261,7 +221,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       isLoading,
       refreshSubscription,
       signInWithEmail,
-      signInWithGithub,
       signInWithGoogle,
       signOut,
       signUpWithEmail,

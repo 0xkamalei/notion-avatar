@@ -242,6 +242,12 @@
     "credits": "積分",
     "creditsRemaining": "剩餘積分",
     "buyMore": "購買更多",
+    "siteFreeQuota": "新用戶每日免費：每個帳號每天 1 次，且受全站每日總限額影響（每日重置）。",
+    "usage": {
+      "availableToday": "今日可用：{{remaining}}（每日免費 {{freeRemaining}} + 積分 {{paidCredits}}）",
+      "usedSiteFree": "每日免費",
+      "usedCredits": "消耗 {{credits}} 積分"
+    },
     "downloading": "下載中...",
     "recentGenerations": "最近生成",
     "noGenerationsYet": "還沒有生成記錄。",

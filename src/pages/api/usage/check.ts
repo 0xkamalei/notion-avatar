@@ -20,7 +20,7 @@ export default async function handler(
     if (!user) {
       return res.status(200).json({
         remaining: 0,
-        total: pricing.siteFreeDailyLimit,
+        total: 1,
         isUnlimited: false,
         isAuthenticated: false,
         freeRemaining: 0,
@@ -29,6 +29,16 @@ export default async function handler(
     }
 
     const serviceClient = createServiceClient();
+
+    const { data: anyCreditPackages, error: anyCreditPackagesError } =
+      await serviceClient
+        .from('credit_packages')
+        .select('id')
+        .eq('user_id', user.id)
+        .limit(1);
+    if (anyCreditPackagesError) throw anyCreditPackagesError;
+
+    const isEligibleForDailyFree = (anyCreditPackages || []).length === 0;
 
     // Check credit packages
     const { data: credits } = await serviceClient
@@ -41,20 +51,38 @@ export default async function handler(
       credits?.reduce((sum, pkg) => sum + pkg.credits_remaining, 0) || 0;
 
     const today = new Date().toISOString().split('T')[0];
-    const { data: siteUsage } = await serviceClient
+    const { data: siteUsage, error: siteUsageError } = await serviceClient
       .from('site_daily_usage')
       .select('count')
       .eq('usage_date', today)
-      .single();
+      .maybeSingle();
+    if (siteUsageError) throw siteUsageError;
 
     const usedToday = siteUsage?.count || 0;
-    const freeRemaining = Math.max(0, pricing.siteFreeDailyLimit - usedToday);
+    const siteFreeRemaining = Math.max(
+      0,
+      pricing.siteFreeDailyLimit - usedToday,
+    );
+
+    let freeRemaining = 0;
+    if (isEligibleForDailyFree && siteFreeRemaining > 0) {
+      const { data: userDaily, error: userDailyError } = await serviceClient
+        .from('daily_usage')
+        .select('count')
+        .eq('user_id', user.id)
+        .eq('usage_date', today)
+        .maybeSingle();
+      if (userDailyError) throw userDailyError;
+
+      const userUsedToday = userDaily?.count || 0;
+      freeRemaining = userUsedToday >= 1 ? 0 : 1;
+    }
 
     return res.status(200).json({
       remaining: freeRemaining + totalCredits,
       freeRemaining,
       paidCredits: totalCredits,
-      total: pricing.siteFreeDailyLimit,
+      total: isEligibleForDailyFree ? 1 : 0,
       isUnlimited: false,
       isAuthenticated: true,
     });

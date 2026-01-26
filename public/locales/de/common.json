@@ -242,6 +242,12 @@
     "credits": "Credits",
     "creditsRemaining": "verbleibende Credits",
     "buyMore": "Mehr kaufen",
+    "siteFreeQuota": "Täglich kostenlos (neue Nutzer): 1 Generierung pro Konto und Tag, abhängig von einem siteweiten Limit (täglicher Reset).",
+    "usage": {
+      "availableToday": "Heute verfügbar: {{remaining}} (täglich kostenlos {{freeRemaining}} + Credits {{paidCredits}})",
+      "usedSiteFree": "Täglich kostenlos",
+      "usedCredits": "{{credits}} Credits"
+    },
     "downloading": "Wird heruntergeladen...",
     "recentGenerations": "Letzte Generierungen",
     "noGenerationsYet": "Noch keine Generierungen.",

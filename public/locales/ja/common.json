@@ -242,6 +242,12 @@
     "credits": "クレジット",
     "creditsRemaining": "残りのクレジット",
     "buyMore": "さらに購入",
+    "siteFreeQuota": "毎日無料（新規ユーザー）：アカウントごとに1日1回、サイト全体の上限あり（毎日リセット）。",
+    "usage": {
+      "availableToday": "本日利用可能: {{remaining}}（毎日無料 {{freeRemaining}} + クレジット {{paidCredits}}）",
+      "usedSiteFree": "毎日無料",
+      "usedCredits": "{{credits}} クレジット"
+    },
     "downloading": "ダウンロード中...",
     "recentGenerations": "最近の生成",
     "noGenerationsYet": "まだ生成がありません。",

@@ -5,6 +5,9 @@ interface UsageRecord {
   id: string;
   generation_mode: string;
   created_at: string;
+  credits_charged?: number;
+  estimated_tokens?: number;
+  used_free?: boolean;
   image_path?: string;
   image_url?: string;
 }

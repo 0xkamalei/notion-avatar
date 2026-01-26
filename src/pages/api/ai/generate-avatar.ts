@@ -77,22 +77,38 @@ export default async function handler(
 
     const serviceClient = createServiceClient();
 
-    const { data: usedFree } = await serviceClient.rpc(
-      'try_consume_site_free_usage',
-      {
-        p_date: today,
-        p_limit: pricing.siteFreeDailyLimit,
-      },
-    );
+    const { data: anyCreditPackages, error: anyCreditPackagesError } =
+      await serviceClient
+        .from('credit_packages')
+        .select('id')
+        .eq('user_id', user.id)
+        .limit(1);
+    if (anyCreditPackagesError) throw anyCreditPackagesError;
+
+    const isEligibleForDailyFree = (anyCreditPackages || []).length === 0;
+
+    let usedFree = false;
+    if (isEligibleForDailyFree) {
+      const { data: usedFreeData, error: usedFreeError } =
+        await serviceClient.rpc('try_consume_user_free_usage', {
+          p_user_id: user.id,
+          p_date: today,
+          p_user_limit: 1,
+          p_site_limit: pricing.siteFreeDailyLimit,
+        });
+      if (usedFreeError) throw usedFreeError;
+      usedFree = !!usedFreeData;
+    }
 
     let reservedCredits = 0;
 
     if (!usedFree) {
-      const { data: creditData } = await serviceClient
+      const { data: creditData, error: creditError } = await serviceClient
         .from('credit_packages')
         .select('credits_remaining')
         .eq('user_id', user.id)
         .gt('credits_remaining', 0);
+      if (creditError) throw creditError;
 
       const totalCredits =
         creditData?.reduce((sum, pkg) => sum + pkg.credits_remaining, 0) || 0;
@@ -102,19 +118,20 @@ export default async function handler(
           success: false,
           error:
             totalCredits <= 0
-              ? 'Today’s free quota has been used. Please recharge credits to continue.'
+              ? isEligibleForDailyFree
+                ? 'Daily free quota is unavailable. Please purchase credits to continue.'
+                : 'No credits remaining. Please purchase credits to continue.'
               : 'Insufficient credits. Please recharge to continue.',
           requiredCredits,
         });
       }
 
-      const { data: consumedCredits } = await serviceClient.rpc(
-        'consume_user_credits',
-        {
+      const { data: consumedCredits, error: consumeError } =
+        await serviceClient.rpc('consume_user_credits', {
           p_user_id: user.id,
           p_amount: requiredCredits,
-        },
-      );
+        });
+      if (consumeError) throw consumeError;
 
       if (!consumedCredits) {
         return res.status(402).json({
@@ -127,50 +144,59 @@ export default async function handler(
       reservedCredits = requiredCredits;
     }
 
-    let generatedImage: string;
     try {
-      generatedImage = await generateAvatar(mode, input, style);
-    } catch (generationError) {
+      const generatedImage = await generateAvatar(mode, input, style);
+
+      let imagePath: string | null = null;
+      try {
+        const imageBuffer = base64ToBuffer(generatedImage);
+        imagePath = await uploadImageToStorage(imageBuffer, user!.id);
+      } catch (uploadError) {
+        console.error('Failed to upload image to storage:', uploadError);
+      }
+
+      const { error: usageInsertError } = await serviceClient
+        .from('usage_records')
+        .insert({
+          user_id: user!.id,
+          generation_mode: mode,
+          input_type: mode === 'photo2avatar' ? 'image' : 'text',
+          image_path: imagePath,
+          credits_charged: reservedCredits,
+          estimated_tokens: estimatedTokens,
+          used_free: usedFree,
+        });
+      if (usageInsertError) throw usageInsertError;
+
+      return res.status(200).json({
+        success: true,
+        image: generatedImage,
+        creditsCharged: reservedCredits,
+        usedFree,
+      });
+    } catch (requestError) {
       if (usedFree) {
-        await serviceClient.rpc('refund_site_free_usage', { p_date: today });
+        try {
+          await serviceClient.rpc('refund_user_free_usage', {
+            p_user_id: user.id,
+            p_date: today,
+          });
+        } catch (refundError) {
+          console.error('Failed to refund daily free usage:', refundError);
+        }
       }
       if (reservedCredits > 0) {
-        await serviceClient.rpc('refund_user_credits', {
-          p_user_id: user.id,
-          p_amount: reservedCredits,
-        });
+        try {
+          await serviceClient.rpc('refund_user_credits', {
+            p_user_id: user.id,
+            p_amount: reservedCredits,
+          });
+        } catch (refundError) {
+          console.error('Failed to refund user credits:', refundError);
+        }
       }
-      throw generationError;
+      throw requestError;
     }
-
-    // Upload image to Supabase Storage
-    let imagePath: string | null = null;
-    try {
-      const imageBuffer = base64ToBuffer(generatedImage);
-      imagePath = await uploadImageToStorage(imageBuffer, user!.id);
-    } catch (uploadError) {
-      console.error('Failed to upload image to storage:', uploadError);
-      // Continue without storing image path - don't fail the request
-      // The base64 image is still returned to the client
-    }
-
-    // Insert usage record with image_path if upload succeeded
-    await serviceClient.from('usage_records').insert({
-      user_id: user!.id,
-      generation_mode: mode,
-      input_type: mode === 'photo2avatar' ? 'image' : 'text',
-      image_path: imagePath,
-      credits_charged: reservedCredits,
-      estimated_tokens: estimatedTokens,
-      used_free: !!usedFree,
-    });
-
-    return res.status(200).json({
-      success: true,
-      image: generatedImage,
-      creditsCharged: reservedCredits,
-      usedFree: !!usedFree,
-    });
   } catch (error) {
     console.error('API Error:', error);
     return res.status(500).json({

@@ -242,6 +242,12 @@
     "credits": "Crédits",
     "creditsRemaining": "crédits restants",
     "buyMore": "Acheter Plus",
+    "siteFreeQuota": "Gratuit quotidien (nouveaux utilisateurs) : 1 génération par compte et par jour, soumis à un plafond global du site (réinitialisation quotidienne).",
+    "usage": {
+      "availableToday": "Disponible aujourd'hui : {{remaining}} (gratuit quotidien {{freeRemaining}} + crédits {{paidCredits}})",
+      "usedSiteFree": "Gratuit quotidien",
+      "usedCredits": "{{credits}} crédits"
+    },
     "downloading": "Téléchargement...",
     "recentGenerations": "Générations Récentes",
     "noGenerationsYet": "Aucune génération pour le moment.",

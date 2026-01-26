@@ -233,6 +233,12 @@
     "credits": "Кредиты",
     "creditsRemaining": "осталось кредитов",
     "buyMore": "Купить Больше",
+    "siteFreeQuota": "Ежедневно бесплатно (для новых пользователей): 1 генерация на аккаунт в день, с учетом общего лимита сайта (сбрасывается ежедневно).",
+    "usage": {
+      "availableToday": "Доступно сегодня: {{remaining}} (ежедневно бесплатно {{freeRemaining}} + кредиты {{paidCredits}})",
+      "usedSiteFree": "Ежедневно бесплатно",
+      "usedCredits": "{{credits}} кредитов"
+    },
     "downloading": "Загрузка...",
     "recentGenerations": "Последние Генерации",
     "noGenerationsYet": "Генераций пока нет.",

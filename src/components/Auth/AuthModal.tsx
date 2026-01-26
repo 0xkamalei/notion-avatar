@@ -12,12 +12,7 @@ interface AuthModalProps {
 export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
   const { t } = useTranslation('common');
   const router = useRouter();
-  const {
-    signInWithGoogle,
-    signInWithGithub,
-    signInWithEmail,
-    signUpWithEmail,
-  } = useAuth();
+  const { signInWithGoogle, signInWithEmail, signUpWithEmail } = useAuth();
 
   const [isSignUp, setIsSignUp] = useState(false);
   const [username, setUsername] = useState('');
@@ -61,13 +56,9 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
     }
   };
 
-  const handleOAuthLogin = async (provider: 'google' | 'github') => {
+  const handleOAuthLogin = async () => {
     try {
-      if (provider === 'google') {
-        await signInWithGoogle();
-      } else {
-        await signInWithGithub();
-      }
+      await signInWithGoogle();
     } catch (err) {
       toast.error(t('auth.error'));
     }
@@ -121,7 +112,7 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
         {/* OAuth Buttons */}
         <div className="space-y-3">
           <button
-            onClick={() => handleOAuthLogin('google')}
+            onClick={handleOAuthLogin}
             type="button"
             className="w-full flex items-center justify-center gap-3 px-4 py-3 border border-gray-300 rounded-xl hover:bg-gray-50 transition-colors"
           >

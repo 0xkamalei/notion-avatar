@@ -17,8 +17,8 @@ function clampNumber(value: number, fallback: number) {
 
 export function getPricingConfig(): PricingConfig {
   const siteFreeDailyLimit = clampNumber(
-    Number.parseInt(process.env.SITE_FREE_DAILY_LIMIT || '1', 10),
-    1,
+    Number.parseInt(process.env.SITE_FREE_DAILY_LIMIT || '10', 10),
+    10,
   );
   const creditUsdValue = clampNumber(
     Number.parseFloat(process.env.CREDIT_USD_VALUE || '0.05'),

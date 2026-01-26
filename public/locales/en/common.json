@@ -260,7 +260,12 @@
     "credits": "Credits",
     "creditsRemaining": "credits remaining",
     "buyMore": "Buy More",
-    "siteFreeQuota": "Site-free: 1 shared free generation per day (resets daily).",
+    "siteFreeQuota": "Daily free (new users): 1 generation per account per day, subject to a site-wide cap (resets daily).",
+    "usage": {
+      "availableToday": "Available today: {{remaining}} (daily free {{freeRemaining}} + credits {{paidCredits}})",
+      "usedSiteFree": "Daily free",
+      "usedCredits": "{{credits}} credits"
+    },
     "downloading": "Downloading...",
     "recentGenerations": "Recent Generations",
     "noGenerationsYet": "No generations yet.",
