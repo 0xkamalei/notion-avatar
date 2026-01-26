@@ -13,6 +13,7 @@ interface Plan {
   buttonVariant: 'primary' | 'secondary';
   packId: 'small' | 'medium' | 'large' | null;
   popular?: boolean;
+  credits?: number;
 }
 
 interface PricingPlansProps {
@@ -104,11 +105,18 @@ export default function PricingPlans({
               <h3 className="text-xl font-bold text-gray-900 mb-2">
                 {plan.name}
               </h3>
-              <div className="flex items-baseline justify-center gap-1">
-                <span className="text-4xl font-bold text-gray-900">
-                  {plan.price}
-                </span>
-                <span className="text-gray-500">/{plan.period}</span>
+              <div className="flex flex-col items-center">
+                <div className="flex items-baseline justify-center gap-1">
+                  <span className="text-4xl font-bold text-gray-900">
+                    {plan.price}
+                  </span>
+                  <span className="text-gray-500">/{plan.period}</span>
+                </div>
+                {plan.credits && (
+                  <span className="text-sm font-medium text-gray-600 mt-1 bg-gray-100 px-3 py-1 rounded-full">
+                    {t('pricing.approx_uses', { count: plan.credits })}
+                  </span>
+                )}
               </div>
               <p className="text-gray-600 mt-2">{plan.description}</p>
             </div>

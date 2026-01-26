@@ -63,38 +63,6 @@ export default function Header() {
           </Link>
 
           <Link
-            href="/blog"
-            className="group flex items-center gap-2 px-4 py-2 transition-all relative text-black font-bold"
-          >
-            <span className="relative z-10">Blog</span>
-            <span
-              className={`absolute top-[-24px] left-[-24px] pointer-events-none transition-all duration-300 ease-out ${
-                router.pathname.startsWith('/blog')
-                  ? 'opacity-100 scale-100'
-                  : 'opacity-0 scale-0 group-hover:opacity-100 group-hover:scale-100'
-              }`}
-            >
-              <Image src="/icon/bling.svg" width={32} height={34} alt="Bling" />
-            </span>
-          </Link>
-
-          <Link
-            href="/resources"
-            className="group flex items-center gap-2 px-4 py-2 transition-all relative text-black font-bold"
-          >
-            <span className="relative z-10">{t('menu.resources')}</span>
-            <span
-              className={`absolute top-[-24px] left-[-24px] pointer-events-none transition-all duration-300 ease-out ${
-                router.pathname === '/resources'
-                  ? 'opacity-100 scale-100'
-                  : 'opacity-0 scale-0 group-hover:opacity-100 group-hover:scale-100'
-              }`}
-            >
-              <Image src="/icon/bling.svg" width={32} height={34} alt="Bling" />
-            </span>
-          </Link>
-
-          <Link
             href="/pricing"
             className="group flex items-center gap-2 px-4 py-2 transition-all relative text-black font-bold"
           >
@@ -236,52 +204,6 @@ export default function Header() {
                     className="drop-shadow-sm"
                   />
                   <span className="relative z-10">{t('ai.title')}</span>
-                </Link>
-
-                {/* Blog Link */}
-                <Link
-                  href="/blog"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="flex items-center gap-3 px-4 py-3 transition-all text-black font-bold rounded-lg hover:bg-gray-50 active:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth={2}
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"
-                    />
-                  </svg>
-                  <span>Blog</span>
-                </Link>
-
-                {/* Resources Link */}
-                <Link
-                  href="/resources"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="flex items-center gap-3 px-4 py-3 transition-all text-black font-bold rounded-lg hover:bg-gray-50 active:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth={2}
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"
-                    />
-                  </svg>
-                  <span>{t('menu.resources')}</span>
                 </Link>
 
                 {/* Pricing Link */}

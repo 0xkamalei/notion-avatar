@@ -68,26 +68,6 @@
     "shareTitle": "分享我的头像",
     "shareText": "快来看看我新做的头像！"
   },
-  "resourceStore": {
-    "title": "设计资源",
-    "description": "获取完整设计资源包，包含网站设计稿和装饰元素。",
-    "buyNow": "立即购买",
-    "freeForPro": "已包含",
-    "designPack": {
-      "title": "完整网站设计稿",
-      "description": "包含所有页面的 Figma 设计稿",
-      "features": {
-        "1": "响应式设计"
-      }
-    },
-    "scribblesPack": {
-      "title": "手绘装饰元素包",
-      "description": "手绘装饰元素，为你的设计添加趣味性",
-      "features": {
-        "1": "100+ 手绘装饰元素"
-      }
-    }
-  },
   "contactUs": "联系我们",
   "termOfUse": "使用条款",
   "privacyPolicy": "隐私政策",
@@ -219,7 +199,6 @@
     "close": "关闭菜单",
     "navigation": "导航菜单",
     "home": "首页",
-    "resources": "资源",
     "pricing": "价格",
     "signIn": "登录",
     "signOut": "退出登录",
@@ -264,23 +243,17 @@
     "creditsRemaining": "剩余积分",
     "buyMore": "购买更多",
     "siteFreeQuota": "全站每日共享 1 次免费生成（每日重置）。",
-    "purchasedResources": "已购买的资源",
-    "resourcePack": "资源包",
     "downloading": "下载中...",
-    "noResourcesPurchased": "还没有购买任何资源。",
-    "browseResourcePacks": "浏览资源包",
     "recentGenerations": "最近生成",
     "noGenerationsYet": "还没有生成记录。",
     "createFirstAvatar": "创建你的第一个头像！",
     "signOut": "退出登录",
     "failedToOpenBillingPortal": "无法打开账单管理页面",
-    "failedToDownload": "下载资源包失败，请重试。",
+    "failedToDownload": "下载失败，请重试。",
     "subscriptionWillCancel": "您的订阅将在计费周期结束时取消",
     "expiresOn": "到期时间",
     "subscriptionCanceled": "您的订阅已取消",
     "resubscribe": "重新订阅",
-    "generationHistoryProOnly": "生成历史仅限 Pro 用户使用。",
-    "upgradeToViewHistory": "升级到 Pro 以查看您的生成历史",
     "promo": {
       "title": "促销码",
       "description": "有促销码？在下方输入以兑换积分。",
@@ -367,8 +340,7 @@
           "3": "文字生成头像",
           "4": "高质量输出",
           "5": "优先处理",
-          "6": "生成历史",
-          "7": "免费资源包下载"
+          "6": "生成历史"
         },
         "buttonText": "立即订阅",
         "popular": "最受欢迎"
@@ -389,6 +361,7 @@
       }
     },
     "loading": "加载中...",
+    "approx_uses": "预计可用 {{count}} 次",
     "currentPlan": "当前方案",
     "checkoutError": "启动结账失败，请重试。",
     "faq": {

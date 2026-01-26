@@ -68,26 +68,6 @@
     "shareTitle": "아바타 공유하기",
     "shareText": "새 아바타를 확인해보세요!"
   },
-  "resourceStore": {
-    "title": "디자인 리소스",
-    "description": "웹사이트 디자인과 장식 요소를 포함한 완전한 디자인 리소스 팩.",
-    "buyNow": "구매하기",
-    "freeForPro": "포함됨",
-    "designPack": {
-      "title": "완전한 웹사이트 디자인",
-      "description": "모든 페이지의 Figma 디자인 파일",
-      "features": {
-        "1": "반응형 디자인"
-      }
-    },
-    "scribblesPack": {
-      "title": "손그림 요소 팩",
-      "description": "손그림 장식 요소로 디자인에 재미를 더하세요",
-      "features": {
-        "1": "100개 이상의 손그림 요소"
-      }
-    }
-  },
   "contactUs": "문의하기",
   "termOfUse": "이용 약관",
   "privacyPolicy": "개인정보 처리방침",
@@ -213,7 +193,6 @@
     "close": "메뉴 닫기",
     "navigation": "내비게이션 메뉴",
     "home": "홈",
-    "resources": "리소스",
     "pricing": "가격",
     "signIn": "로그인",
     "signOut": "로그아웃",
@@ -257,23 +236,17 @@
     "credits": "크레딧",
     "creditsRemaining": "남은 크레딧",
     "buyMore": "더 구매하기",
-    "purchasedResources": "구매한 리소스",
-    "resourcePack": "리소스 팩",
     "downloading": "다운로드 중...",
-    "noResourcesPurchased": "아직 리소스를 구매하지 않았습니다.",
-    "browseResourcePacks": "리소스 팩 둘러보기",
     "recentGenerations": "최근 생성",
     "noGenerationsYet": "아직 생성이 없습니다.",
     "createFirstAvatar": "첫 번째 아바타를 만들어보세요!",
     "signOut": "로그아웃",
     "failedToOpenBillingPortal": "결제 관리 페이지를 열 수 없습니다",
-    "failedToDownload": "리소스 팩 다운로드에 실패했습니다. 다시 시도해주세요.",
+    "failedToDownload": "다운로드에 실패했습니다. 다시 시도해주세요.",
     "subscriptionWillCancel": "구독이 청구 기간 종료 시 취소됩니다",
     "expiresOn": "만료일",
     "subscriptionCanceled": "구독이 취소되었습니다",
     "resubscribe": "재구독",
-    "generationHistoryProOnly": "생성 기록은 Pro 사용자만 사용할 수 있습니다.",
-    "upgradeToViewHistory": "Pro로 업그레이드하여 생성 기록 보기",
     "promo": {
       "title": "프로모 코드",
       "description": "프로모 코드가 있으신가요? 아래에 입력하여 크레딧을 교환하세요.",
@@ -318,8 +291,7 @@
           "3": "텍스트를 아바타로",
           "4": "고품질 출력",
           "5": "우선 처리",
-          "6": "생성 기록",
-          "7": "무료 리소스 팩 다운로드"
+          "6": "생성 기록"
         },
         "buttonText": "지금 구독",
         "popular": "가장 인기"
@@ -366,7 +338,8 @@
       "redirecting": "결제 페이지로 이동 중...",
       "resetInfo": "무료 한도는 내일 자정에 재설정됩니다.",
       "checkoutError": "결제를 시작하지 못했습니다. 다시 시도해주세요."
-    }
+    },
+    "approx_uses": "Approx. {{count}} uses"
   },
   "productHunt": {
     "welcome": "Product Hunt에서 오신 것을 환영합니다!",

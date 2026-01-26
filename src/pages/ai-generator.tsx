@@ -213,6 +213,7 @@ export default function AIGeneratorPage({
         buttonVariant: 'primary' as const,
         packId: 'small' as const,
         popular: true,
+        credits: 100,
       },
       {
         name: t('pricing.packs.medium.name'),
@@ -223,6 +224,7 @@ export default function AIGeneratorPage({
         buttonText: t('pricing.packs.medium.buttonText'),
         buttonVariant: 'secondary' as const,
         packId: 'medium' as const,
+        credits: 500,
       },
       {
         name: t('pricing.packs.large.name'),
@@ -233,6 +235,7 @@ export default function AIGeneratorPage({
         buttonText: t('pricing.packs.large.buttonText'),
         buttonVariant: 'secondary' as const,
         packId: 'large' as const,
+        credits: 2000,
       },
     ],
     [t],

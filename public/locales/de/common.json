@@ -68,26 +68,6 @@
     "shareTitle": "Teile meinen Avatar",
     "shareText": "Schau dir meinen neuen Avatar an!"
   },
-  "resourceStore": {
-    "title": "Design-Ressourcen",
-    "description": "Holen Sie sich das komplette Design-Ressourcenpaket, einschließlich Website-Design und dekorativer Elemente.",
-    "buyNow": "Jetzt kaufen",
-    "freeForPro": "Inklusive",
-    "designPack": {
-      "title": "Komplettes Website-Design",
-      "description": "Enthält Figma-Designdateien für alle Seiten",
-      "features": {
-        "1": "Responsives Design"
-      }
-    },
-    "scribblesPack": {
-      "title": "Handgezeichnete Elemente Paket",
-      "description": "Handgezeichnete Dekorationselemente für mehr Spaß in Ihrem Design",
-      "features": {
-        "1": "Über 100 handgezeichnete Elemente"
-      }
-    }
-  },
   "contactUs": "Kontaktieren Sie uns",
   "termOfUse": "Nutzungsbedingungen",
   "privacyPolicy": "Datenschutzrichtlinie",
@@ -119,8 +99,8 @@
     "isBelongToNotionAnswer": "Nein. Es ist ein unabhängiges Projekt."
   },
   "ai": {
-    "title": "AI Avatar",
-    "navTitle": "AI Avatar",
+    "title": "Notion Avatar",
+    "navTitle": "Notion Avatar",
     "description": "Verwandle deine Fotos oder Ideen mit AI in minimalistische Schwarzweiß-Avatare.",
     "heroSubtitle": "Verwandle deine Fotos oder Textbeschreibungen in einzigartige Schwarzweiß-Avatare in nur wenigen Sekunden",
     "heroCTA": "Loslegen",
@@ -213,7 +193,6 @@
     "close": "Menü schließen",
     "navigation": "Navigationsmenü",
     "home": "Startseite",
-    "resources": "Ressourcen",
     "pricing": "Preise",
     "signIn": "Anmelden",
     "signOut": "Abmelden",
@@ -257,23 +236,17 @@
     "credits": "Credits",
     "creditsRemaining": "verbleibende Credits",
     "buyMore": "Mehr kaufen",
-    "purchasedResources": "Gekaufte Ressourcen",
-    "resourcePack": "Ressourcenpaket",
     "downloading": "Wird heruntergeladen...",
-    "noResourcesPurchased": "Noch keine Ressourcen gekauft.",
-    "browseResourcePacks": "Ressourcenpakete durchsuchen",
     "recentGenerations": "Letzte Generierungen",
     "noGenerationsYet": "Noch keine Generierungen.",
     "createFirstAvatar": "Erstelle deinen ersten Avatar!",
     "signOut": "Abmelden",
     "failedToOpenBillingPortal": "Rechnungsverwaltungsseite konnte nicht geöffnet werden",
-    "failedToDownload": "Ressourcenpaket konnte nicht heruntergeladen werden. Bitte versuchen Sie es erneut.",
+    "failedToDownload": "Herunterladen fehlgeschlagen. Bitte versuchen Sie es erneut.",
     "subscriptionWillCancel": "Ihr Abonnement wird am Ende des Abrechnungszeitraums gekündigt",
     "expiresOn": "Läuft ab am",
     "subscriptionCanceled": "Ihr Abonnement wurde gekündigt",
     "resubscribe": "Erneut abonnieren",
-    "generationHistoryProOnly": "Generierungsverlauf ist nur für Pro-Benutzer verfügbar.",
-    "upgradeToViewHistory": "Upgraden Sie auf Pro, um Ihren Generierungsverlauf anzuzeigen",
     "promo": {
       "title": "Promo-Code",
       "description": "Haben Sie einen Promo-Code? Geben Sie ihn unten ein, um Credits einzulösen.",
@@ -318,8 +291,7 @@
           "3": "Text zu Avatar",
           "4": "Hohe Qualität",
           "5": "Prioritätsverarbeitung",
-          "6": "Generierungsverlauf",
-          "7": "Kostenlose Ressourcenpaket-Downloads"
+          "6": "Generierungsverlauf"
         },
         "buttonText": "Jetzt abonnieren",
         "popular": "Beliebtester"
@@ -366,7 +338,8 @@
       "redirecting": "Weiterleitung zum Checkout...",
       "resetInfo": "Ihr kostenloses Limit wird morgen um Mitternacht zurückgesetzt.",
       "checkoutError": "Checkout konnte nicht gestartet werden. Bitte versuchen Sie es erneut."
-    }
+    },
+    "approx_uses": "Approx. {{count}} uses"
   },
   "productHunt": {
     "welcome": "Willkommen von Product Hunt!",

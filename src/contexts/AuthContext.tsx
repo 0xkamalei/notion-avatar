@@ -30,7 +30,6 @@ interface AuthContextType {
   credits: number;
   isLoading: boolean;
   signInWithGoogle: () => Promise<void>;
-  signInWithGithub: () => Promise<void>;
   signInWithEmail: (
     email: string,
     password: string,
@@ -253,7 +252,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       credits: subscriptionData.credits,
       isLoading,
       signInWithGoogle,
-      signInWithGithub,
       signInWithEmail,
       signUpWithEmail,
       signOut,

@@ -1,5 +1,4 @@
-import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { useCallback } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import { useAuth } from '@/contexts/AuthContext';
 
 interface UsageRecord {
@@ -14,11 +13,7 @@ interface UsageHistoryResponse {
   records: UsageRecord[];
 }
 
-interface PurchasedPacksResponse {
-  packs: string[];
-}
-
-export function useUsageHistory(limit = 10) {
+export function useUsageHistory(limit: number = 10) {
   const { user } = useAuth();
 
   return useQuery<UsageRecord[]>({
@@ -31,33 +26,4 @@ export function useUsageHistory(limit = 10) {
     enabled: !!user,
     staleTime: 1000 * 60 * 5,
   });
-}
-
-export function usePurchasedPacks(initialData?: string[]) {
-  const { user } = useAuth();
-  const queryClient = useQueryClient();
-
-  const query = useQuery<string[]>({
-    queryKey: ['purchasedPacks'],
-    queryFn: async () => {
-      const response = await fetch('/api/resources/purchased');
-      if (!response.ok) {
-        return [];
-      }
-      const data: PurchasedPacksResponse = await response.json();
-      return data.packs || [];
-    },
-    enabled: !!user,
-    staleTime: 1000 * 60 * 5,
-    initialData,
-  });
-
-  const refetch = useCallback(async () => {
-    await queryClient.invalidateQueries({ queryKey: ['purchasedPacks'] });
-  }, [queryClient]);
-
-  return {
-    ...query,
-    refetch,
-  };
 }

@@ -21,10 +21,9 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import Modal from '@/components/Modal/Common';
 import FaviconLinks from '@/components/SEO/FaviconLinks';
-import { useUsageHistory, usePurchasedPacks } from '@/hooks/useAccountData';
+import { useUsageHistory } from '@/hooks/useAccountData';
 
 interface AccountPageProps {
-  initialPurchasedPacks: string[];
   initialUsageHistory: Array<{
     id: string;
     generation_mode: string;
@@ -34,10 +33,7 @@ interface AccountPageProps {
   }>;
 }
 
-export default function AccountPage({
-  initialPurchasedPacks,
-  initialUsageHistory,
-}: AccountPageProps) {
+export default function AccountPage({ initialUsageHistory }: AccountPageProps) {
   const { t } = useTranslation('common');
   const router = useRouter();
   const { user, credits, isLoading, signOut, refreshSubscription } = useAuth();
@@ -46,12 +42,7 @@ export default function AccountPage({
     data: usageHistory = initialUsageHistory,
     isLoading: isLoadingHistory,
   } = useUsageHistory(10);
-  const {
-    data: purchasedPacks = initialPurchasedPacks,
-    isLoading: isLoadingPacks,
-  } = usePurchasedPacks(initialPurchasedPacks);
 
-  const [downloadingPack, setDownloadingPack] = useState<string | null>(null);
   const [previewImageUrl, setPreviewImageUrl] = useState<string | null>(null);
   const [downloadingImage, setDownloadingImage] = useState<string | null>(null);
   const [loadingImages, setLoadingImages] = useState<Set<string>>(new Set());
@@ -70,39 +61,6 @@ export default function AccountPage({
       setLoadingImages(new Set(imageIds));
     }
   }, [usageHistory]);
-
-  const handleDownload = async (packId: string) => {
-    setDownloadingPack(packId);
-    try {
-      const response = await fetch(`/api/resources/download?pack=${packId}`);
-      const data = await response.json();
-
-      if (response.ok && data.url) {
-        window.location.href = data.url;
-        // 延迟清除 loading 状态，给下载一些时间
-        setTimeout(() => {
-          setDownloadingPack(null);
-        }, 2000);
-      } else {
-        throw new Error(data.error || 'Failed to download');
-      }
-    } catch (error) {
-      console.error('Download error:', error);
-      toast.error(t('account.failedToDownload'));
-      setDownloadingPack(null);
-    }
-  };
-
-  const getPackName = (packId: string) => {
-    switch (packId) {
-      case 'design-pack':
-        return t('resourceStore.designPack.title');
-      case 'scribbles-pack':
-        return t('resourceStore.scribblesPack.title');
-      default:
-        return packId;
-    }
-  };
 
   const handleImagePreview = (imageUrl: string) => {
     setPreviewImageUrl(imageUrl);
@@ -312,61 +270,6 @@ export default function AccountPage({
                   )}
                 </button>
               </div>
-            </div>
-
-            {/* Purchased Resources */}
-            <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 mb-6">
-              <h2 className="text-lg font-bold text-gray-900 mb-4">
-                {t('account.purchasedResources')}
-              </h2>
-              {isLoadingPacks ? (
-                <div className="text-center py-8">
-                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-black mx-auto" />
-                </div>
-              ) : purchasedPacks.length > 0 ? (
-                <div className="space-y-3">
-                  {purchasedPacks.map((packId) => (
-                    <div
-                      key={packId}
-                      className="flex items-center justify-between py-3 border-b border-gray-100 last:border-0"
-                    >
-                      <div>
-                        <p className="font-medium text-gray-900">
-                          {getPackName(packId)}
-                        </p>
-                        <p className="text-sm text-gray-500">
-                          {t('account.resourcePack')}
-                        </p>
-                      </div>
-                      <button
-                        onClick={() => handleDownload(packId)}
-                        disabled={downloadingPack === packId}
-                        type="button"
-                        className="px-4 py-2 text-sm bg-black text-white rounded-lg hover:bg-gray-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
-                      >
-                        {downloadingPack === packId ? (
-                          <>
-                            <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white" />
-                            <span>{t('account.downloading')}</span>
-                          </>
-                        ) : (
-                          t('download')
-                        )}
-                      </button>
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <p className="text-gray-500 text-center py-8">
-                  {t('account.noResourcesPurchased')}{' '}
-                  <Link
-                    href="/resources"
-                    className="text-black font-medium hover:underline"
-                  >
-                    {t('account.browseResourcePacks')}
-                  </Link>
-                </p>
-              )}
             </div>
 
             {/* Usage History */}
@@ -592,7 +495,6 @@ export async function getServerSideProps(
   context: GetServerSidePropsContext & { locale: string },
 ) {
   const { locale } = context;
-  let purchasedPacks: string[] = [];
   let usageHistory: Array<{
     id: string;
     generation_mode: string;
@@ -616,27 +518,17 @@ export async function getServerSideProps(
       };
     }
 
-    const [purchasesResult, usageResult] = await Promise.all([
-      supabase
-        .from('resource_purchases')
-        .select('resource_pack_id')
-        .eq('user_id', user.id),
-      supabase
-        .from('usage_records')
-        .select('id, generation_mode, created_at, image_path')
-        .eq('user_id', user.id)
-        .order('created_at', { ascending: false })
-        .limit(10),
-    ]);
+    const { data: usageData } = await supabase
+      .from('usage_records')
+      .select('id, generation_mode, created_at, image_path')
+      .eq('user_id', user.id)
+      .order('created_at', { ascending: false })
+      .limit(10);
 
-    if (purchasesResult.data) {
-      purchasedPacks = purchasesResult.data.map((p) => p.resource_pack_id);
-    }
-
-    if (usageResult.data) {
+    if (usageData) {
       const serviceClient = createServiceClient();
       usageHistory = await Promise.all(
-        usageResult.data.map(async (record) => {
+        usageData.map(async (record) => {
           if (record.image_path) {
             try {
               const { data: signedUrlData } = await serviceClient.storage
@@ -661,7 +553,6 @@ export async function getServerSideProps(
 
   return {
     props: {
-      initialPurchasedPacks: purchasedPacks,
       initialUsageHistory: usageHistory,
       ...(await serverSideTranslations(locale, ['common'])),
     },

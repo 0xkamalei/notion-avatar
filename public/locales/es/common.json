@@ -64,26 +64,6 @@
     "shareTitle": "Compartir mi avatar",
     "shareText": "¡Mira mi nuevo avatar!"
   },
-  "resourceStore": {
-    "title": "Recursos de Diseño",
-    "description": "Obtén el paquete completo de recursos de diseño, incluyendo diseño web y elementos decorativos.",
-    "buyNow": "Comprar Ahora",
-    "freeForPro": "Incluido",
-    "designPack": {
-      "title": "Diseño Completo del Sitio Web",
-      "description": "Incluye archivos de Figma para todas las páginas",
-      "features": {
-        "1": "Diseño responsive"
-      }
-    },
-    "scribblesPack": {
-      "title": "Paquete de Elementos Dibujados a Mano",
-      "description": "Elementos decorativos dibujados a mano para añadir diversión a tu diseño",
-      "features": {
-        "1": "Más de 100 elementos dibujados a mano"
-      }
-    }
-  },
   "contactUs": "Contacto",
   "termOfUse": "Términos de Uso",
   "privacyPolicy": "Política de Privacidad",
@@ -209,7 +189,6 @@
     "close": "Cerrar menú",
     "navigation": "Menú de navegación",
     "home": "Inicio",
-    "resources": "Recursos",
     "pricing": "Precios",
     "signIn": "Iniciar sesión",
     "signOut": "Cerrar sesión",
@@ -253,23 +232,17 @@
     "credits": "Créditos",
     "creditsRemaining": "créditos restantes",
     "buyMore": "Comprar Más",
-    "purchasedResources": "Recursos Comprados",
-    "resourcePack": "Paquete de Recursos",
     "downloading": "Descargando...",
-    "noResourcesPurchased": "Aún no has comprado ningún recurso.",
-    "browseResourcePacks": "Explorar Paquetes de Recursos",
     "recentGenerations": "Generaciones Recientes",
     "noGenerationsYet": "Aún no hay generaciones.",
     "createFirstAvatar": "¡Crea tu primer avatar!",
     "signOut": "Cerrar Sesión",
     "failedToOpenBillingPortal": "No se pudo abrir el portal de facturación",
-    "failedToDownload": "Error al descargar el paquete de recursos. Por favor, inténtalo de nuevo.",
+    "failedToDownload": "Error al descargar. Por favor, inténtalo de nuevo.",
     "subscriptionWillCancel": "Tu suscripción se cancelará al final del período de facturación",
     "expiresOn": "Expira el",
     "subscriptionCanceled": "Tu suscripción ha sido cancelada",
     "resubscribe": "Volver a suscribirse",
-    "generationHistoryProOnly": "El historial de generaciones está disponible solo para usuarios Pro.",
-    "upgradeToViewHistory": "Actualiza a Pro para ver tu historial de generaciones",
     "promo": {
       "title": "Código Promocional",
       "description": "¿Tienes un código promocional? Introdúcelo a continuación para canjear créditos.",
@@ -314,8 +287,7 @@
           "3": "Texto a Avatar",
           "4": "Alta calidad",
           "5": "Procesamiento prioritario",
-          "6": "Historial de generaciones",
-          "7": "Descargas gratuitas de paquetes de recursos"
+          "6": "Historial de generaciones"
         },
         "buttonText": "Suscribirse Ahora",
         "popular": "Más Popular"
@@ -362,13 +334,14 @@
       "redirecting": "Redirigiendo al checkout...",
       "resetInfo": "Tu límite gratuito se restablecerá mañana a medianoche.",
       "checkoutError": "Error al iniciar el checkout. Por favor, inténtalo de nuevo."
-    }
+    },
+    "approx_uses": "Approx. {{count}} uses"
   },
   "productHunt": {
     "welcome": "¡Bienvenido desde Product Hunt!",
     "promoMessage": "Usa el código promocional para obtener 10 créditos gratis:",
     "redeemNow": "Canjear Ahora",
     "signInToRedeem": "Iniciar Sesión para Canjear",
-    "tryAI": "Probar AI Avatar"
+    "tryAI": "Probar Notion Avatar"
   }
 }

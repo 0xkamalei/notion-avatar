@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import type { GetServerSidePropsContext, NextPage } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
@@ -7,10 +6,6 @@ import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'next-i18next';
-import toast from 'react-hot-toast';
-import { useAuth } from '@/contexts/AuthContext';
-import { createServerSideClient } from '@/lib/supabase/server';
-import { usePurchasedPacks } from '@/hooks/useAccountData';
 import {
   getCanonicalUrl,
   getDefaultHreflangUrl,
@@ -23,107 +18,10 @@ import AvatarEditor from '@/components/AvatarEditor';
 const UseCases = dynamic(() => import('@/components/UseCases'), {
   loading: () => null,
 });
-const AIFeatureIntroModal = dynamic(
-  () => import('@/components/Modal/AIFeatureIntro'),
-  { loading: () => null },
-);
-const ResourceStore = dynamic(() => import('@/components/ResourceStore'), {
-  loading: () => null,
-});
 
-const AI_FEATURE_INTRO_KEY = 'ai-feature-intro-dismissed';
-
-interface HomeProps {
-  initialPurchasedPacks: string[];
-}
-
-const Home: NextPage<HomeProps> = ({ initialPurchasedPacks }) => {
+const Home: NextPage = () => {
   const { t } = useTranslation(`common`);
   const router = useRouter();
-  const { user, isLoading: isAuthLoading } = useAuth();
-  const [isAIFeatureModalOpen, setIsAIFeatureModalOpen] = useState(false);
-  const { data: purchasedPacks = initialPurchasedPacks, refetch } =
-    usePurchasedPacks(initialPurchasedPacks);
-
-  // eslint-disable-next-line consistent-return
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const dismissed = localStorage.getItem(AI_FEATURE_INTRO_KEY);
-      if (!dismissed) {
-        const timer = setTimeout(() => {
-          setIsAIFeatureModalOpen(true);
-        }, 5000);
-        return () => clearTimeout(timer);
-      }
-    }
-  }, []);
-
-  const handleDontShowAgain = () => {
-    if (typeof window !== 'undefined') {
-      localStorage.setItem(AI_FEATURE_INTRO_KEY, 'true');
-    }
-    setIsAIFeatureModalOpen(false);
-  };
-
-  const handleDownload = async (packId: string) => {
-    if (!user) {
-      return;
-    }
-
-    try {
-      const response = await fetch(`/api/resources/download?pack=${packId}`);
-      const data = await response.json();
-
-      if (response.ok && data.url) {
-        window.location.href = data.url;
-      } else {
-        throw new Error(data.error || 'Failed to download');
-      }
-    } catch (error) {
-      // eslint-disable-next-line no-console
-      console.error('Download error:', error);
-      toast.error('Failed to download resource pack. Please try again.');
-      throw error;
-    }
-  };
-
-  // Check for success query param from Stripe and scroll to resource store
-  useEffect(() => {
-    if (typeof window === 'undefined' || isAuthLoading) return;
-
-    const { hash, search } = window.location;
-    const urlParams = new URLSearchParams(search);
-    const hashParams = hash.includes('?')
-      ? new URLSearchParams(hash.split('?')[1])
-      : null;
-
-    const successParam =
-      urlParams.get('success') || hashParams?.get('success') || null;
-    const packParam = urlParams.get('pack') || hashParams?.get('pack') || null;
-
-    if (successParam === 'true' && packParam) {
-      if (user) {
-        toast.success(
-          'Payment successful! You can now download your resource pack.',
-        );
-        refetch();
-      }
-      window.history.replaceState({}, '', '#resource-store');
-      setTimeout(() => {
-        const element = document.getElementById('resource-store');
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      }, 500);
-    } else if (hash === '#resource-store') {
-      setTimeout(() => {
-        const element = document.getElementById('resource-store');
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      }, 300);
-    }
-  }, [refetch, user, isAuthLoading]);
 
   const faqItems = [
     { question: 'faq.whatIsAvatar', answer: 'faq.whatIsAvatarAnswer' },
@@ -302,7 +200,7 @@ const Home: NextPage<HomeProps> = ({ initialPurchasedPacks }) => {
             </div>
           </div>
         </section>
-        {/* AI Avatar Hero Section */}
+        {/* Notion Avatar Hero Section */}
         <section className="py-16 my-12">
           <div className="container mx-auto px-4 md:px-8">
             <div className="text-center mb-8">
@@ -325,7 +223,7 @@ const Home: NextPage<HomeProps> = ({ initialPurchasedPacks }) => {
               <div className="mb-8">
                 <Image
                   src="/image/avatar-diff.png"
-                  alt="AI Avatar"
+                  alt="Notion Avatar"
                   width={1024}
                   height={485}
                   className="mx-auto"
@@ -356,13 +254,6 @@ const Home: NextPage<HomeProps> = ({ initialPurchasedPacks }) => {
           </div>
         </section>
 
-        <div id="resource-store">
-          <ResourceStore
-            purchasedPacks={purchasedPacks}
-            onDownload={handleDownload}
-            showDownloadButton
-          />
-        </div>
         <UseCases />
 
         <section className="py-16 my-12">
@@ -389,11 +280,6 @@ const Home: NextPage<HomeProps> = ({ initialPurchasedPacks }) => {
         </section>
       </main>
       <Footer />
-      <AIFeatureIntroModal
-        isOpen={isAIFeatureModalOpen}
-        onClose={() => setIsAIFeatureModalOpen(false)}
-        onDontShowAgain={handleDontShowAgain}
-      />
     </>
   );
 };
@@ -402,32 +288,9 @@ export async function getServerSideProps(
   context: GetServerSidePropsContext & { locale: string },
 ) {
   const { locale } = context;
-  let purchasedPacks: string[] = [];
-
-  try {
-    const supabase = createServerSideClient(context);
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-
-    if (user) {
-      const { data: purchases, error } = await supabase
-        .from('resource_purchases')
-        .select('resource_pack_id')
-        .eq('user_id', user.id);
-
-      if (!error && purchases) {
-        purchasedPacks = purchases.map((p) => p.resource_pack_id);
-      }
-    }
-  } catch (error) {
-    // eslint-disable-next-line no-console
-    console.error('Error fetching purchased packs in SSR:', error);
-  }
 
   return {
     props: {
-      initialPurchasedPacks: purchasedPacks,
       ...(await serverSideTranslations(locale, [`common`])),
     },
   };

@@ -68,26 +68,6 @@
     "shareTitle": "Share my avatar",
     "shareText": "Check out my new avatar!"
   },
-  "resourceStore": {
-    "title": "Design Resources",
-    "description": "Get the complete design resource pack, including website design and decorative elements.",
-    "buyNow": "Buy Now",
-    "freeForPro": "Included",
-    "designPack": {
-      "title": "Complete Website Design",
-      "description": "Includes Figma design files for all pages",
-      "features": {
-        "1": "Responsive design"
-      }
-    },
-    "scribblesPack": {
-      "title": "Hand-drawn Elements Pack",
-      "description": "Hand-drawn decorative elements to add fun to your design",
-      "features": {
-        "1": "100+ hand-drawn elements"
-      }
-    }
-  },
   "contactUs": "Contact Us",
   "termOfUse": "Terms of Use",
   "privacyPolicy": "Privacy Policy",
@@ -119,8 +99,8 @@
     "isBelongToNotionAnswer": "No. This is an independent project."
   },
   "ai": {
-    "title": "AI Avatar",
-    "navTitle": "AI Avatar",
+    "title": "Notion Avatar",
+    "navTitle": "Notion Avatar",
     "description": "Transform your photos or ideas into clean black-and-white avatars with AI.",
     "heroSubtitle": "Turn photos or text descriptions into unique black-and-white avatars in seconds",
     "heroCTA": "Get Started",
@@ -201,17 +181,18 @@
       "q4": "Can I use generated avatars commercially?",
       "a4": "Yes, all generated avatars follow CC0 license and can be used for commercial purposes without attribution."
     },
-    "seoKeywords": "AI Avatar Generator,AI Avatar Maker,Photo to Avatar AI,Text to Avatar AI,AI Avatar Creator,AI Generated Avatar,Free AI Avatar Generator,Online AI Avatar Maker,AI Avatar Tool,AI Profile Picture Generator,AI Avatar Design,Smart Avatar Generator"
+    "seoKeywords": "Notion Avatar Generator,Notion Avatar Maker,Photo to Avatar AI,Text to Avatar AI,Notion Avatar Creator,AI Generated Avatar,Free Notion Avatar Generator,Online Notion Avatar Maker,Notion Avatar Tool,AI Profile Picture Generator,Notion Avatar Design,Smart Avatar Generator"
   },
   "aiFeatureIntro": {
-    "title": "New AI Avatar Generator Feature",
-    "description": "Now you can use AI technology to quickly generate black-and-white avatars!",
+    "title": "New Notion Avatar Generator Feature",
     "feature1Title": "Photo to Avatar",
-    "feature1Desc": "Upload your photo and AI will automatically convert it to a black-and-white avatar",
+    "feature1Desc": "Upload your photo and let AI convert it into a minimal, hand-drawn style avatar.",
     "feature2Title": "Text to Avatar",
-    "feature2Desc": "Just describe the avatar you want, and AI will generate it for you",
-    "tryNow": "Try Now",
-    "dontShowAgain": "Don't show again"
+    "feature2Desc": "Describe the avatar you want, and AI will create it for you instantly.",
+    "feature3Title": "Fully Customizable",
+    "feature3Desc": "Fine-tune the generated avatar's features like hair, eyes, and accessories.",
+    "cta": "Start Creating Now",
+    "dontShowAgain": "Don't show this again"
   },
   "menu": {
     "title": "Menu",
@@ -219,7 +200,6 @@
     "close": "Close menu",
     "navigation": "Navigation menu",
     "home": "Home",
-    "resources": "Resources",
     "pricing": "Pricing",
     "signIn": "Sign In",
     "signOut": "Sign Out",
@@ -264,23 +244,17 @@
     "creditsRemaining": "credits remaining",
     "buyMore": "Buy More",
     "siteFreeQuota": "Site-free: 1 shared free generation per day (resets daily).",
-    "purchasedResources": "Purchased Resources",
-    "resourcePack": "Resource Pack",
     "downloading": "Downloading...",
-    "noResourcesPurchased": "No resources purchased yet.",
-    "browseResourcePacks": "Browse Resource Packs",
     "recentGenerations": "Recent Generations",
     "noGenerationsYet": "No generations yet.",
     "createFirstAvatar": "Create your first avatar!",
     "signOut": "Sign Out",
     "failedToOpenBillingPortal": "Failed to open billing portal",
-    "failedToDownload": "Failed to download resource pack. Please try again.",
+    "failedToDownload": "Failed to download. Please try again.",
     "subscriptionWillCancel": "Your subscription will cancel at the end of the billing period",
     "expiresOn": "Expires on",
     "subscriptionCanceled": "Your subscription has been canceled",
     "resubscribe": "Resubscribe",
-    "generationHistoryProOnly": "Generation history is available for Pro users only.",
-    "upgradeToViewHistory": "Upgrade to Pro to view your generation history",
     "promo": {
       "title": "Promo Code",
       "description": "Have a promo code? Enter it below to redeem credits.",
@@ -367,8 +341,7 @@
           "3": "Text to Avatar",
           "4": "High quality output",
           "5": "Priority processing",
-          "6": "Generation history",
-          "7": "Free resource pack downloads"
+          "6": "Generation history"
         },
         "buttonText": "Subscribe Now",
         "popular": "Most Popular"
@@ -389,6 +362,7 @@
       }
     },
     "loading": "Loading...",
+    "approx_uses": "Approx. {{count}} uses",
     "currentPlan": "Current Plan",
     "checkoutError": "Failed to start checkout. Please try again.",
     "faq": {
@@ -422,6 +396,6 @@
     "promoMessage": "Use promo code to get 10 free credits:",
     "redeemNow": "Redeem Now",
     "signInToRedeem": "Sign In to Redeem",
-    "tryAI": "Try AI Avatar"
+    "tryAI": "Try Notion Avatar"
   }
 }

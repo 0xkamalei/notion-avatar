@@ -65,26 +65,6 @@
     "shareTitle": "Compartilhar meu avatar",
     "shareText": "Confira meu novo avatar!"
   },
-  "resourceStore": {
-    "title": "Recursos de Design",
-    "description": "Obtenha o pacote completo de recursos de design, incluindo design do site e elementos decorativos.",
-    "buyNow": "Comprar Agora",
-    "freeForPro": "Incluído",
-    "designPack": {
-      "title": "Design Completo do Site",
-      "description": "Inclui arquivos Figma para todas as páginas",
-      "features": {
-        "1": "Design responsivo"
-      }
-    },
-    "scribblesPack": {
-      "title": "Pacote de Elementos Desenhados à Mão",
-      "description": "Elementos decorativos desenhados à mão para adicionar diversão ao seu design",
-      "features": {
-        "1": "Mais de 100 elementos desenhados à mão"
-      }
-    }
-  },
   "contactUs": "Contate-nos",
   "termOfUse": "Termos de Uso",
   "privacyPolicy": "Política de Privacidade",
@@ -210,7 +190,6 @@
     "close": "Fechar menu",
     "navigation": "Menu de navegação",
     "home": "Início",
-    "resources": "Recursos",
     "pricing": "Preços",
     "signIn": "Entrar",
     "signOut": "Sair",
@@ -254,23 +233,17 @@
     "credits": "Créditos",
     "creditsRemaining": "créditos restantes",
     "buyMore": "Comprar Mais",
-    "purchasedResources": "Recursos Comprados",
-    "resourcePack": "Pacote de Recursos",
     "downloading": "Baixando...",
-    "noResourcesPurchased": "Nenhum recurso comprado ainda.",
-    "browseResourcePacks": "Navegar Pacotes de Recursos",
     "recentGenerations": "Gerações Recentes",
     "noGenerationsYet": "Nenhuma geração ainda.",
     "createFirstAvatar": "Crie seu primeiro avatar!",
     "signOut": "Sair",
     "failedToOpenBillingPortal": "Falha ao abrir o portal de cobrança",
-    "failedToDownload": "Falha ao baixar o pacote de recursos. Por favor, tente novamente.",
+    "failedToDownload": "Falha ao baixar. Por favor, tente novamente.",
     "subscriptionWillCancel": "Sua assinatura será cancelada no final do período de cobrança",
     "expiresOn": "Expira em",
     "subscriptionCanceled": "Sua assinatura foi cancelada",
     "resubscribe": "Reassinar",
-    "generationHistoryProOnly": "O histórico de gerações está disponível apenas para usuários Pro.",
-    "upgradeToViewHistory": "Atualize para Pro para ver seu histórico de gerações",
     "promo": {
       "title": "Código Promocional",
       "description": "Tem um código promocional? Digite-o abaixo para resgatar créditos.",
@@ -315,8 +288,7 @@
           "3": "Texto para Avatar",
           "4": "Alta qualidade",
           "5": "Processamento prioritário",
-          "6": "Histórico de gerações",
-          "7": "Downloads gratuitos de pacotes de recursos"
+          "6": "Histórico de gerações"
         },
         "buttonText": "Assinar Agora",
         "popular": "Mais Popular"
@@ -363,13 +335,14 @@
       "redirecting": "Redirecionando para o checkout...",
       "resetInfo": "Seu limite gratuito será redefinido amanhã à meia-noite.",
       "checkoutError": "Falha ao iniciar o checkout. Por favor, tente novamente."
-    }
+    },
+    "approx_uses": "Approx. {{count}} uses"
   },
   "productHunt": {
     "welcome": "Bem-vindo do Product Hunt!",
     "promoMessage": "Use o código promocional para obter 10 créditos grátis:",
     "redeemNow": "Resgatar Agora",
     "signInToRedeem": "Entrar para Resgatar",
-    "tryAI": "Experimentar AI Avatar"
+    "tryAI": "Experimentar Notion Avatar"
   }
 }
