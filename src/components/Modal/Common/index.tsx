@@ -1,9 +1,10 @@
 import { useTranslation } from 'next-i18next';
+import type { ReactNode } from 'react';
 
 type ModalProps = {
   onCancel: () => void;
   onConfirm?: (...args: any[]) => void;
-  children: JSX.Element;
+  children: ReactNode;
 };
 
 export default function Modal({ onCancel, children, onConfirm }: ModalProps) {

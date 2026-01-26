@@ -27,8 +27,8 @@ export function createClient(req: NextApiRequest, res: NextApiResponse) {
         const existingCookiesArray: string[] = Array.isArray(existingCookies)
           ? existingCookies.map(String)
           : existingCookies
-          ? [String(existingCookies)]
-          : [];
+            ? [String(existingCookies)]
+            : [];
 
         // Create new cookie strings
         const newCookies = cookiesToSet.map(({ name, value, options }) => {

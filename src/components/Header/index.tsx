@@ -12,7 +12,7 @@ import Decoration from './decoration';
 export default function Header() {
   const { t } = useTranslation('common');
   const router = useRouter();
-  const { user, subscription, credits, signOut, isLoading } = useAuth();
+  const { user, credits, signOut, isLoading } = useAuth();
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [showMobileLanguageMenu, setShowMobileLanguageMenu] = useState(false);
@@ -38,29 +38,8 @@ export default function Header() {
             href="/"
             className="flex items-center gap-2 hover:opacity-80 transition-opacity"
           >
-            <Image
-              src="/logo.gif"
-              alt="Notion Avatar Logo"
-              width={50}
-              height={50}
-              priority
-              loading="eager"
-            />
             <span className="w-36 sm:w-48 text-lg leading-tight relative inline-block">
-              Notion {router.pathname === '/ai-generator' ? 'AI' : ''}
-              <br />
-              {t('avatarMaker')}
-              {router.pathname === '/ai-generator' && (
-                <span className="absolute top-0 sm:right-24 right-12 transition-opacity">
-                  <Image
-                    src="/icon/ai-stars.svg"
-                    alt="AI Stars"
-                    width={18}
-                    height={18}
-                    className="drop-shadow-sm"
-                  />
-                </span>
-              )}
+              {t('siteTitle')}
             </span>
           </Link>
         </div>
@@ -447,24 +426,9 @@ export default function Header() {
                           </div>
                         </div>
                         <div className="flex items-center gap-2 mt-2">
-                          <span
-                            className={`px-2 py-0.5 text-xs font-medium rounded-full ${
-                              subscription?.plan_type === 'monthly' ||
-                              subscription?.plan_type === 'yearly'
-                                ? 'bg-black text-white'
-                                : 'bg-gray-100 text-gray-600'
-                            }`}
-                          >
-                            {subscription?.plan_type === 'monthly' ||
-                            subscription?.plan_type === 'yearly'
-                              ? t('menu.pro')
-                              : t('menu.free')}
+                          <span className="text-xs text-gray-500">
+                            {credits} {t('menu.credits')}
                           </span>
-                          {credits > 0 && (
-                            <span className="text-xs text-gray-500">
-                              {credits} {t('menu.credits')}
-                            </span>
-                          )}
                         </div>
                       </div>
 

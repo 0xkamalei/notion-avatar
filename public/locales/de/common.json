@@ -21,14 +21,14 @@
   "underDesign": "und unter",
   "designedBy": "designed von",
   "license": "Lizenz",
-  "coffeeUrl": "https://ko-fi.com/mayandev",
+  "coffeeUrl": "",
   "modalTitle": "Fast fertig",
   "modalHint": "Lange drücken oder rechtsklicken um den Avatar in deinem Album zu speichern",
   "modalCancel": "Abbrechen",
   "modalConfirm": "Bestätigen",
-  "siteTitle": "Notion Avatar Ersteller",
-  "siteDescription": "Ein Notion-Handzeichnungsstil Avatar-Maker-Tool, mit dem Sie Gesichtszüge, Frisuren, Brillen, Bärte und Accessoires anpassen können, um mit einem Klick einzigartige persönliche Avatare zu erstellen. Perfekt für Notion, GitHub, Twitter und andere soziale Plattformen, ideal für Teamzusammenarbeit und persönliches Branding. Probieren Sie es jetzt aus und erstellen Sie ganz einfach Ihren eigenen Notion-Style Avatar!",
-  "siteKeywords": "Notion Avatar,Avatar Ersteller,Notion Stil,Handgezeichneter Avatar,Individueller Avatar,Minimalistischer Avatar,Team Avatar,Persönliche Marke,Social Media Avatar,SVG Avatar,PNG Avatar,Kostenloser Avatar Creator,Online Avatar Generator,GitHub Avatar,Twitter Avatar",
+  "siteTitle": "Avatar-Ersteller",
+  "siteDescription": "Ein Tool zum Erstellen minimalistischer Schwarzweiß-Avatare mit anpassbaren Gesichtszügen, Frisuren, Brillen, Bärten und Accessoires.",
+  "siteKeywords": "avatar ersteller,avatar generator,handgezeichneter avatar,individueller avatar,minimalistischer avatar,team avatar,social media avatar,svg avatar,png avatar,online avatar generator",
   "404Title": "Ups! Seite nicht gefunden",
   "404Redirect": "Zurück zur Startseite",
   "copy": "Kopieren",
@@ -45,12 +45,12 @@
   "christmas": "Weihnachten",
   "downloadSuccess": "Download erfolgreich",
   "shareModalHint": "Teile es in deinen sozialen Medien!",
-  "shareContent": "Ich habe gerade einen Avatar mit Notion Avatar Maker erstellt, schau mal!",
+  "shareContent": "Ich habe gerade einen Avatar erstellt, schau mal!",
   "avatarMaker": "Avatar Ersteller",
   "whosUsing": "Wer nutzt es",
-  "whosUsingDescription": "Teams und Einzelpersonen auf der ganzen Welt nutzen Notion Avatar",
+  "whosUsingDescription": "Teams und Einzelpersonen auf der ganzen Welt nutzen den Avatar-Ersteller",
   "useCases": "Anwendungsfälle",
-  "useCasesDescription": "Entdecken Sie die vielfältigen Einsatzmöglichkeiten der Notion-Style Avatare",
+  "useCasesDescription": "Entdecken Sie die vielfältigen Einsatzmöglichkeiten von Avataren",
   "you": "Du",
   "chatDemo": {
     "message1": "Schau dir meinen neuen Avatar an!",
@@ -62,17 +62,17 @@
   },
   "socialDemo": {
     "name": "Phill Zou",
-    "handle": "phillzou",
+    "handle": "user",
     "bio": "Fullstack-Entwickler / Open-Source-Enthusiast",
-    "tweet": "Habe gerade meinen Avatar mit Notion Avatar Maker erstellt! Liebe diesen minimalistischen Stil ✨",
-    "shareTitle": "Teile meinen Notion-Style Avatar",
-    "shareText": "Schau dir meinen neuen Avatar an, erstellt mit Notion Avatar Maker!"
+    "tweet": "Habe gerade meinen neuen Avatar erstellt! Liebe diesen minimalistischen Stil.",
+    "shareTitle": "Teile meinen Avatar",
+    "shareText": "Schau dir meinen neuen Avatar an!"
   },
   "resourceStore": {
     "title": "Design-Ressourcen",
-    "description": "Holen Sie sich das komplette Design-Ressourcenpaket für Notion Avatar Maker, einschließlich Website-Design und dekorativer Elemente. Kostenlos für Pro-Nutzer.",
+    "description": "Holen Sie sich das komplette Design-Ressourcenpaket, einschließlich Website-Design und dekorativer Elemente.",
     "buyNow": "Jetzt kaufen",
-    "freeForPro": "Kostenlos für Pro-Nutzer",
+    "freeForPro": "Inklusive",
     "designPack": {
       "title": "Komplettes Website-Design",
       "description": "Enthält Figma-Designdateien für alle Seiten",
@@ -82,7 +82,7 @@
     },
     "scribblesPack": {
       "title": "Handgezeichnete Elemente Paket",
-      "description": "Notion-Style handgezeichnete Dekorationselemente für mehr Spaß in Ihrem Design",
+      "description": "Handgezeichnete Dekorationselemente für mehr Spaß in Ihrem Design",
       "features": {
         "1": "Über 100 handgezeichnete Elemente"
       }
@@ -99,30 +99,30 @@
     "step2Title": "Merkmale anpassen",
     "step2Desc": "Passen Sie Frisur, Gesichtszüge, Accessoires und andere Details an, um ein einzigartiges Aussehen zu schaffen",
     "step3Title": "Herunterladen & Verwenden",
-    "step3Desc": "Klicken Sie auf die Download-Schaltfläche, um Ihren hochauflösenden Avatar zu erhalten, der sofort in Notion oder anderen Plattformen verwendet werden kann",
+    "step3Desc": "Klicken Sie auf die Download-Schaltfläche, um Ihren hochauflösenden Avatar zu erhalten, der sofort überall verwendet werden kann",
     "step4Title": "Teile deine Kreation",
-    "step4Desc": "Teile deinen neuen Notion-Avatar auf sozialen Medien und zeige ihn deinen Freunden!"
+    "step4Desc": "Teile deinen neuen Avatar auf sozialen Medien und zeige ihn deinen Freunden!"
   },
   "faq": {
     "title": "FAQ",
-    "whatIsAvatar": "Was ist Notion Avatar Maker?",
-    "whatIsAvatarAnswer": "Notion Avatar Maker ist ein kostenloses Tool, mit dem Sie benutzerdefinierte Avatare für die Verwendung in Notion, sozialen Medien oder jeder anderen digitalen Plattform erstellen können.",
+    "whatIsAvatar": "Was ist der Avatar-Ersteller?",
+    "whatIsAvatarAnswer": "Der Avatar-Ersteller ist ein Tool, mit dem Sie benutzerdefinierte Avatare für soziale Medien oder andere digitale Plattformen erstellen können.",
     "howToUse": "Wie verwende ich den Avatar-Editor?",
     "howToUseAnswer": "Klicken Sie einfach auf die verschiedenen Gesichtszüge, Frisuren und Accessoires, um Ihren Avatar anzupassen. Verwenden Sie die Spiegeln-Schaltfläche, um die Ausrichtung zu ändern, und die Hintergrund-Schaltfläche, um den Hintergrundstil anzupassen.",
     "commercialUse": "Kann ich Avatare für kommerzielle Zwecke verwenden?",
-    "commercialUseAnswer": "Ja, alle mit Notion Avatar erstellten Avatare werden unter der CC0-Lizenz veröffentlicht und ermöglichen die kommerzielle Nutzung ohne Namensnennung.",
+    "commercialUseAnswer": "Ja, alle erstellten Avatare werden unter der CC0-Lizenz veröffentlicht und ermöglichen die kommerzielle Nutzung ohne Namensnennung.",
     "privacyConcerns": "Sammeln Sie Benutzerdaten?",
     "privacyConcernsAnswer": "Nein, wir sammeln oder speichern keine Benutzerdaten. Die gesamte Avatar-Erstellung erfolgt lokal in Ihrem Browser.",
     "supportedBrowsers": "Welche Browser werden unterstützt?",
-    "supportedBrowsersAnswer": "Notion Avatar funktioniert am besten in modernen Browsern, einschließlich Chrome, Firefox, Safari und Edge. Internet Explorer wird nicht unterstützt.",
-    "isBelongToNotion": "Ist Notion Avatar Maker mit Notion verbunden?",
-    "isBelongToNotionAnswer": "Nein, Notion Avatar Maker ist nicht mit Notion verbunden. Es ist ein unabhängiges Projekt."
+    "supportedBrowsersAnswer": "Diese App funktioniert am besten in modernen Browsern, einschließlich Chrome, Firefox, Safari und Edge. Internet Explorer wird nicht unterstützt.",
+    "isBelongToNotion": "Ist der Avatar-Ersteller mit einem Unternehmen verbunden?",
+    "isBelongToNotionAnswer": "Nein. Es ist ein unabhängiges Projekt."
   },
   "ai": {
-    "title": "Notion AI Avatar",
-    "navTitle": "Notion AI Avatar",
-    "description": "Verwandle deine Fotos oder Ideen mit AI-Magie in Notion-style Avatare.",
-    "heroSubtitle": "Verwandle deine Fotos oder Textbeschreibungen in einzigartige Notion-style Avatare in nur wenigen Sekunden",
+    "title": "AI Avatar",
+    "navTitle": "AI Avatar",
+    "description": "Verwandle deine Fotos oder Ideen mit AI in minimalistische Schwarzweiß-Avatare.",
+    "heroSubtitle": "Verwandle deine Fotos oder Textbeschreibungen in einzigartige Schwarzweiß-Avatare in nur wenigen Sekunden",
     "heroCTA": "Loslegen",
     "photo2avatar": "Foto zu Avatar",
     "text2avatar": "Text zu Avatar",
@@ -139,7 +139,7 @@
     "error": "Etwas ist schief gelaufen. Bitte versuche es erneut.",
     "examples": {
       "photoTitle": "Foto-Transformation",
-      "photoDesc": "Sieh, wie AI deine echten Fotos in Notion-style Avatare verwandelt",
+      "photoDesc": "Sieh, wie AI deine echten Fotos in Schwarzweiß-Avatare verwandelt",
       "textTitle": "Text-Generierungsbeispiele",
       "textDesc": "Beschreibe einfach, was du willst, und AI wird es für dich generieren",
       "before": "Vorher",
@@ -152,9 +152,9 @@
     "features": {
       "title": "Leistungsstarke AI-Funktionen",
       "photo2avatarTitle": "Foto zu Avatar",
-      "photo2avatarDesc": "Lade dein Foto hoch und AI erkennt und konvertiert es automatisch in einen Notion-style Avatar und bewahrt deine einzigartigen Merkmale",
+      "photo2avatarDesc": "Lade dein Foto hoch und AI erkennt und konvertiert es automatisch in einen Schwarzweiß-Avatar und bewahrt deine einzigartigen Merkmale",
       "text2avatarTitle": "Text zu Avatar",
-      "text2avatarDesc": "Beschreibe einfach die Avatar-Merkmale, die du möchtest, und AI generiert einen personalisierten Notion-style Avatar für dich"
+      "text2avatarDesc": "Beschreibe einfach die Avatar-Merkmale, die du möchtest, und AI generiert einen personalisierten Schwarzweiß-Avatar für dich"
     },
     "steps": {
       "title": "Wie Es Funktioniert",
@@ -165,7 +165,7 @@
       "step3Title": "AI-Generierung",
       "step3Desc": "Klicke auf Generieren und AI erstellt deinen Avatar in Sekunden",
       "step4Title": "Herunterladen & Verwenden",
-      "step4Desc": "Lade deinen generierten Avatar herunter und verwende ihn auf Notion, sozialen Medien und mehr"
+      "step4Desc": "Lade deinen generierten Avatar herunter und verwende ihn überall"
     },
     "pricing": {
       "title": "Wähle Deinen Plan",
@@ -195,13 +195,13 @@
       "q4": "Kann ich generierte Avatare kommerziell verwenden?",
       "a4": "Ja, alle generierten Avatare folgen der CC0-Lizenz und können ohne Namensnennung für kommerzielle Zwecke verwendet werden."
     },
-    "seoKeywords": "AI-Avatar-Generator,AI-Avatar-Ersteller,Notion AI-Avatar,Foto zu AI-Avatar,Text zu AI-Avatar,AI-Avatar-Ersteller,Notion-Stil AI-Avatar,AI-generierter Avatar,Kostenloser AI-Avatar-Generator,Online AI-Avatar-Ersteller,AI-Avatar-Tool,Künstliche Intelligenz Avatar,AI-Profilbild-Generator,AI-Avatar-Design,Intelligenter Avatar-Generator"
+    "seoKeywords": "AI-Avatar-Generator,AI-Avatar-Ersteller,Foto zu AI-Avatar,Text zu AI-Avatar,AI-generierter Avatar,Kostenloser AI-Avatar-Generator,Online AI-Avatar-Ersteller,AI-Avatar-Tool,AI-Profilbild-Generator,AI-Avatar-Design,Intelligenter Avatar-Generator"
   },
   "aiFeatureIntro": {
     "title": "Neue AI-Avatar-Generator-Funktion",
-    "description": "Du kannst jetzt AI-Technologie verwenden, um schnell Notion-style Avatare zu generieren!",
+    "description": "Du kannst jetzt AI-Technologie verwenden, um schnell Schwarzweiß-Avatare zu generieren!",
     "feature1Title": "Foto zu Avatar",
-    "feature1Desc": "Lade dein Foto hoch und AI wird es automatisch in einen Notion-style Avatar umwandeln",
+    "feature1Desc": "Lade dein Foto hoch und AI wird es automatisch in einen Schwarzweiß-Avatar umwandeln",
     "feature2Title": "Text zu Avatar",
     "feature2Desc": "Beschreibe einfach den Avatar, den du möchtest, und AI wird ihn für dich generieren",
     "tryNow": "Jetzt ausprobieren",
@@ -245,7 +245,7 @@
   },
   "account": {
     "title": "Kontoeinstellungen",
-    "pageTitle": "Konto | Notion Avatar Maker",
+    "pageTitle": "Konto | Avatar-Ersteller",
     "profile": "Profil",
     "subscription": "Abonnement",
     "unlimitedGenerations": "Unbegrenzte Generierungen mit Pro-Abonnement",
@@ -289,7 +289,7 @@
     }
   },
   "pricing": {
-    "pageTitle": "Preise | Notion Avatar Maker",
+    "pageTitle": "Preise | Avatar-Ersteller",
     "pageDescription": "Wählen Sie den perfekten Plan für Ihre Avatar-Erstellung",
     "title": "Einfache, transparente Preise",
     "description": "Wählen Sie den Plan, der am besten zu Ihnen passt. Jederzeit upgraden.",

@@ -34,7 +34,7 @@ import AvatarPickerPopover from '../Popover/AvatarPicker';
 
 export default function AvatarEditor() {
   const router = useRouter();
-  const { user, subscription } = useAuth();
+  const { user } = useAuth();
   const [showLanguageMenu, setShowLanguageMenu] = useState(false);
   const [config, setConfig] = useState({ ...getRandomStyle() });
   const [preview, setPreview] = useState('');
@@ -45,7 +45,7 @@ export default function AvatarEditor() {
     DefaultBackgroundConfig,
   );
   // default placeholder for compatible modal
-  const [imageDataURL, setImageDataURL] = useState('/logo.gif');
+  const [imageDataURL, setImageDataURL] = useState('/image/avatar-1.jpg');
   const [avatarPart, setAvatarPart] = useState<AvatarPickerConfig | null>(null);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
 
@@ -80,11 +80,13 @@ export default function AvatarEditor() {
       Object.keys(AvatarStyleCount).map(async (type) => {
         /* eslint-disable */
         const svgRaw = (
-          await require(`!!raw-loader!@/public/avatar/preview/${type}/${
-            config[type as AvatarPart]
-          }.svg`)
+          await require(
+            `!!raw-loader!@/public/avatar/preview/${type}/${
+              config[type as AvatarPart]
+            }.svg`,
+          )
         ).default;
-        return `\n<g id="notion-avatar-${type}" ${
+        return `\n<g id="avatar-${type}" ${
           type === 'face' ? 'fill="#ffffff"' : ''
         } ${flipped ? 'transform="scale(-1,1) translate(-1080, 0)"' : ''}>\n
         ${svgRaw.replace(/<svg.*(?=>)>/, '').replace('</svg>', '')}
@@ -95,9 +97,11 @@ export default function AvatarEditor() {
     // for festival
     if (festival) {
       const svgRaw = (
-        await require(`!!raw-loader!@/public/avatar/preview/festival/${festival}/${config[festival]}.svg`)
+        await require(
+          `!!raw-loader!@/public/avatar/preview/festival/${festival}/${config[festival]}.svg`,
+        )
       ).default;
-      groups.push(`\n<g id="notion-avatar-${festival}" ${
+      groups.push(`\n<g id="avatar-${festival}" ${
         flipped ? 'transform="scale(-1,1) translate(-1080, 0)"' : ''
       }>\n
       ${svgRaw.replace(/<svg.*(?=>)>/, '').replace('</svg>', '')}
@@ -107,7 +111,7 @@ export default function AvatarEditor() {
     const previewSvg =
       `<svg viewBox="0 0 1080 1080" fill="none" xmlns="http://www.w3.org/2000/svg">
         ${SVGFilter}
-        <g id="notion-avatar" filter="url(#filter)">
+        <g id="avatar" filter="url(#filter)">
           ${groups.join('\n\n')}
         </g>
         </svg>`
@@ -174,7 +178,7 @@ export default function AvatarEditor() {
     const a = document.createElement('a');
 
     a.href = imageURL;
-    a.download = `notion-avatar-${new Date().getTime()}.${imageType}`;
+    a.download = `avatar-${new Date().getTime()}.${imageType}`;
     a.click();
     toggleModal('share');
   };
@@ -222,10 +226,7 @@ export default function AvatarEditor() {
             shape: background.shape,
           }}
           imageType={imageType}
-          isPremium={
-            subscription?.plan_type === 'monthly' &&
-            subscription?.status === 'active'
-          }
+          isPremium
           onUpgrade={() => {
             toggleModal('embed');
             if (!user) {

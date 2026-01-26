@@ -3,212 +3,45 @@ import type { GetStaticPropsContext, NextPage } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Head from 'next/head';
 import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
 import Header, { BackToHome } from '@/components/Header';
 import Footer from '@/components/Footer';
-
-const URL = `https://notion-avatar.app/`;
+import FaviconLinks from '@/components/SEO/FaviconLinks';
+import {
+  getCanonicalUrl,
+  getDefaultHreflangUrl,
+  getHreflangLinks,
+} from '@/lib/seo';
 const Terms: NextPage = () => {
   const { t } = useTranslation();
+  const router = useRouter();
+  const pagePath = '/terms';
+  const canonicalUrl = getCanonicalUrl(pagePath, router.locale);
+  const hreflangLinks = getHreflangLinks(pagePath);
   return (
     <div className="min-h-screen flex flex-col">
       <Head>
-        <Head>
+        <FaviconLinks />
+        <title>Terms of Use | {t('siteTitle')}</title>
+        <meta name="description" content={t('siteDescription')} />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="robots" content="index, follow" />
+        <meta name="googlebot" content="index, follow" />
+        <link rel="canonical" href={canonicalUrl} />
+        {hreflangLinks.map((link) => (
           <link
-            rel="apple-touch-icon"
-            sizes="57x57"
-            href="/favicon/apple-icon-57x57.png"
-          />
-          <link
-            rel="apple-touch-icon"
-            sizes="60x60"
-            href="/favicon/apple-icon-60x60.png"
-          />
-          <link
-            rel="apple-touch-icon"
-            sizes="72x72"
-            href="/favicon/apple-icon-72x72.png"
-          />
-          <link
-            rel="apple-touch-icon"
-            sizes="76x76"
-            href="/favicon/apple-icon-76x76.png"
-          />
-          <link
-            rel="apple-touch-icon"
-            sizes="114x114"
-            href="/favicon/apple-icon-114x114.png"
-          />
-          <link
-            rel="apple-touch-icon"
-            sizes="120x120"
-            href="/favicon/apple-icon-120x120.png"
-          />
-          <link
-            rel="apple-touch-icon"
-            sizes="144x144"
-            href="/favicon/apple-icon-144x144.png"
-          />
-          <link
-            rel="apple-touch-icon"
-            sizes="152x152"
-            href="/favicon/apple-icon-152x152.png"
-          />
-          <link
-            rel="apple-touch-icon"
-            sizes="180x180"
-            href="/favicon/apple-icon-180x180.png"
-          />
-          <link
-            rel="icon"
-            type="image/png"
-            sizes="192x192"
-            href="/favicon/android-icon-192x192.png"
-          />
-          <link
-            rel="icon"
-            type="image/png"
-            sizes="32x32"
-            href="/favicon/favicon-32x32.png"
-          />
-          <link
-            rel="icon"
-            type="image/png"
-            sizes="96x96"
-            href="/favicon/favicon-96x96.png"
-          />
-          <link
-            rel="icon"
-            type="image/png"
-            sizes="16x16"
-            href="/favicon/favicon-16x16.png"
-          />
-          <link rel="manifest" href="/manifest.json" />
-          <title>Terms of User</title>
-          <meta name="description" content={t(`siteDescription`)} />
-          <meta name="msapplication-TileColor" content="#fffefc" />
-          <meta
-            name="msapplication-TileImage"
-            content="/favicon/ms-icon-144x144.png"
-          />
-          <meta name="theme-color" content="#fffefc" />
-          <meta name="keywords" content={t('siteKeywords')} />
-          <meta name="author" content="Notion Avatar" />
-          <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1.0"
-          />
-          <meta name="format-detection" content="telephone=no" />
-          <meta name="apple-mobile-web-app-capable" content="yes" />
-          <meta name="mobile-web-app-capable" content="yes" />
-          <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-          <meta content={t(`siteDescription`)} name="description" />
-          <meta property="og:type" content="website" />
-          <meta property="og:site_name" content={t(`siteTitle`)} />
-          <meta property="og:title" content={t(`siteTitle`)} />
-          <meta property="og:description" content={t(`siteDescription`)} />
-          <meta property="og:url" content={URL} />
-          <meta property="og:image" content="https://i.imgur.com/F5R0K03.png" />
-          <meta name="twitter:card" content="summary_large_image" />
-          <meta
-            name="twitter:image"
-            content="https://i.imgur.com/F5R0K03.png"
-          />
-          <meta name="twitter:site" content="@phillzou" />
-          <meta name="twitter:title" content={t(`siteTitle`)} />
-          <meta name="twitter:description" content={t(`siteDescription`)} />
-          <meta charSet="utf-8" />
-          <meta name="theme-color" content="#fffefc" />
-          <meta name="robots" content="index, follow" />
-          <meta name="googlebot" content="index, follow" />
-          <meta name="google" content="notranslate" />
-          <link rel="canonical" href="https://notion-avatar.app" />
-          {/* 添加所有语言的备用链接 */}
-          <link
+            key={link.hrefLang}
             rel="alternate"
-            hrefLang="en"
-            href="https://notion-avatar.app/en"
+            hrefLang={link.hrefLang}
+            href={link.href}
           />
-          <link
-            rel="alternate"
-            hrefLang="zh"
-            href="https://notion-avatar.app/zh"
-          />
-          <link
-            rel="alternate"
-            hrefLang="zh-TW"
-            href="https://notion-avatar.app/zh-TW"
-          />
-          <link
-            rel="alternate"
-            hrefLang="ja"
-            href="https://notion-avatar.app/ja"
-          />
-          <link
-            rel="alternate"
-            hrefLang="ko"
-            href="https://notion-avatar.app/ko"
-          />
-          <link
-            rel="alternate"
-            hrefLang="es"
-            href="https://notion-avatar.app/es"
-          />
-          <link
-            rel="alternate"
-            hrefLang="fr"
-            href="https://notion-avatar.app/fr"
-          />
-          <link
-            rel="alternate"
-            hrefLang="de"
-            href="https://notion-avatar.app/de"
-          />
-          <link
-            rel="alternate"
-            hrefLang="ru"
-            href="https://notion-avatar.app/ru"
-          />
-          <link
-            rel="alternate"
-            hrefLang="pt"
-            href="https://notion-avatar.app/pt"
-          />
-          <link
-            rel="alternate"
-            hrefLang="x-default"
-            href="https://notion-avatar.app"
-          />
-          <link rel="preconnect" href="https://fonts.googleapis.com" />
-          <link
-            rel="preconnect"
-            href="https://fonts.gstatic.com"
-            crossOrigin="anonymous"
-          />
-          <link href="/fonts/Quicksand.tff" as="font" crossOrigin="anonymous" />
-          <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{
-              __html: JSON.stringify({
-                '@context': 'https://schema.org',
-                '@type': 'WebApplication',
-                name: t('siteTitle'),
-                description: t('siteDescription'),
-                url: URL,
-                applicationCategory: 'DesignApplication',
-                operatingSystem: 'Web',
-              }),
-            }}
-          />
-          <meta
-            name="apple-mobile-web-app-status-bar-style"
-            content="default"
-          />
-          <meta name="apple-mobile-web-app-title" content="Notion Avatar" />
-          <meta name="format-detection" content="telephone=no" />
-          <meta name="msapplication-tap-highlight" content="no" />
-          {/* PWA manifest */}
-          <link rel="manifest" href="/manifest.json" />
-        </Head>
+        ))}
+        <link
+          rel="alternate"
+          hrefLang="x-default"
+          href={getDefaultHreflangUrl(pagePath)}
+        />
       </Head>
       <Header />
       <main className="flex-grow max-w-3xl mx-auto px-4 pb-6">
@@ -221,7 +54,7 @@ const Terms: NextPage = () => {
 
           <div className="bg-gray-100 p-4 rounded-lg my-6">
             <p>
-              By using Notion Avatar, you agree to these Terms of Use. Please
+              By using Avatar Maker, you agree to these Terms of Use. Please
               read them carefully. If you don't agree with these terms, please
               do not use our service.
             </p>
@@ -231,7 +64,7 @@ const Terms: NextPage = () => {
             1. Acceptance of Terms
           </h2>
           <p>
-            By accessing or using Notion Avatar ("the Service"), you agree to be
+            By accessing or using Avatar Maker ("the Service"), you agree to be
             bound by these Terms of Use. These Terms apply to all visitors,
             users, and others who access or use the Service.
           </p>
@@ -240,9 +73,9 @@ const Terms: NextPage = () => {
             2. Description of Service
           </h2>
           <p className="mb-4 text-gray-700">
-            Notion Avatar is a free online tool that allows users to make
-            notion-style image. The Service processes images directly in your
-            browser and does not store uploaded images on our servers.
+            Avatar Maker is an online tool that allows users to create avatar
+            images. The Service processes images directly in your browser and
+            does not store uploaded images on our servers.
           </p>
 
           <h2 className="text-2xl font-bold mt-10 mb-4 text-black">
@@ -302,7 +135,7 @@ const Terms: NextPage = () => {
           </h2>
           <p className="mb-4 text-gray-700">
             The Service and its original content, features, and functionality
-            are owned by Notion Avatar and are protected by international
+            are owned by Avatar Maker and are protected by international
             copyright, trademark, patent, trade secret, and other intellectual
             property or proprietary rights laws.
           </p>
@@ -332,7 +165,7 @@ const Terms: NextPage = () => {
             7. Limitation of Liability
           </h2>
           <p className="mb-4 text-gray-700">
-            In no event shall Notion Avatar, its directors, employees, partners,
+            In no event shall Avatar Maker, its directors, employees, partners,
             agents, suppliers, or affiliates be liable for any indirect,
             incidental, special, consequential or punitive damages, including
             without limitation, loss of profits, data, use, goodwill, or other
@@ -344,7 +177,7 @@ const Terms: NextPage = () => {
             8. Indemnification
           </h2>
           <p className="mb-4 text-gray-700">
-            You agree to defend, indemnify and hold harmless Notion Avatar and
+            You agree to defend, indemnify and hold harmless Avatar Maker and
             its licensors, licensees, and against any claims, liabilities,
             damages, judgments, awards, losses, costs, expenses, or fees
             (including reasonable attorneys' fees) arising out of or relating to
@@ -365,8 +198,8 @@ const Terms: NextPage = () => {
           </h2>
           <p className="mb-4 text-gray-700">
             The Service may contain links to third-party websites or services
-            that are not owned or controlled by Notion Avatar. We have no
-            control over, and assume no responsibility for, the content, privacy
+            that are not owned or controlled by Avatar Maker. We have no control
+            over, and assume no responsibility for, the content, privacy
             policies, or practices of any third-party websites or services.
           </p>
 
@@ -404,8 +237,8 @@ const Terms: NextPage = () => {
           </h2>
           <p className="mb-4 text-gray-700">
             If you have any questions about these Terms, please contact us at{' '}
-            <a href="mailto:contact@notion-avatar.app" className="underline">
-              contact@notion-avatar.app
+            <a href="mailto:contact@avatar.leix.dev" className="underline">
+              contact@avatar.leix.dev
             </a>
           </p>
         </div>

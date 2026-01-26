@@ -21,14 +21,14 @@
   "underDesign": "と",
   "designedBy": "デザイン：",
   "license": "ライセンス",
-  "coffeeUrl": "https://ko-fi.com/mayandev",
+  "coffeeUrl": "",
   "modalTitle": "もう少しです",
   "modalHint": "長押しまたは右クリックでアバターを保存できます",
   "modalCancel": "キャンセル",
   "modalConfirm": "確認",
-  "siteTitle": "Notion アバターメーカー",
-  "siteDescription": "Notion手書きスタイルのアバターメーカーツール。顔の特徴、髪型、メガネ、ひげ、アクセサリーをカスタマイズして、ワンクリックで独自のアバターを作成できます。Notion、GitHub、Twitterなどのソーシャルプラットフォームに最適で、チームコラボレーションやパーソナルブランディングにぴったりです。今すぐ試して、あなただけのNotionスタイルのアバターを簡単に作成しましょう！",
-  "siteKeywords": "Notionアバター,アバターメーカー,Notionスタイル,手書きアバター,カスタムアバター,ミニマルアバター,チームアバター,個人ブランド,SNSアバター,SVGアバター,PNGアバター,無料アバター作成,オンラインアバター生成,GitHubアバター,Twitterアバター",
+  "siteTitle": "アバターメーカー",
+  "siteDescription": "ミニマルな白黒アバターを作れるツール。顔の特徴、髪型、メガネ、ひげ、アクセサリーをカスタマイズできます。",
+  "siteKeywords": "アバター作成,アバターメーカー,手書きアバター,カスタムアバター,ミニマルアバター,チームアバター,SNSアバター,SVGアバター,PNGアバター,オンラインアバター生成",
   "404Title": "ページが見つかりません",
   "404Redirect": "ホームに戻る",
   "copy": "コピー",
@@ -45,12 +45,12 @@
   "christmas": "クリスマス",
   "downloadSuccess": "ダウンロード完了",
   "shareModalHint": "お気に入りのSNSでシェアしましょう！",
-  "shareContent": "Notion Avatar Makerで可愛いアバターを作りました！見てください！",
+  "shareContent": "アバターメーカーで新しいアバターを作りました！見てください！",
   "avatarMaker": "アバターメーカー",
   "whosUsing": "利用者",
-  "whosUsingDescription": "世界中のチームや個人がNotion Avatarを使用しています",
+  "whosUsingDescription": "世界中のチームや個人がアバターメーカーを使用しています",
   "useCases": "使用シーン",
-  "useCasesDescription": "Notion風アバターの多様な活用方法をご紹介",
+  "useCasesDescription": "アバターの多様な活用方法をご紹介",
   "you": "あなた",
   "chatDemo": {
     "message1": "新しいアバターを見てください！",
@@ -64,15 +64,15 @@
     "name": "田中太郎",
     "handle": "tarotanaka",
     "bio": "フルスタックエンジニア / オープンソース愛好家",
-    "tweet": "Notion Avatar Maker で新しいアバターを作りました！このミニマルなデザインが素敵 ✨",
-    "shareTitle": "Notionスタイルのアバターをシェア",
-    "shareText": "Notion Avatar Maker で作った新しいアバターをチェックしてください！"
+    "tweet": "新しいアバターを作りました！このミニマルなデザインが素敵。",
+    "shareTitle": "アバターをシェア",
+    "shareText": "新しいアバターをチェックしてください！"
   },
   "resourceStore": {
     "title": "デザインリソース",
-    "description": "Notion Avatar Maker の完全なデザインリソースパック（ウェブサイトデザインと装飾要素を含む）。Proユーザーは無料。",
+    "description": "ウェブサイトデザインと装飾要素を含む完全なデザインリソースパック。",
     "buyNow": "今すぐ購入",
-    "freeForPro": "Proユーザーは無料",
+    "freeForPro": "同梱",
     "designPack": {
       "title": "完全なウェブサイトデザイン",
       "description": "すべてのページの Figma デザインファイル",
@@ -82,7 +82,7 @@
     },
     "scribblesPack": {
       "title": "手書き要素パック",
-      "description": "Notion スタイルの手書き装飾要素でデザインに楽しさを追加",
+      "description": "手書き装飾要素でデザインに楽しさを追加",
       "features": {
         "1": "100以上の手書き要素"
       }
@@ -105,22 +105,22 @@
   },
   "faq": {
     "title": "よくある質問",
-    "whatIsAvatar": "Notion Avatar Makerとは何ですか？",
-    "whatIsAvatarAnswer": "Notion Avatar Makerは、Notion、ソーシャルメディア、またはその他のデジタルプラットフォームで使用するカスタムアバターを作成できる無料ツールです。",
+    "whatIsAvatar": "アバターメーカーとは何ですか？",
+    "whatIsAvatarAnswer": "アバターメーカーは、ソーシャルメディアなどで使えるカスタムアバターを作成できるツールです。",
     "howToUse": "アバターエディターの使い方は？",
     "howToUseAnswer": "さまざまな顔の特徴、ヘアスタイル、アクセサリーをクリックしてアバターをカスタマイズします。フリップボタンで向きを変更し、背景ボタンで背景スタイルを調整できます。",
     "commercialUse": "アバターを商用目的で使用できますか？",
-    "commercialUseAnswer": "はい、Notion Avatarで作成されたすべてのアバターはCC0ライセンスの下でリリースされており、帰属表示なしで商用利用できます。",
+    "commercialUseAnswer": "はい、このツールで作成されたすべてのアバターはCC0ライセンスの下でリリースされており、帰属表示なしで商用利用できます。",
     "privacyConcerns": "ユーザーデータを収集しますか？",
     "privacyConcernsAnswer": "いいえ、ユーザーデータを収集または保存することはありません。すべてのアバター作成はブラウザ内でローカルに実行されます。",
     "supportedBrowsers": "どのブラウザがサポートされていますか？",
-    "supportedBrowsersAnswer": "Notion Avatarは、Chrome、Firefox、Safari、Edgeなどのモダンブラウザで最適に動作します。Internet Explorerはサポートされていません。",
-    "isBelongToNotion": "Notion Avatar MakerはNotionと提携していますか？",
-    "isBelongToNotionAnswer": "いいえ、Notion Avatar MakerはNotionと提携していません。これは独立したプロジェクトです。"
+    "supportedBrowsersAnswer": "このアプリは、Chrome、Firefox、Safari、Edgeなどのモダンブラウザで最適に動作します。Internet Explorerはサポートされていません。",
+    "isBelongToNotion": "アバターメーカーはどこかの企業と提携していますか？",
+    "isBelongToNotionAnswer": "いいえ。これは独立したプロジェクトです。"
   },
   "ai": {
-    "title": "Notion AI アバター生成",
-    "navTitle": "Notion AI アバター",
+    "title": "AI アバター生成",
+    "navTitle": "AI アバター",
     "description": "AIの魔法で写真やアイデアをNotionスタイルのアバターに変換します。",
     "heroSubtitle": "数秒で写真やテキストの説明をユニークなNotionスタイルのアバターに変換",
     "heroCTA": "始める",
@@ -165,7 +165,7 @@
       "step3Title": "AI生成",
       "step3Desc": "生成をクリックすると、AIが数秒でアバターを作成します",
       "step4Title": "ダウンロード & 使用",
-      "step4Desc": "生成されたアバターをダウンロードして、Notion、SNSなどで使用できます"
+      "step4Desc": "生成されたアバターをダウンロードして、どこでも使用できます"
     },
     "pricing": {
       "title": "プランを選択",
@@ -195,7 +195,7 @@
       "q4": "生成されたアバターは商用利用できますか？",
       "a4": "はい、すべての生成されたアバターはCC0ライセンスに従い、帰属表示なしで商用利用できます。"
     },
-    "seoKeywords": "AIアバター生成器,AIアバターメーカー,Notion AIアバター,写真からAIアバター,テキストからAIアバター,AIアバタークリエイター,NotionスタイルAIアバター,AI生成アバター,無料AIアバター生成器,オンラインAIアバターメーカー,AIアバターツール,人工知能アバター,AIアバター生成,スマートアバター生成器"
+    "seoKeywords": "AIアバター生成器,AIアバターメーカー,写真からAIアバター,テキストからAIアバター,AIアバタークリエイター,AI生成アバター,無料AIアバター生成器,オンラインAIアバターメーカー,AIアバターツール,人工知能アバター,AIアバター生成,スマートアバター生成器"
   },
   "aiFeatureIntro": {
     "title": "新しい AI アバター生成機能",
@@ -245,7 +245,7 @@
   },
   "account": {
     "title": "アカウント設定",
-    "pageTitle": "アカウント | Notion Avatar Maker",
+    "pageTitle": "アカウント | アバターメーカー",
     "profile": "プロフィール",
     "subscription": "サブスクリプション",
     "unlimitedGenerations": "Proサブスクリプションで無制限生成",
@@ -289,7 +289,7 @@
     }
   },
   "pricing": {
-    "pageTitle": "料金 | Notion Avatar Maker",
+    "pageTitle": "料金 | アバターメーカー",
     "pageDescription": "アバター作成に最適なプランを選択してください",
     "title": "シンプルで透明な料金",
     "description": "あなたに最適なプランを選択してください。いつでもアップグレードできます。",

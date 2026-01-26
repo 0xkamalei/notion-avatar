@@ -21,13 +21,13 @@
   "underDesign": "设计且基于",
   "designedBy": "由",
   "license": "协议",
-  "coffeeUrl": "https://ko-fi.com/mayandev",
+  "coffeeUrl": "",
   "modalTitle": "最后一步",
   "modalHint": "长按图片或者右键保存头像至本地相册",
   "modalCancel": "关闭",
   "modalConfirm": "确认",
-  "siteTitle": "Notion 风格头像制作",
-  "siteDescription": "一个 Notion 手绘风格头像制作工具，支持自定义面部特征、发型、眼镜、胡须和配饰，一键生成独特的个人头像。适用于 Notion、GitHub、Twitter 等社交平台，完美契合团队协作和个人品牌打造。立即体验，轻松创建专属于你的 Notion 风格头像！",
+  "siteTitle": "头像生成器",
+  "siteDescription": "一个手绘风格头像制作工具，支持自定义面部特征、发型、眼镜、胡须和配饰，一键生成独特的个人头像。",
   "404Title": "啊哦！页面走丢了。",
   "404Redirect": "返回主页",
   "copy": "复制",
@@ -44,13 +44,13 @@
   "christmas": "圣诞节装饰",
   "downloadSuccess": "下载成功",
   "shareModalHint": "分享到你喜欢的社交媒体吧！",
-  "shareContent": "我用 Notion 风格头像制作器生成了一个头像，快来看看吧！",
+  "shareContent": "我用头像生成器生成了一个头像，快来看看吧！",
   "avatarMaker": "头像制作",
-  "siteKeywords": "Notion 头像,头像生成器,Notion Avatar,手绘风格头像,个性化头像,自定义头像简约头像,团队头像,个人品牌,社交媒体头像,SVG头像,PNG头像,免费头像制作,在线头像生成,GitHub头像,Twitter头像",
+  "siteKeywords": "头像生成器,手绘风格头像,个性化头像,自定义头像,简约头像,团队头像,社交媒体头像,SVG头像,PNG头像,免费头像制作,在线头像生成",
   "whosUsing": "谁在使用",
-  "whosUsingDescription": "来自全球的团队和个人都在使用 Notion Avatar",
+  "whosUsingDescription": "来自全球的团队和个人都在使用头像生成器",
   "useCases": "使用场景",
-  "useCasesDescription": "探索 Notion 风格头像的多种应用场景",
+  "useCasesDescription": "探索头像的多种应用场景",
   "you": "你",
   "chatDemo": {
     "message1": "给你看看我新设置的头像！",
@@ -63,16 +63,16 @@
   "socialDemo": {
     "name": "张小明",
     "handle": "xiaoming",
-    "bio": "全栈工程师 / 开源爱好者",
-    "tweet": "刚用 Notion Avatar Maker 制作了新头像！简约的设计风格真的太棒了 ✨",
-    "shareTitle": "分享我的 Notion 风格头像",
-    "shareText": "快来看看我用 Notion Avatar Maker 制作的新头像！"
+    "bio": "创作者",
+    "tweet": "刚做了新头像！简约的设计风格真的太棒了。",
+    "shareTitle": "分享我的头像",
+    "shareText": "快来看看我新做的头像！"
   },
   "resourceStore": {
     "title": "设计资源",
-    "description": "获取 Notion Avatar Maker 的完整设计资源包，包含网站设计稿和装饰元素。Pro 用户免费。",
+    "description": "获取完整设计资源包，包含网站设计稿和装饰元素。",
     "buyNow": "立即购买",
-    "freeForPro": "Pro 用户免费",
+    "freeForPro": "已包含",
     "designPack": {
       "title": "完整网站设计稿",
       "description": "包含所有页面的 Figma 设计稿",
@@ -82,7 +82,7 @@
     },
     "scribblesPack": {
       "title": "手绘装饰元素包",
-      "description": "Notion 风格的手绘装饰元素，为你的设计添加趣味性",
+      "description": "手绘装饰元素，为你的设计添加趣味性",
       "features": {
         "1": "100+ 手绘装饰元素"
       }
@@ -99,30 +99,30 @@
     "step2Title": "自定义特征",
     "step2Desc": "调整发型、面部特征、配饰等细节，打造独特外观",
     "step3Title": "下载并使用",
-    "step3Desc": "点击下载按钮获取高分辨率头像，可立即在Notion或其他平台使用",
+    "step3Desc": "点击下载按钮获取高分辨率头像，可立即在任意平台使用",
     "step4Title": "分享您的作品",
-    "step4Desc": "在社交媒体上分享您的新Notion头像，向朋友展示！"
+    "step4Desc": "在社交媒体上分享您的新头像，向朋友展示！"
   },
   "faq": {
     "title": "常见问题",
-    "whatIsAvatar": "什么是 Notion Avatar Maker？",
-    "whatIsAvatarAnswer": "Notion Avatar Maker 是一个免费工具，允许您创建自定义头像，用于 Notion、社交媒体或任何其他数字平台。",
+    "whatIsAvatar": "什么是头像生成器？",
+    "whatIsAvatarAnswer": "头像生成器是一个工具，允许您创建自定义头像，用于社交媒体或任何其他数字平台。",
     "howToUse": "如何使用头像编辑器？",
     "howToUseAnswer": "只需点击不同的面部特征、发型和配饰来自定义您的头像。使用翻转按钮改变方向，使用背景按钮调整背景样式。",
     "commercialUse": "我可以将头像用于商业目的吗？",
-    "commercialUseAnswer": "可以，所有使用 Notion Avatar 创建的头像都遵循 CC0 许可证，允许商业使用且无需署名。",
+    "commercialUseAnswer": "可以，所有创建的头像都遵循 CC0 许可证，允许商业使用且无需署名。",
     "privacyConcerns": "你们会收集用户数据吗？",
     "privacyConcernsAnswer": "不会，我们不会收集或存储任何用户数据。所有头像创建都在您的浏览器本地完成。",
     "supportedBrowsers": "支持哪些浏览器？",
-    "supportedBrowsersAnswer": "Notion Avatar 在现代浏览器上运行最佳，包括 Chrome、Firefox、Safari 和 Edge。不支持 Internet Explorer。",
-    "isBelongToNotion": "Notion Avatar Maker 与 Notion 有关联吗？",
-    "isBelongToNotionAnswer": "没有，Notion Avatar Maker 与 Notion 无关。这是一个独立项目。"
+    "supportedBrowsersAnswer": "本应用在现代浏览器上运行最佳，包括 Chrome、Firefox、Safari 和 Edge。不支持 Internet Explorer。",
+    "isBelongToNotion": "头像生成器与任何公司有关联吗？",
+    "isBelongToNotionAnswer": "没有，这是一个独立项目。"
   },
   "ai": {
-    "title": "Notion AI 头像生成",
-    "navTitle": "Notion AI 头像",
-    "description": "使用 AI 魔法将您的照片或创意转换为 Notion 风格头像。",
-    "heroSubtitle": "几秒钟内将您的照片或文字描述转换为独特的 Notion 风格头像",
+    "title": "AI 头像生成",
+    "navTitle": "AI 头像",
+    "description": "使用 AI 将照片或文字描述转换为简洁黑白头像。",
+    "heroSubtitle": "几秒钟内把照片或文字描述转换为简洁黑白头像",
     "heroCTA": "开始使用",
     "photo2avatar": "照片转头像",
     "text2avatar": "文字生成",
@@ -133,13 +133,19 @@
     "generate": "生成头像",
     "generating": "生成中...",
     "download": "下载头像",
+    "unlimited": "无限制",
+    "usage": {
+      "available": "可用",
+      "siteFreeRemaining": "全站今日免费剩余",
+      "creditsRemaining": "积分"
+    },
     "limitReached": "今日额度已用完",
     "limitDesc": "您已使用完今日的免费额度。请明天再来，或升级解锁更多次数。",
     "upgrade": "立即升级",
     "error": "出错了，请重试。",
     "examples": {
       "photoTitle": "照片转换效果",
-      "photoDesc": "看看 AI 如何将您的真实照片转换为 Notion 风格头像",
+      "photoDesc": "看看 AI 如何将您的真实照片转换为简洁黑白头像",
       "textTitle": "文字生成示例",
       "textDesc": "只需描述您想要的头像，AI 就能为您生成",
       "before": "原图",
@@ -152,9 +158,9 @@
     "features": {
       "title": "强大的 AI 功能",
       "photo2avatarTitle": "照片转头像",
-      "photo2avatarDesc": "上传您的照片，AI 会自动识别并转换为 Notion 风格头像，保留您的独特特征",
+      "photo2avatarDesc": "上传您的照片，AI 会自动识别并转换为简洁黑白头像，保留您的独特特征",
       "text2avatarTitle": "文字生成头像",
-      "text2avatarDesc": "只需描述您想要的头像特征，AI 就会为您生成个性化的 Notion 风格头像"
+      "text2avatarDesc": "只需描述您想要的头像特征，AI 就会为您生成个性化的简洁黑白头像"
     },
     "steps": {
       "title": "使用方法",
@@ -165,7 +171,7 @@
       "step3Title": "AI 生成",
       "step3Desc": "点击生成，AI 将在几秒钟内创建您的头像",
       "step4Title": "下载并使用",
-      "step4Desc": "下载您生成的头像，可在 Notion、社交媒体等平台使用"
+      "step4Desc": "下载您生成的头像，可在任意平台使用"
     },
     "pricing": {
       "title": "选择您的方案",
@@ -195,13 +201,13 @@
       "q4": "生成的头像可以商用吗？",
       "a4": "可以，所有生成的头像遵循 CC0 许可证，可用于商业用途，无需署名。"
     },
-    "seoKeywords": "AI 头像生成器,AI 头像制作,Notion AI 头像,照片转 AI 头像,文字生成 AI 头像,AI 头像创建器,Notion 风格 AI 头像,AI 生成头像,免费 AI 头像生成器,在线 AI 头像制作,AI 头像工具,人工智能头像,AI 头像生成,智能头像生成器"
+    "seoKeywords": "AI 头像生成器,AI 头像制作,照片转 AI 头像,文字生成 AI 头像,AI 头像创建器,AI 生成头像,免费 AI 头像生成器,在线 AI 头像制作,AI 头像工具,人工智能头像,智能头像生成器"
   },
   "aiFeatureIntro": {
     "title": "全新 AI 头像生成功能",
-    "description": "现在您可以使用 AI 技术快速生成 Notion 风格的头像了！",
+    "description": "现在您可以使用 AI 技术快速生成简洁黑白头像了！",
     "feature1Title": "照片转头像",
-    "feature1Desc": "上传您的照片，AI 会自动转换为 Notion 风格的头像",
+    "feature1Desc": "上传您的照片，AI 会自动转换为简洁黑白头像",
     "feature2Title": "文字生成头像",
     "feature2Desc": "只需描述您想要的头像，AI 就能为您生成",
     "tryNow": "立即体验",
@@ -245,7 +251,7 @@
   },
   "account": {
     "title": "账户设置",
-    "pageTitle": "账户 | Notion Avatar Maker",
+    "pageTitle": "账户 | 头像生成器",
     "profile": "个人资料",
     "subscription": "订阅",
     "unlimitedGenerations": "Pro 订阅无限生成",
@@ -257,6 +263,7 @@
     "credits": "积分",
     "creditsRemaining": "剩余积分",
     "buyMore": "购买更多",
+    "siteFreeQuota": "全站每日共享 1 次免费生成（每日重置）。",
     "purchasedResources": "已购买的资源",
     "resourcePack": "资源包",
     "downloading": "下载中...",
@@ -289,10 +296,52 @@
     }
   },
   "pricing": {
-    "pageTitle": "价格 | Notion Avatar Maker",
+    "pageTitle": "价格 | 头像生成器",
     "pageDescription": "选择最适合您头像创建需求的方案",
     "title": "简单透明的价格",
     "description": "选择最适合您的方案。随时可以升级。",
+    "packs": {
+      "free": {
+        "name": "全站免费",
+        "price": "￥0",
+        "period": "每日",
+        "description": "全站共享每日免费额度（每日重置）",
+        "features": {
+          "1": "全站每天 1 次免费生成"
+        },
+        "buttonText": "已包含"
+      },
+      "small": {
+        "name": "积分包 - 小",
+        "price": "￥29",
+        "period": "/包",
+        "description": "适合轻度使用",
+        "features": {
+          "1": "充值积分，按次扣除"
+        },
+        "buttonText": "购买"
+      },
+      "medium": {
+        "name": "积分包 - 中",
+        "price": "￥99",
+        "period": "/包",
+        "description": "适合日常使用",
+        "features": {
+          "1": "充值积分，按次扣除"
+        },
+        "buttonText": "购买"
+      },
+      "large": {
+        "name": "积分包 - 大",
+        "price": "￥199",
+        "period": "/包",
+        "description": "适合高频使用",
+        "features": {
+          "1": "充值积分，按次扣除"
+        },
+        "buttonText": "购买"
+      }
+    },
     "plans": {
       "free": {
         "name": "免费版",

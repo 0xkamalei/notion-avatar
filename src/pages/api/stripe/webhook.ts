@@ -99,11 +99,19 @@ export default async function handler(
             console.log('Subscription updated successfully for user:', userId);
           }
         } else if (priceType === 'credits') {
-          // Handle credit purchase (10 credits per package)
+          const creditsAmount = Number.parseInt(
+            session.metadata?.credits_amount || '0',
+            10,
+          );
+          const creditsToGrant =
+            Number.isFinite(creditsAmount) && creditsAmount > 0
+              ? creditsAmount
+              : 100;
+
           await supabase.from('credit_packages').insert({
             user_id: userId,
-            credits_purchased: 10,
-            credits_remaining: 10,
+            credits_purchased: creditsToGrant,
+            credits_remaining: creditsToGrant,
             stripe_payment_intent_id: session.payment_intent as string,
           });
         } else if (priceType === 'resource-pack') {

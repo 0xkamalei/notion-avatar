@@ -11,15 +11,15 @@ import toast from 'react-hot-toast';
 import { useAuth } from '@/contexts/AuthContext';
 import { createServerSideClient } from '@/lib/supabase/server';
 import { usePurchasedPacks } from '@/hooks/useAccountData';
+import {
+  getCanonicalUrl,
+  getDefaultHreflangUrl,
+  getHreflangLinks,
+} from '@/lib/seo';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import AvatarEditor from '@/components/AvatarEditor';
-import ProductHuntBanner from '@/components/ProductHuntBanner';
 
-// 延迟加载非首屏组件
-const WhosUsing = dynamic(() => import('@/components/WhosUsing'), {
-  loading: () => null,
-});
 const UseCases = dynamic(() => import('@/components/UseCases'), {
   loading: () => null,
 });
@@ -30,8 +30,6 @@ const AIFeatureIntroModal = dynamic(
 const ResourceStore = dynamic(() => import('@/components/ResourceStore'), {
   loading: () => null,
 });
-
-const URL = `https://notion-avatar.app/`;
 
 const AI_FEATURE_INTRO_KEY = 'ai-feature-intro-dismissed';
 
@@ -135,17 +133,18 @@ const Home: NextPage<HomeProps> = ({ initialPurchasedPacks }) => {
       question: 'faq.supportedBrowsers',
       answer: 'faq.supportedBrowsersAnswer',
     },
-    {
-      question: 'faq.isBelongToNotion',
-      answer: 'faq.isBelongToNotionAnswer',
-    },
   ];
+
+  const pagePath = '/';
+  const canonicalUrl = getCanonicalUrl(pagePath, router.locale);
+  const hreflangLinks = getHreflangLinks(pagePath);
+  const baseUrl = process.env.NEXT_PUBLIC_URL || 'https://avatar.leix.dev';
+  const ogImage = `${baseUrl}/social.png`;
 
   return (
     <>
       <Head>
         {/* 关键资源预加载 */}
-        <link rel="preload" href="/logo.gif" as="image" />
         <link rel="preload" href="/image/avatar-diff.png" as="image" />
 
         {/* Favicon - 只保留关键尺寸 */}
@@ -172,7 +171,6 @@ const Home: NextPage<HomeProps> = ({ initialPurchasedPacks }) => {
         <title>{t(`siteTitle`)}</title>
         <meta name="description" content={t(`siteDescription`)} />
         <meta name="keywords" content={t('siteKeywords')} />
-        <meta name="author" content="Notion Avatar" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="format-detection" content="telephone=no" />
         <meta name="theme-color" content="#fffefc" />
@@ -184,16 +182,15 @@ const Home: NextPage<HomeProps> = ({ initialPurchasedPacks }) => {
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-        <meta name="apple-mobile-web-app-title" content="Notion Avatar" />
+        <meta name="apple-mobile-web-app-title" content={t('siteTitle')} />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content={t(`siteTitle`)} />
         <meta property="og:title" content={t(`siteTitle`)} />
         <meta property="og:description" content={t(`siteDescription`)} />
-        <meta property="og:url" content={URL} />
-        <meta property="og:image" content="https://i.imgur.com/F5R0K03.png" />
+        <meta property="og:url" content={canonicalUrl} />
+        <meta property="og:image" content={ogImage} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:image" content="https://i.imgur.com/F5R0K03.png" />
-        <meta name="twitter:site" content="@phillzou" />
+        <meta name="twitter:image" content={ogImage} />
         <meta name="twitter:title" content={t(`siteTitle`)} />
         <meta name="twitter:description" content={t(`siteDescription`)} />
         <meta charSet="utf-8" />
@@ -202,28 +199,21 @@ const Home: NextPage<HomeProps> = ({ initialPurchasedPacks }) => {
         <meta name="robots" content="index, follow" />
         <meta name="googlebot" content="index, follow" />
         <meta name="google" content="notranslate" />
-        <link
-          rel="canonical"
-          href={`https://notion-avatar.app${
-            router.locale && router.locale !== 'en' ? `/${router.locale}` : ''
-          }`}
-        />
+        <link rel="canonical" href={canonicalUrl} />
 
         {/* Hreflang - 使用更简洁的方式 */}
-        {['en', 'zh', 'zh-TW', 'ja', 'ko', 'es', 'fr', 'de', 'ru', 'pt'].map(
-          (lang) => (
-            <link
-              key={lang}
-              rel="alternate"
-              hrefLang={lang}
-              href={`https://notion-avatar.app/${lang === 'en' ? '' : lang}`}
-            />
-          ),
-        )}
+        {hreflangLinks.map((link) => (
+          <link
+            key={link.hrefLang}
+            rel="alternate"
+            hrefLang={link.hrefLang}
+            href={link.href}
+          />
+        ))}
         <link
           rel="alternate"
           hrefLang="x-default"
-          href="https://notion-avatar.app"
+          href={getDefaultHreflangUrl(pagePath)}
         />
         <link
           rel="preload"
@@ -240,7 +230,7 @@ const Home: NextPage<HomeProps> = ({ initialPurchasedPacks }) => {
               '@type': 'WebApplication',
               name: t('siteTitle'),
               description: t('siteDescription'),
-              url: URL,
+              url: canonicalUrl,
               applicationCategory: 'DesignApplication',
               operatingSystem: 'Web',
             }),
@@ -248,7 +238,6 @@ const Home: NextPage<HomeProps> = ({ initialPurchasedPacks }) => {
         />
       </Head>
 
-      <ProductHuntBanner />
       <Header />
       <main className="my-5">
         <AvatarEditor />
@@ -336,7 +325,7 @@ const Home: NextPage<HomeProps> = ({ initialPurchasedPacks }) => {
               <div className="mb-8">
                 <Image
                   src="/image/avatar-diff.png"
-                  alt="Notion AI Avatar"
+                  alt="AI Avatar"
                   width={1024}
                   height={485}
                   className="mx-auto"
@@ -374,7 +363,6 @@ const Home: NextPage<HomeProps> = ({ initialPurchasedPacks }) => {
             showDownloadButton
           />
         </div>
-        <WhosUsing />
         <UseCases />
 
         <section className="py-16 my-12">

@@ -33,8 +33,13 @@ yarn-error.log*
 # vercel
 .vercel
 
+# open-next
+.open-next
+
 # js map
 *.js.map
 supabase/.temp
 
 scripts/local
+
+.env

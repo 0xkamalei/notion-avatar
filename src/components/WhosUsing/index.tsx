@@ -15,40 +15,37 @@ export default function WhosUsing() {
 
   const testimonials: Testimonial[] = [
     {
-      name: 'Shadcn',
+      name: 'User',
       avatar: '/image/avatar-1.jpg',
-      handle: '@shadcn',
+      handle: '@user',
       content:
-        'I used Notion Avatar Maker to generate matching avatars for our Shadcn UI library. This is really helpful for the shadcn ui to have a consistent look and feel.',
+        'Great tool for generating clean black-and-white avatars quickly.',
       date: '2024-01-29',
-      url: 'https://x.com/shadcn',
+      url: '/',
     },
     {
-      name: 'つぶあん',
+      name: 'User',
       avatar: '/image/avatar-2.jpg',
-      handle: '@tsubuan_sun',
-      content:
-        'Notion風アイコンが作れる「Notion Avatar Maker」がめちゃおもろい！スマホ＆PCから無料で作れて、かなり自由に使えるよ（ライセンスは各自確認しようね）アイコン変えたい人は検索してみて...',
+      handle: '@user',
+      content: 'The editor is simple and fun, and the results look great.',
       date: '2024-04-14',
-      url: 'https://x.com/tsubuan_sun/status/1779273857150718068',
+      url: '/',
     },
     {
-      name: 'ruanyf',
+      name: 'User',
       avatar: '/image/avatar-3.jpg',
-      handle: '@ruanyf',
-      content:
-        'Notion Avatar Maker 是一个网页工具，用来生成 Notion 风格的头像。各种细节都可以定制，挺好玩的。',
+      handle: '@user',
+      content: 'Lots of customization options and easy downloads.',
       date: '2021-10-15',
-      url: 'https://x.com/ruanyf/status/1448819296990236718',
+      url: '/',
     },
     {
-      name: 'Mayandev',
+      name: 'User',
       avatar: '/image/avatar-4.jpg',
-      handle: '@phillzou',
-      content:
-        'Finally found the perfect tool for my Notion workspace! This avatar maker is exactly what I needed. 💫',
+      handle: '@user',
+      content: 'Perfect for creating consistent avatar styles for a team.',
       date: '2023-12-15',
-      url: 'https://twitter.com/phillzou',
+      url: '/',
     },
   ];
 
@@ -66,13 +63,7 @@ export default function WhosUsing() {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {testimonials.map((item) => (
-            <a
-              key={item.handle}
-              href={item.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group block"
-            >
+            <a key={item.handle} href={item.url} className="group block">
               <div
                 className={`
                 p-8 bg-white border-[3px] border-black rounded-xl
@@ -102,7 +93,7 @@ export default function WhosUsing() {
                         src="/icon/x-logo.svg"
                         width={20}
                         height={20}
-                        alt="X"
+                        alt=""
                         className="flex-shrink-0"
                       />
                     </div>

@@ -22,41 +22,33 @@ export default function DailyLimitBanner({
   if (isUnlimited) {
     return (
       <div className="text-center text-sm text-gray-500 mt-6">
-        <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-green-50 text-green-700 rounded-full font-medium">
-          <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-            <path
-              fillRule="evenodd"
-              d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-              clipRule="evenodd"
-            />
-          </svg>
-          Pro Plan - Unlimited Generations
+        <span className="inline-flex items-center px-3 py-1 bg-green-50 text-green-700 rounded-full font-medium">
+          {t('ai.unlimited')}
         </span>
       </div>
     );
   }
 
   if (remaining > 0) {
-    // If user has paid credits, show total available
     if (paidCredits && paidCredits > 0) {
       return (
         <div className="text-center text-sm text-gray-500 mt-6">
-          <span className="font-bold text-black">{remaining}</span> generations
-          available
-          {freeRemaining !== undefined && freeRemaining > 0 && (
+          <span className="font-bold text-black">{remaining}</span>{' '}
+          {t('ai.usage.available')}
+          {freeRemaining !== undefined && (
             <span className="text-gray-400">
               {' '}
-              ({freeRemaining} free today + {paidCredits} credits)
+              ({t('ai.usage.siteFreeRemaining')} {freeRemaining} +{' '}
+              {t('ai.usage.creditsRemaining')} {paidCredits})
             </span>
           )}
         </div>
       );
     }
 
-    // Only free generations
     return (
       <div className="text-center text-sm text-gray-500 mt-6">
-        Remaining free generations today:{' '}
+        {t('ai.usage.siteFreeRemaining')}{' '}
         <span className="font-bold text-black">
           {remaining}/{total}
         </span>
@@ -70,7 +62,7 @@ export default function DailyLimitBanner({
       <p className="text-sm text-gray-500 mb-3">{t('ai.limitDesc')}</p>
       <button
         type="button"
-        onClick={() => router.push('/pricing')} // Assuming pricing page exists or will be added
+        onClick={() => router.push('/pricing')}
         className="text-sm font-bold text-black border-b-2 border-black hover:border-transparent transition-colors"
       >
         {t('ai.upgrade')} →

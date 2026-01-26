@@ -56,8 +56,8 @@ export default function UserMenu({ onLoginClick }: UserMenuProps) {
     subscription?.plan_type === 'monthly'
       ? t('menu.pro')
       : subscription?.plan_type === 'yearly'
-      ? t('menu.pro')
-      : t('menu.free');
+        ? t('menu.pro')
+        : t('menu.free');
 
   return (
     <div ref={menuRef} className="relative">

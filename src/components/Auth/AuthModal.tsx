@@ -92,6 +92,7 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
           onClick={onClose}
           type="button"
           className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors"
+          aria-label={t('auth.closeModal')}
         >
           <svg
             className="w-6 h-6"
@@ -221,8 +222,8 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
             {isLoading
               ? t('auth.loading')
               : isSignUp
-              ? t('auth.signUp')
-              : t('auth.signIn')}
+                ? t('auth.signUp')
+                : t('auth.signIn')}
           </button>
         </form>
 

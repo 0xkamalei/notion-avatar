@@ -9,6 +9,11 @@ import toast, { Toaster } from 'react-hot-toast';
 import { AIGenerationMode, AIGenerateResponse } from '@/types/ai';
 import { useAIUsage } from '@/hooks/useAIUsage';
 import { useAuth } from '@/contexts/AuthContext';
+import {
+  getCanonicalUrl,
+  getDefaultHreflangUrl,
+  getHreflangLinks,
+} from '@/lib/seo';
 
 import dynamic from 'next/dynamic';
 import Header from '@/components/Header';
@@ -19,7 +24,6 @@ import TextInput from '@/components/AIGenerator/TextInput';
 import GeneratingStatus from '@/components/AIGenerator/GeneratingStatus';
 import GeneratedResult from '@/components/AIGenerator/GeneratedResult';
 import DailyLimitBanner from '@/components/AIGenerator/DailyLimitBanner';
-import ProductHuntBanner from '@/components/ProductHuntBanner';
 import Image from 'next/legacy/image';
 
 // 延迟加载非首屏组件
@@ -121,6 +125,9 @@ export default function AIGeneratorPage({
       }
 
       if (response.status === 402) {
+        if (data.error) {
+          toast.error(data.error);
+        }
         setIsUpgradeModalOpen(true);
         return;
       }
@@ -174,88 +181,58 @@ export default function AIGeneratorPage({
     }, 100);
   };
 
-  // Generate SEO URLs based on current locale
-  // Use prop locale (from getStaticProps) for SSR, fallback to router.locale for CSR
   const currentLocale = propLocale || router.locale || 'en';
-  const baseUrl = 'https://notion-avatar.app';
   const pagePath = '/ai-generator';
-  const canonicalUrl =
-    currentLocale === 'en'
-      ? `${baseUrl}${pagePath}`
-      : `${baseUrl}/${currentLocale}${pagePath}`;
-  const pageTitle = `${t('ai.title')} | Notion Avatar Maker`;
+  const baseUrl = process.env.NEXT_PUBLIC_URL || 'https://avatar.leix.dev';
+  const canonicalUrl = getCanonicalUrl(pagePath, currentLocale);
+  const hreflangLinks = getHreflangLinks(pagePath);
+  const pageTitle = `${t('ai.title')} | ${t('siteTitle')}`;
   const pageDescription = t('ai.description');
   const pageKeywords = t('ai.seoKeywords') || t('siteKeywords');
-  const ogImage = 'https://notion-avatar.app/social-ai.png';
-
-  // Generate hreflang URLs
-  const locales = [
-    'en',
-    'zh',
-    'zh-TW',
-    'ja',
-    'ko',
-    'es',
-    'fr',
-    'de',
-    'ru',
-    'pt',
-  ];
-  const generateHreflangUrl = (locale: string) =>
-    locale === 'en'
-      ? `${baseUrl}${pagePath}`
-      : `${baseUrl}/${locale}${pagePath}`;
+  const ogImage = `${baseUrl}/social-ai.png`;
 
   const plans = useMemo(
     () => [
       {
-        name: t('pricing.plans.free.name'),
-        price: t('pricing.plans.free.price'),
-        period: t('pricing.plans.free.period'),
-        description: t('pricing.plans.free.description'),
-        features: [
-          t('pricing.plans.free.features.1'),
-          t('pricing.plans.free.features.2'),
-          t('pricing.plans.free.features.3'),
-          t('pricing.plans.free.features.4'),
-        ],
-        buttonText: t('pricing.plans.free.buttonText'),
+        name: t('pricing.packs.free.name'),
+        price: t('pricing.packs.free.price'),
+        period: t('pricing.packs.free.period'),
+        description: t('pricing.packs.free.description'),
+        features: [t('pricing.packs.free.features.1')],
+        buttonText: t('pricing.packs.free.buttonText'),
         buttonVariant: 'secondary' as const,
-        priceType: null,
+        packId: null,
       },
       {
-        name: t('pricing.plans.pro.name'),
-        price: t('pricing.plans.pro.price'),
-        period: t('pricing.plans.pro.period'),
-        description: t('pricing.plans.pro.description'),
-        features: [
-          t('pricing.plans.pro.features.1'),
-          t('pricing.plans.pro.features.2'),
-          t('pricing.plans.pro.features.3'),
-          t('pricing.plans.pro.features.4'),
-          t('pricing.plans.pro.features.5'),
-          t('pricing.plans.pro.features.6'),
-        ],
-        buttonText: t('pricing.plans.pro.buttonText'),
+        name: t('pricing.packs.small.name'),
+        price: t('pricing.packs.small.price'),
+        period: t('pricing.packs.small.period'),
+        description: t('pricing.packs.small.description'),
+        features: [t('pricing.packs.small.features.1')],
+        buttonText: t('pricing.packs.small.buttonText'),
         buttonVariant: 'primary' as const,
-        priceType: 'monthly',
+        packId: 'small' as const,
         popular: true,
       },
       {
-        name: t('pricing.plans.credits.name'),
-        price: t('pricing.plans.credits.price'),
-        period: t('pricing.plans.credits.period'),
-        description: t('pricing.plans.credits.description'),
-        features: [
-          t('pricing.plans.credits.features.1'),
-          t('pricing.plans.credits.features.2'),
-          t('pricing.plans.credits.features.3'),
-          t('pricing.plans.credits.features.4'),
-          t('pricing.plans.credits.features.5'),
-        ],
-        buttonText: t('pricing.plans.credits.buttonText'),
+        name: t('pricing.packs.medium.name'),
+        price: t('pricing.packs.medium.price'),
+        period: t('pricing.packs.medium.period'),
+        description: t('pricing.packs.medium.description'),
+        features: [t('pricing.packs.medium.features.1')],
+        buttonText: t('pricing.packs.medium.buttonText'),
         buttonVariant: 'secondary' as const,
-        priceType: 'credits',
+        packId: 'medium' as const,
+      },
+      {
+        name: t('pricing.packs.large.name'),
+        price: t('pricing.packs.large.price'),
+        period: t('pricing.packs.large.period'),
+        description: t('pricing.packs.large.description'),
+        features: [t('pricing.packs.large.features.1')],
+        buttonText: t('pricing.packs.large.buttonText'),
+        buttonVariant: 'secondary' as const,
+        packId: 'large' as const,
       },
     ],
     [t],
@@ -335,7 +312,6 @@ export default function AIGeneratorPage({
         <title>{pageTitle}</title>
         <meta name="description" content={pageDescription} />
         <meta name="keywords" content={pageKeywords} />
-        <meta name="author" content="Notion Avatar" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="format-detection" content="telephone=no" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -364,7 +340,6 @@ export default function AIGeneratorPage({
 
         {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:site" content="@phillzou" />
         <meta name="twitter:title" content={pageTitle} />
         <meta name="twitter:description" content={pageDescription} />
         <meta name="twitter:image" content={ogImage} />
@@ -373,18 +348,18 @@ export default function AIGeneratorPage({
         <link rel="canonical" href={canonicalUrl} />
 
         {/* Hreflang links */}
-        {locales.map((locale) => (
+        {hreflangLinks.map((link) => (
           <link
-            key={locale}
+            key={link.hrefLang}
             rel="alternate"
-            hrefLang={locale}
-            href={generateHreflangUrl(locale)}
+            hrefLang={link.hrefLang}
+            href={link.href}
           />
         ))}
         <link
           rel="alternate"
           hrefLang="x-default"
-          href={`${baseUrl}${pagePath}`}
+          href={getDefaultHreflangUrl(pagePath)}
         />
 
         {/* Favicon links */}
@@ -429,7 +404,7 @@ export default function AIGeneratorPage({
                 'Photo to Avatar conversion',
                 'Text to Avatar generation',
                 'AI-powered avatar creation',
-                'Notion-style avatar design',
+                'Minimalist black-and-white avatar design',
               ],
             }),
           }}
@@ -437,7 +412,6 @@ export default function AIGeneratorPage({
       </Head>
 
       <div className="min-h-screen flex flex-col bg-[#fffefc]">
-        <ProductHuntBanner />
         <Header />
         <Toaster position="top-center" />
         <AuthModal
@@ -474,21 +448,6 @@ export default function AIGeneratorPage({
             <p className="text-xl md:text-2xl text-gray-700 max-w-3xl mx-auto mb-8 leading-relaxed">
               {t('ai.heroSubtitle')}
             </p>
-            <a
-              href="https://www.producthunt.com/products/notion-avatar-maker-3?embed=true&utm_source=badge-featured&utm_medium=badge&utm_campaign=badge-notion-avatar-maker-2"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex justify-center"
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                alt="Notion Avatar Maker - AI-powered online tool for making notion-style avatars. | Product Hunt"
-                width="250"
-                height="54"
-                src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1057963&theme=dark&t=1767502844579"
-                loading="lazy"
-              />
-            </a>
           </section>
           {/* Generator Section */}
           <section id="ai-generator" className="mb-16 scroll-mt-20">

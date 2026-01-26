@@ -12,6 +12,7 @@ import AuthModal from '@/components/Auth/AuthModal';
 import ResourceStore from '@/components/ResourceStore';
 import FaviconLinks from '@/components/SEO/FaviconLinks';
 import { usePurchasedPacks } from '@/hooks/useAccountData';
+import { getCanonicalUrl } from '@/lib/seo';
 
 export default function ResourcesPage() {
   const { t } = useTranslation('common');
@@ -65,18 +66,15 @@ export default function ResourcesPage() {
     );
   }
 
-  const baseUrl = 'https://notion-avatar.app';
-  const currentLocale = router.locale || 'en';
-  const canonicalUrl =
-    currentLocale === 'en'
-      ? `${baseUrl}/resources`
-      : `${baseUrl}/${currentLocale}/resources`;
+  const canonicalUrl = getCanonicalUrl('/resources', router.locale);
 
   return (
     <>
       <Head>
         <FaviconLinks />
-        <title>Resources | Notion Avatar Maker</title>
+        <title>
+          {t('menu.resources')} | {t('siteTitle')}
+        </title>
         <meta
           name="description"
           content="Download your purchased resource packs"

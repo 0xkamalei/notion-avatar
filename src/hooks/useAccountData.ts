@@ -18,7 +18,7 @@ interface PurchasedPacksResponse {
   packs: string[];
 }
 
-export function useUsageHistory(limit = 10, isPro = false) {
+export function useUsageHistory(limit = 10) {
   const { user } = useAuth();
 
   return useQuery<UsageRecord[]>({
@@ -28,7 +28,7 @@ export function useUsageHistory(limit = 10, isPro = false) {
       const data: UsageHistoryResponse = await response.json();
       return data.records || [];
     },
-    enabled: !!user && isPro,
+    enabled: !!user,
     staleTime: 1000 * 60 * 5,
   });
 }

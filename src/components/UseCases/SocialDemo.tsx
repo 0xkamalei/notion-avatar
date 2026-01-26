@@ -42,26 +42,6 @@ export default function SocialDemo() {
           </div>
           <h2 className="text-xl font-bold mb-2">{t('socialDemo.name')}</h2>
           <p className="text-gray-600 mb-4">{t('socialDemo.bio')}</p>
-
-          <div className="flex space-x-4">
-            <a
-              href="https://github.com/Mayandev"
-              className="text-gray-600 hover:text-black"
-            >
-              <Image
-                src="/icon/github.svg"
-                width={24}
-                height={24}
-                alt="GitHub"
-              />
-            </a>
-            <a
-              href="https://x.com/phillzou"
-              className="text-gray-600 hover:text-black"
-            >
-              <Image src="/icon/x-logo.svg" width={24} height={24} alt="X" />
-            </a>
-          </div>
         </div>
 
         {/* 推文部分 */}
@@ -83,7 +63,7 @@ export default function SocialDemo() {
             <div className="mt-2 w-full h-48 md:36 relative border-2 border-gray-100 rounded-lg">
               <Image
                 src="/social.png"
-                alt="Notion Avatar Maker"
+                alt="Avatar"
                 layout="fill"
                 objectFit="contain"
                 className="rounded-xl"

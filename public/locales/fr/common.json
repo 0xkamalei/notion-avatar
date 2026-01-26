@@ -21,14 +21,14 @@
   "underDesign": "et sous",
   "designedBy": "conçu par",
   "license": "licence",
-  "coffeeUrl": "https://ko-fi.com/mayandev",
+  "coffeeUrl": "",
   "modalTitle": "Presque terminé",
   "modalHint": "Appuyez longuement ou cliquez avec le bouton droit pour enregistrer l'avatar dans votre album",
   "modalCancel": "Annuler",
   "modalConfirm": "Confirmer",
-  "siteTitle": "Créateur d'Avatar Notion",
-  "siteDescription": "Un outil de création d'avatars style dessiné à la main Notion qui permet de personnaliser les traits du visage, les coiffures, les lunettes, les barbes et les accessoires pour générer des avatars uniques en un clic. Parfait pour Notion, GitHub, Twitter et autres plateformes sociales, idéal pour la collaboration d'équipe et l'image de marque personnelle. Essayez-le maintenant et créez facilement votre propre avatar style Notion !",
-  "siteKeywords": "Avatar Notion,Créateur d'Avatar,Style Notion,Avatar Dessiné,Avatar Personnalisé,Avatar Minimaliste,Avatar d'Équipe,Marque Personnelle,Avatar Réseaux Sociaux,Avatar SVG,Avatar PNG,Créateur d'Avatar Gratuit,Générateur d'Avatar en Ligne,Avatar GitHub,Avatar Twitter",
+  "siteTitle": "Créateur d'Avatar",
+  "siteDescription": "Un outil pour créer des avatars minimalistes en noir et blanc, avec personnalisation du visage, des coiffures, des lunettes, des barbes et des accessoires.",
+  "siteKeywords": "créateur d'avatar,générateur d'avatar,avatar dessiné,avatar personnalisé,avatar minimaliste,avatar d'équipe,avatar réseaux sociaux,avatar SVG,avatar PNG,générateur d'avatar en ligne",
   "404Title": "Oups ! Page non trouvée",
   "404Redirect": "Retour à l'accueil",
   "copy": "Copier",
@@ -45,12 +45,12 @@
   "christmas": "Noël",
   "downloadSuccess": "Téléchargement réussi",
   "shareModalHint": "Partagez sur vos réseaux sociaux préférés !",
-  "shareContent": "Je viens de créer un avatar avec Notion Avatar Maker, regardez ça !",
+  "shareContent": "Je viens de créer un avatar, regardez ça !",
   "avatarMaker": "Créateur d'Avatar",
   "whosUsing": "Qui l'utilise",
-  "whosUsingDescription": "Des équipes et des individus du monde entier utilisent Notion Avatar",
+  "whosUsingDescription": "Des équipes et des individus du monde entier utilisent le créateur d'avatar",
   "useCases": "Cas d'utilisation",
-  "useCasesDescription": "Découvrez les applications polyvalentes des avatars style Notion",
+  "useCasesDescription": "Découvrez les applications polyvalentes des avatars",
   "you": "Vous",
   "chatDemo": {
     "message1": "Regardez mon nouvel avatar !",
@@ -62,17 +62,17 @@
   },
   "socialDemo": {
     "name": "Phill Zou",
-    "handle": "phillzou",
+    "handle": "user",
     "bio": "Développeur Full-stack / Passionné d'Open Source",
-    "tweet": "Je viens de créer mon avatar avec Notion Avatar Maker ! J'adore ce style minimaliste ✨",
-    "shareTitle": "Partager mon avatar style Notion",
-    "shareText": "Découvrez mon nouvel avatar créé avec Notion Avatar Maker !"
+    "tweet": "Je viens de créer mon avatar ! J'adore ce style minimaliste.",
+    "shareTitle": "Partager mon avatar",
+    "shareText": "Découvrez mon nouvel avatar !"
   },
   "resourceStore": {
     "title": "Ressources de Design",
-    "description": "Obtenez le pack complet de ressources de design pour Notion Avatar Maker, incluant le design du site web et les éléments décoratifs. Gratuit pour les utilisateurs Pro.",
+    "description": "Obtenez le pack complet de ressources de design, incluant le design du site web et les éléments décoratifs.",
     "buyNow": "Acheter",
-    "freeForPro": "Gratuit pour les utilisateurs Pro",
+    "freeForPro": "Inclus",
     "designPack": {
       "title": "Design Complet du Site Web",
       "description": "Inclut les fichiers Figma pour toutes les pages",
@@ -82,7 +82,7 @@
     },
     "scribblesPack": {
       "title": "Pack d'Éléments Dessinés à la Main",
-      "description": "Éléments décoratifs style Notion dessinés à la main pour ajouter du fun à votre design",
+      "description": "Éléments décoratifs dessinés à la main pour ajouter du fun à votre design",
       "features": {
         "1": "Plus de 100 éléments dessinés à la main"
       }
@@ -99,30 +99,30 @@
     "step2Title": "Personnaliser les caractéristiques",
     "step2Desc": "Ajustez la coiffure, les traits du visage, les accessoires et autres détails pour créer un look unique",
     "step3Title": "Télécharger et utiliser",
-    "step3Desc": "Cliquez sur le bouton de téléchargement pour obtenir votre avatar haute résolution, prêt à être utilisé sur Notion ou d'autres plateformes",
+    "step3Desc": "Cliquez sur le bouton de téléchargement pour obtenir votre avatar haute résolution, prêt à être utilisé partout",
     "step4Title": "Partagez votre création",
-    "step4Desc": "Partagez votre nouvel avatar Notion sur les réseaux sociaux et montrez-le à vos amis !"
+    "step4Desc": "Partagez votre nouvel avatar sur les réseaux sociaux et montrez-le à vos amis !"
   },
   "faq": {
     "title": "FAQ",
-    "whatIsAvatar": "Qu'est-ce que Notion Avatar Maker ?",
-    "whatIsAvatarAnswer": "Notion Avatar Maker est un outil gratuit qui vous permet de créer des avatares personnalisés à utiliser dans Notion, les réseaux sociaux ou toute autre plateforme numérique.",
+    "whatIsAvatar": "Qu'est-ce que le créateur d'avatar ?",
+    "whatIsAvatarAnswer": "Le créateur d'avatar est un outil qui vous permet de créer des avatares personnalisés à utiliser sur n'importe quelle plateforme numérique.",
     "howToUse": "Comment utiliser l'éditeur d'avatar ?",
     "howToUseAnswer": "Cliquez simplement sur les différentes caractéristiques faciales, coiffures et accessoires pour personnaliser votre avatar. Utilisez le bouton de retournement pour changer l'orientation et le bouton d'arrière-plan pour ajuster le style d'arrière-plan.",
     "commercialUse": "Puis-je utiliser des avatares à des fins commerciales ?",
-    "commercialUseAnswer": "Oui, tous les avatares créés avec Notion Avatar sont publiés sous la licence CC0, permettant une utilisation commerciale sans attribution.",
+    "commercialUseAnswer": "Oui, tous les avatares créés ici sont publiés sous la licence CC0, permettant une utilisation commerciale sans attribution.",
     "privacyConcerns": "Collectez-vous des données utilisateur ?",
     "privacyConcernsAnswer": "Non, nous ne collectons ni ne stockons de données utilisateur. Toute la création d'avatar se fait localement dans votre navigateur.",
     "supportedBrowsers": "Quels navigateurs sont pris en charge ?",
-    "supportedBrowsersAnswer": "Notion Avatar fonctionne mieux sur les navigateurs modernes, notamment Chrome, Firefox, Safari et Edge. Internet Explorer n'est pas pris en charge.",
-    "isBelongToNotion": "Notion Avatar Maker est-il affilié à Notion ?",
-    "isBelongToNotionAnswer": "Non, Notion Avatar Maker n'est pas affilié à Notion. C'est un projet indépendant."
+    "supportedBrowsersAnswer": "Cette application fonctionne mieux sur les navigateurs modernes, notamment Chrome, Firefox, Safari et Edge. Internet Explorer n'est pas pris en charge.",
+    "isBelongToNotion": "Le créateur d'avatar est-il affilié à une entreprise ?",
+    "isBelongToNotionAnswer": "Non. C'est un projet indépendant."
   },
   "ai": {
-    "title": "Avatar AI Notion",
-    "navTitle": "Notion AI Avatar",
-    "description": "Transformez vos photos ou idées en avatares style Notion avec la magie de l'AI.",
-    "heroSubtitle": "Transformez vos photos ou descriptions de texte en avatares uniques style Notion en quelques secondes",
+    "title": "Avatar IA",
+    "navTitle": "Avatar IA",
+    "description": "Transformez vos photos ou idées en avatares minimalistes en noir et blanc avec l'IA.",
+    "heroSubtitle": "Transformez vos photos ou descriptions en avatares uniques en noir et blanc en quelques secondes",
     "heroCTA": "Commencer",
     "photo2avatar": "Photo vers Avatar",
     "text2avatar": "Texte vers Avatar",
@@ -139,7 +139,7 @@
     "error": "Quelque chose s'est mal passé. Veuillez réessayer.",
     "examples": {
       "photoTitle": "Transformation de Photo",
-      "photoDesc": "Découvrez comment l'AI transforme vos vraies photos en avatares style Notion",
+      "photoDesc": "Découvrez comment l'IA transforme vos vraies photos en avatares en noir et blanc",
       "textTitle": "Exemples de Génération de Texte",
       "textDesc": "Décrivez simplement ce que vous voulez et l'AI le générera pour vous",
       "before": "Avant",
@@ -152,9 +152,9 @@
     "features": {
       "title": "Fonctionnalités AI Puissantes",
       "photo2avatarTitle": "Photo vers Avatar",
-      "photo2avatarDesc": "Téléchargez votre photo et l'AI la reconnaîtra et la convertira automatiquement en avatar style Notion, préservant vos caractéristiques uniques",
+      "photo2avatarDesc": "Téléchargez votre photo et l'IA la reconnaîtra et la convertira automatiquement en avatar en noir et blanc, en préservant vos caractéristiques uniques",
       "text2avatarTitle": "Texte vers Avatar",
-      "text2avatarDesc": "Décrivez simplement les caractéristiques d'avatar que vous voulez et l'AI générera un avatar personnalisé style Notion pour vous"
+      "text2avatarDesc": "Décrivez simplement les caractéristiques souhaitées et l'IA générera un avatar personnalisé en noir et blanc"
     },
     "steps": {
       "title": "Comment Ça Marche",
@@ -165,7 +165,7 @@
       "step3Title": "Génération AI",
       "step3Desc": "Cliquez sur générer et l'AI créera votre avatar en quelques secondes",
       "step4Title": "Télécharger et Utiliser",
-      "step4Desc": "Téléchargez votre avatar généré et utilisez-le sur Notion, les réseaux sociaux et plus encore"
+      "step4Desc": "Téléchargez votre avatar généré et utilisez-le partout"
     },
     "pricing": {
       "title": "Choisissez Votre Plan",
@@ -195,13 +195,13 @@
       "q4": "Puis-je utiliser les avatares générés commercialement ?",
       "a4": "Oui, tous les avatares générés suivent la licence CC0 et peuvent être utilisés à des fins commerciales sans attribution."
     },
-    "seoKeywords": "Générateur d'Avatar AI,Créateur d'Avatar AI,Avatar AI Notion,Photo vers Avatar AI,Texte vers Avatar AI,Créateur d'Avatar AI,Avatar Style Notion AI,Avatar Généré par AI,Générateur d'Avatar AI Gratuit,Créateur d'Avatar AI En Ligne,Outil d'Avatar AI,Avatar Intelligence Artificielle,Générateur de Photo de Profil AI,Conception d'Avatar AI,Générateur d'Avatar Intelligent"
+    "seoKeywords": "Générateur d'Avatar IA,Créateur d'Avatar IA,Photo vers Avatar IA,Texte vers Avatar IA,Avatar Généré par IA,Générateur d'Avatar IA Gratuit,Créateur d'Avatar IA En Ligne,Outil d'Avatar IA,Générateur de Photo de Profil IA,Conception d'Avatar IA,Générateur d'Avatar Intelligent"
   },
   "aiFeatureIntro": {
     "title": "Nouvelle Fonctionnalité Générateur d'Avatar AI",
-    "description": "Vous pouvez maintenant utiliser la technologie AI pour générer rapidement des avatares style Notion !",
+    "description": "Vous pouvez maintenant utiliser la technologie IA pour générer rapidement des avatares en noir et blanc !",
     "feature1Title": "Photo vers Avatar",
-    "feature1Desc": "Téléchargez votre photo et l'AI la convertira automatiquement en avatar style Notion",
+    "feature1Desc": "Téléchargez votre photo et l'IA la convertira automatiquement en avatar en noir et blanc",
     "feature2Title": "Texte vers Avatar",
     "feature2Desc": "Décrivez simplement l'avatar que vous voulez et l'AI le générera pour vous",
     "tryNow": "Essayer Maintenant",
@@ -245,7 +245,7 @@
   },
   "account": {
     "title": "Paramètres du Compte",
-    "pageTitle": "Compte | Notion Avatar Maker",
+    "pageTitle": "Compte | Créateur d'Avatar",
     "profile": "Profil",
     "subscription": "Abonnement",
     "unlimitedGenerations": "Générations illimitées avec l'abonnement Pro",
@@ -289,7 +289,7 @@
     }
   },
   "pricing": {
-    "pageTitle": "Tarifs | Notion Avatar Maker",
+    "pageTitle": "Tarifs | Créateur d'Avatar",
     "pageDescription": "Choisissez le plan parfait pour vos besoins de création d'avatar",
     "title": "Tarifs Simples et Transparents",
     "description": "Choisissez le plan qui vous convient le mieux. Mettez à niveau à tout moment.",

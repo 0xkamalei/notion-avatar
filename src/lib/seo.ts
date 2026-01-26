@@ -2,7 +2,7 @@
  * SEO 工具函数 - 用于生成多语言的 canonical URL 和 hreflang 标签
  */
 
-const BASE_URL = 'https://notion-avatar.app';
+const BASE_URL = process.env.NEXT_PUBLIC_URL || 'https://avatar.leix.dev';
 const SUPPORTED_LOCALES = [
   'en',
   'zh',

@@ -3,7 +3,7 @@ import Stripe from 'stripe';
 import { createClient } from '@/lib/supabase/server';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: '2025-05-28.basil',
+  apiVersion: '2025-12-15.clover',
 });
 
 export default async function handler(
@@ -24,7 +24,31 @@ export default async function handler(
       return res.status(401).json({ error: 'Unauthorized' });
     }
 
-    const { priceType } = req.body; // 'monthly' or 'credits'
+    const { packId, priceType } = req.body as {
+      packId?: 'small' | 'medium' | 'large';
+      priceType?: string;
+    };
+
+    const resolvedPackId: 'small' | 'medium' | 'large' =
+      packId || (priceType === 'credits' ? 'small' : 'small');
+
+    const packConfig: Record<
+      'small' | 'medium' | 'large',
+      { priceId?: string; credits: number }
+    > = {
+      small: {
+        priceId: process.env.STRIPE_CREDITS_SMALL_PRICE_ID,
+        credits: Number.parseInt(process.env.CREDITS_PACK_SMALL || '100', 10),
+      },
+      medium: {
+        priceId: process.env.STRIPE_CREDITS_MEDIUM_PRICE_ID,
+        credits: Number.parseInt(process.env.CREDITS_PACK_MEDIUM || '500', 10),
+      },
+      large: {
+        priceId: process.env.STRIPE_CREDITS_LARGE_PRICE_ID,
+        credits: Number.parseInt(process.env.CREDITS_PACK_LARGE || '2000', 10),
+      },
+    };
 
     // Get or create Stripe customer
     const { data: profile } = await supabase
@@ -68,11 +92,7 @@ export default async function handler(
         .eq('id', user.id);
     }
 
-    // Determine the price ID based on type
-    const priceId =
-      priceType === 'monthly'
-        ? process.env.STRIPE_MONTHLY_PRICE_ID
-        : process.env.STRIPE_CREDITS_PRICE_ID;
+    const { priceId, credits } = packConfig[resolvedPackId];
 
     if (!priceId) {
       return res.status(500).json({ error: 'Price not configured' });
@@ -81,7 +101,7 @@ export default async function handler(
     // Create checkout session
     const session = await stripe.checkout.sessions.create({
       customer: customerId,
-      mode: priceType === 'monthly' ? 'subscription' : 'payment',
+      mode: 'payment',
       payment_method_types: ['card'],
       line_items: [
         {
@@ -93,7 +113,8 @@ export default async function handler(
       cancel_url: `${req.headers.origin}/pricing?canceled=true`,
       metadata: {
         user_id: user.id,
-        price_type: priceType,
+        price_type: 'credits',
+        credits_amount: `${credits}`,
       },
     });
 

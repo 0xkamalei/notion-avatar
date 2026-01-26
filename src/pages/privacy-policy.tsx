@@ -3,202 +3,47 @@ import type { GetStaticPropsContext, NextPage } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Head from 'next/head';
 import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
 import Header, { BackToHome } from '@/components/Header';
 import Footer from '@/components/Footer';
-
-const URL = `https://notion-avatar.app/`;
+import FaviconLinks from '@/components/SEO/FaviconLinks';
+import {
+  getCanonicalUrl,
+  getDefaultHreflangUrl,
+  getHreflangLinks,
+} from '@/lib/seo';
 
 const PrivacyPolicy: NextPage = () => {
   const { t } = useTranslation();
+  const router = useRouter();
+  const pagePath = '/privacy-policy';
+  const canonicalUrl = getCanonicalUrl(pagePath, router.locale);
+  const hreflangLinks = getHreflangLinks(pagePath);
 
   return (
     <div className="min-h-screen flex flex-col">
       <Head>
-        <link
-          rel="apple-touch-icon"
-          sizes="57x57"
-          href="/favicon/apple-icon-57x57.png"
-        />
-        <link
-          rel="apple-touch-icon"
-          sizes="60x60"
-          href="/favicon/apple-icon-60x60.png"
-        />
-        <link
-          rel="apple-touch-icon"
-          sizes="72x72"
-          href="/favicon/apple-icon-72x72.png"
-        />
-        <link
-          rel="apple-touch-icon"
-          sizes="76x76"
-          href="/favicon/apple-icon-76x76.png"
-        />
-        <link
-          rel="apple-touch-icon"
-          sizes="114x114"
-          href="/favicon/apple-icon-114x114.png"
-        />
-        <link
-          rel="apple-touch-icon"
-          sizes="120x120"
-          href="/favicon/apple-icon-120x120.png"
-        />
-        <link
-          rel="apple-touch-icon"
-          sizes="144x144"
-          href="/favicon/apple-icon-144x144.png"
-        />
-        <link
-          rel="apple-touch-icon"
-          sizes="152x152"
-          href="/favicon/apple-icon-152x152.png"
-        />
-        <link
-          rel="apple-touch-icon"
-          sizes="180x180"
-          href="/favicon/apple-icon-180x180.png"
-        />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="192x192"
-          href="/favicon/android-icon-192x192.png"
-        />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="32x32"
-          href="/favicon/favicon-32x32.png"
-        />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="96x96"
-          href="/favicon/favicon-96x96.png"
-        />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="16x16"
-          href="/favicon/favicon-16x16.png"
-        />
-        <link rel="manifest" href="/manifest.json" />
-        <title>Privacy Policy</title>
-        <meta name="description" content={t(`siteDescription`)} />
-        <meta name="msapplication-TileColor" content="#fffefc" />
-        <meta
-          name="msapplication-TileImage"
-          content="/favicon/ms-icon-144x144.png"
-        />
-        <meta name="theme-color" content="#fffefc" />
-        <meta name="keywords" content={t('siteKeywords')} />
-        <meta name="author" content="Notion Avatar" />
+        <FaviconLinks />
+        <title>Privacy Policy | {t('siteTitle')}</title>
+        <meta name="description" content={t('siteDescription')} />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="format-detection" content="telephone=no" />
-        <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-        <meta content={t(`siteDescription`)} name="description" />
-        <meta property="og:type" content="website" />
-        <meta property="og:site_name" content={t(`siteTitle`)} />
-        <meta property="og:title" content={t(`siteTitle`)} />
-        <meta property="og:description" content={t(`siteDescription`)} />
-        <meta property="og:url" content={URL} />
-        <meta property="og:image" content="https://i.imgur.com/F5R0K03.png" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:image" content="https://i.imgur.com/F5R0K03.png" />
-        <meta name="twitter:site" content="@phillzou" />
-        <meta name="twitter:title" content={t(`siteTitle`)} />
-        <meta name="twitter:description" content={t(`siteDescription`)} />
-        <meta charSet="utf-8" />
-        <meta name="theme-color" content="#fffefc" />
         <meta name="robots" content="index, follow" />
         <meta name="googlebot" content="index, follow" />
-        <meta name="google" content="notranslate" />
-        <link rel="canonical" href="https://notion-avatar.app" />
-        {/* 添加所有语言的备用链接 */}
-        <link
-          rel="alternate"
-          hrefLang="en"
-          href="https://notion-avatar.app/en"
-        />
-        <link
-          rel="alternate"
-          hrefLang="zh"
-          href="https://notion-avatar.app/zh"
-        />
-        <link
-          rel="alternate"
-          hrefLang="zh-TW"
-          href="https://notion-avatar.app/zh-TW"
-        />
-        <link
-          rel="alternate"
-          hrefLang="ja"
-          href="https://notion-avatar.app/ja"
-        />
-        <link
-          rel="alternate"
-          hrefLang="ko"
-          href="https://notion-avatar.app/ko"
-        />
-        <link
-          rel="alternate"
-          hrefLang="es"
-          href="https://notion-avatar.app/es"
-        />
-        <link
-          rel="alternate"
-          hrefLang="fr"
-          href="https://notion-avatar.app/fr"
-        />
-        <link
-          rel="alternate"
-          hrefLang="de"
-          href="https://notion-avatar.app/de"
-        />
-        <link
-          rel="alternate"
-          hrefLang="ru"
-          href="https://notion-avatar.app/ru"
-        />
-        <link
-          rel="alternate"
-          hrefLang="pt"
-          href="https://notion-avatar.app/pt"
-        />
+        <link rel="canonical" href={canonicalUrl} />
+        {hreflangLinks.map((link) => (
+          <link
+            key={link.hrefLang}
+            rel="alternate"
+            hrefLang={link.hrefLang}
+            href={link.href}
+          />
+        ))}
         <link
           rel="alternate"
           hrefLang="x-default"
-          href="https://notion-avatar.app"
+          href={getDefaultHreflangUrl(pagePath)}
         />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
-        <link href="/fonts/Quicksand.tff" as="font" crossOrigin="anonymous" />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              '@context': 'https://schema.org',
-              '@type': 'WebApplication',
-              name: t('siteTitle'),
-              description: t('siteDescription'),
-              url: URL,
-              applicationCategory: 'DesignApplication',
-              operatingSystem: 'Web',
-            }),
-          }}
-        />
-        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-        <meta name="apple-mobile-web-app-title" content="Notion Avatar" />
-        <meta name="format-detection" content="telephone=no" />
-        <meta name="msapplication-tap-highlight" content="no" />
-        <link rel="manifest" href="/manifest.json" />
       </Head>
       <Header />
       <main className="flex-grow max-w-3xl mx-auto px-4 pb-6">
@@ -212,8 +57,8 @@ const PrivacyPolicy: NextPage = () => {
           <div className="bg-gray-100 p-4 rounded-lg my-6">
             <p>
               We value your privacy. This policy outlines how we handle your
-              data when you use Notion Avatar. The short version: we process
-              your images directly in your browser and don't store them on our
+              data when you use Avatar Maker. The short version: we process your
+              images directly in your browser and don't store them on our
               servers.
             </p>
           </div>
@@ -221,7 +66,7 @@ const PrivacyPolicy: NextPage = () => {
           <h2 className="text-2xl font-semibold mt-8 mb-4 text-gray-800">
             Information We Don't Collect
           </h2>
-          <p>Notion Avatar is designed with privacy in mind:</p>
+          <p>Avatar Maker is designed with privacy in mind:</p>
           <ul className="list-disc pl-8 my-4 space-y-3 text-gray-700">
             <li className="pl-2 leading-relaxed">
               <strong className="text-gray-900">No Image Storage:</strong> Your
@@ -392,10 +237,10 @@ const PrivacyPolicy: NextPage = () => {
               If you have any questions about this Privacy Policy, please
               contact us at{' '}
               <a
-                href="mailto:contact@notion-avatar.app"
+                href="mailto:contact@avatar.leix.dev"
                 className="hover:underline"
               >
-                contact@notion-avatar.app
+                contact@avatar.leix.dev
               </a>
             </p>
           </div>

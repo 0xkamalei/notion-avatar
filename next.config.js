@@ -5,6 +5,9 @@ const { i18n } = require('./next-i18next.config');
 module.exports = withPWA({
   i18n,
   reactStrictMode: true,
+  outputFileTracingIncludes: {
+    '/api/stripe/*': ['./node_modules/stripe/**'],
+  },
   images: {
     formats: ['image/avif', 'image/webp'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],

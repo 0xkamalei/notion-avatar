@@ -1,17 +1,17 @@
 ---
 title: "How to Use AI to Create Your Perfect Avatar"
-description: "Discover how our AI-powered avatar generator can transform your photos or text descriptions into beautiful Notion-style avatars in seconds."
+description: "Discover how our AI-powered avatar generator can transform your photos or text descriptions into clean black-and-white avatars in seconds."
 date: "2026-01-02"
 coverImage: "https://uclqvnpqvartezdtmgpn.supabase.co/storage/v1/object/public/static-resource/avatar-diff.png"
 ---
 
-The future of avatar creation is here! Our AI Avatar Generator uses cutting-edge technology to create stunning Notion-style avatars from your photos or simple text descriptions.
+The future of avatar creation is here! Our AI Avatar Generator uses cutting-edge technology to create clean black-and-white avatars from your photos or simple text descriptions.
 
 ## Two Powerful Modes
 
 ### Photo to Avatar
 
-Upload any photo of yourself (or anyone!) and watch as our AI transforms it into a beautiful hand-drawn Notion-style avatar. The AI analyzes facial features, hairstyles, and accessories to create an accurate yet stylized representation.
+Upload any photo of yourself (or anyone!) and watch as our AI transforms it into a beautiful hand-drawn black-and-white avatar. The AI analyzes facial features, hairstyles, and accessories to create an accurate yet stylized representation.
 
 **How it works:**
 
@@ -64,4 +64,3 @@ A: Simply try again with a different photo or adjust your text description.
 ---
 
 Ready to try AI avatar generation? [Get started now](/ai-generator)!
-

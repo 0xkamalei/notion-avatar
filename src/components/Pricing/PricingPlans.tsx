@@ -11,7 +11,7 @@ interface Plan {
   features: string[];
   buttonText: string;
   buttonVariant: 'primary' | 'secondary';
-  priceType: string | null;
+  packId: 'small' | 'medium' | 'large' | null;
   popular?: boolean;
 }
 
@@ -29,11 +29,13 @@ export default function PricingPlans({
   onAuthRequired,
 }: PricingPlansProps) {
   const { t } = useTranslation('common');
-  const { user, subscription } = useAuth();
+  const { user } = useAuth();
   const [loadingPlan, setLoadingPlan] = useState<string | null>(null);
 
-  const handleSelectPlan = async (priceType: string | null) => {
-    if (!priceType) return;
+  const handleSelectPlan = async (
+    packId: 'small' | 'medium' | 'large' | null,
+  ) => {
+    if (!packId) return;
 
     if (!user) {
       if (onAuthRequired) {
@@ -42,7 +44,7 @@ export default function PricingPlans({
       return;
     }
 
-    setLoadingPlan(priceType);
+    setLoadingPlan(packId);
 
     try {
       const response = await fetch('/api/stripe/create-checkout', {
@@ -50,7 +52,7 @@ export default function PricingPlans({
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ priceType }),
+        body: JSON.stringify({ packId }),
       });
 
       const data = await response.json();
@@ -65,24 +67,6 @@ export default function PricingPlans({
     } finally {
       setLoadingPlan(null);
     }
-  };
-
-  const isCurrentPlan = (planName: string) => {
-    if (
-      (planName === t('pricing.plans.free.name') || planName === 'Free') &&
-      (!subscription || subscription.plan_type === 'free')
-    ) {
-      return true;
-    }
-    if (
-      (planName === t('pricing.plans.pro.name') ||
-        planName === 'Pro Monthly') &&
-      subscription?.plan_type === 'monthly' &&
-      subscription?.status === 'active'
-    ) {
-      return true;
-    }
-    return false;
   };
 
   return (
@@ -151,24 +135,17 @@ export default function PricingPlans({
             </ul>
 
             <button
-              onClick={() => handleSelectPlan(plan.priceType)}
-              disabled={
-                isCurrentPlan(plan.name) ||
-                (loadingPlan !== null && loadingPlan === plan.priceType)
-              }
+              onClick={() => handleSelectPlan(plan.packId)}
+              disabled={loadingPlan !== null && loadingPlan === plan.packId}
               type="button"
               className={`w-full py-3 px-4 rounded-xl font-bold transition-all ${
-                isCurrentPlan(plan.name)
-                  ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                  : plan.buttonVariant === 'primary'
+                plan.buttonVariant === 'primary'
                   ? 'bg-black text-white hover:bg-gray-800'
                   : 'bg-white text-black border-2 border-black hover:bg-gray-50'
               } disabled:opacity-50`}
             >
-              {loadingPlan !== null && loadingPlan === plan.priceType
+              {loadingPlan !== null && loadingPlan === plan.packId
                 ? t('pricing.loading')
-                : isCurrentPlan(plan.name)
-                ? t('pricing.currentPlan')
                 : plan.buttonText}
             </button>
           </div>

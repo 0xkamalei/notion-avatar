@@ -21,13 +21,13 @@
   "underDesign": "設計且基於",
   "designedBy": "由",
   "license": "協議",
-  "coffeeUrl": "https://ko-fi.com/mayandev",
+  "coffeeUrl": "",
   "modalTitle": "最後一步",
   "modalHint": "長按圖片或者右鍵儲存頭像至本地相簿",
   "modalCancel": "關閉",
   "modalConfirm": "確認",
-  "siteTitle": "Notion 風格頭像製作",
-  "siteDescription": "一個 Notion 手繪風格頭像製作工具，支援自定義面部特徵、髮型、眼鏡、鬍鬚和配飾，一鍵生成獨特的個人頭像。適用於 Notion、GitHub、Twitter 等社交平台，完美契合團隊協作和個人品牌打造。立即體驗，輕鬆創建專屬於你的 Notion 風格頭像！",
+  "siteTitle": "頭像生成器",
+  "siteDescription": "一個手繪風格頭像製作工具，支援自定義面部特徵、髮型、眼鏡、鬍鬚和配飾，一鍵生成獨特的個人頭像。",
   "404Title": "啊喔！頁面走丟了。",
   "404Redirect": "返回首頁",
   "copy": "複製",
@@ -44,13 +44,13 @@
   "christmas": "聖誕節裝飾",
   "downloadSuccess": "下載成功",
   "shareModalHint": "分享到你喜歡的社交媒體吧！",
-  "shareContent": "我用 Notion 風格頭像製作器生成了一個頭像，快來看看吧！",
+  "shareContent": "我用頭像生成器生成了一個頭像，快來看看吧！",
   "avatarMaker": "頭像製作",
-  "siteKeywords": "Notion 頭像,頭像生成器,Notion Avatar,手繪風格頭像,個性化頭像,自定義頭像簡約頭像,團隊頭像,個人品牌,社交媒體頭像,SVG頭像,PNG頭像,免費頭像製作,線上頭像生成,GitHub頭像,Twitter頭像",
+  "siteKeywords": "頭像生成器,手繪風格頭像,個性化頭像,自定義頭像,簡約頭像,團隊頭像,社交媒體頭像,SVG頭像,PNG頭像,免費頭像製作,線上頭像生成",
   "whosUsing": "誰在使用",
-  "whosUsingDescription": "來自全球的團隊和個人都在使用 Notion Avatar",
+  "whosUsingDescription": "來自全球的團隊和個人都在使用頭像生成器",
   "useCases": "使用場景",
-  "useCasesDescription": "探索 Notion 風格頭像的多種應用場景",
+  "useCasesDescription": "探索頭像的多種應用場景",
   "you": "你",
   "chatDemo": {
     "message1": "給你看看我新設置的頭像！",
@@ -64,15 +64,15 @@
     "name": "張小明",
     "handle": "xiaoming",
     "bio": "全端工程師 / 開源愛好者",
-    "tweet": "剛用 Notion Avatar Maker 製作了新頭像！簡約的設計風格真的太棒了 ✨",
-    "shareTitle": "分享我的 Notion 風格頭像",
-    "shareText": "快來看看我用 Notion Avatar Maker 製作的新頭像！"
+    "tweet": "剛做了新頭像！簡約的設計風格真的太棒了。",
+    "shareTitle": "分享我的頭像",
+    "shareText": "快來看看我新做的頭像！"
   },
   "resourceStore": {
     "title": "設計資源",
-    "description": "獲取 Notion Avatar Maker 的完整設計資源包，包含網站設計稿和裝飾元素。Pro 用戶免費。",
+    "description": "獲取完整設計資源包，包含網站設計稿和裝飾元素。",
     "buyNow": "立即購買",
-    "freeForPro": "Pro 用戶免費",
+    "freeForPro": "已包含",
     "designPack": {
       "title": "完整網站設計稿",
       "description": "包含所有頁面的 Figma 設計稿",
@@ -82,7 +82,7 @@
     },
     "scribblesPack": {
       "title": "手繪裝飾元素包",
-      "description": "Notion 風格的手繪裝飾元素，為你的設計添加趣味性",
+      "description": "手繪裝飾元素，為你的設計添加趣味性",
       "features": {
         "1": "100+ 手繪裝飾元素"
       }
@@ -105,24 +105,24 @@
   },
   "faq": {
     "title": "常見問題",
-    "whatIsAvatar": "什麼是 Notion Avatar Maker？",
-    "whatIsAvatarAnswer": "Notion Avatar Maker 是一個免費工具，允許您創建自定義頭像，用於 Notion、社交媒體或任何其他數位平台。",
+    "whatIsAvatar": "什麼是頭像生成器？",
+    "whatIsAvatarAnswer": "頭像生成器是一個工具，允許您創建自定義頭像，用於社交媒體或任何其他數位平台。",
     "howToUse": "如何使用頭像編輯器？",
     "howToUseAnswer": "只需點擊不同的面部特徵、髮型和配飾來自定義您的頭像。使用翻轉按鈕改變方向，使用背景按鈕調整背景樣式。",
     "commercialUse": "我可以將頭像用於商業目的嗎？",
-    "commercialUseAnswer": "可以，所有使用 Notion Avatar 創建的頭像都遵循 CC0 許可證，允許商業使用且無需署名。",
+    "commercialUseAnswer": "可以，所有創建的頭像都遵循 CC0 許可證，允許商業使用且無需署名。",
     "privacyConcerns": "你們會收集用戶數據嗎？",
     "privacyConcernsAnswer": "不會，我們不會收集或存儲任何用戶數據。所有頭像創建都在您的瀏覽器本地完成。",
     "supportedBrowsers": "支援哪些瀏覽器？",
-    "supportedBrowsersAnswer": "Notion Avatar 在現代瀏覽器上運行最佳，包括 Chrome、Firefox、Safari 和 Edge。不支援 Internet Explorer。",
-    "isBelongToNotion": "Notion Avatar Maker 與 Notion 有關聯嗎？",
-    "isBelongToNotionAnswer": "沒有，Notion Avatar Maker 與 Notion 無關。這是一個獨立專案。"
+    "supportedBrowsersAnswer": "本應用在現代瀏覽器上運行最佳，包括 Chrome、Firefox、Safari 和 Edge。不支援 Internet Explorer。",
+    "isBelongToNotion": "頭像生成器與任何公司有關聯嗎？",
+    "isBelongToNotionAnswer": "沒有，這是一個獨立專案。"
   },
   "ai": {
-    "title": "Notion AI 頭像生成",
-    "navTitle": "Notion AI 頭像",
-    "description": "使用 AI 魔法將您的照片或創意轉換為 Notion 風格頭像。",
-    "heroSubtitle": "幾秒鐘內將您的照片或文字描述轉換為獨特的 Notion 風格頭像",
+    "title": "AI 頭像生成",
+    "navTitle": "AI 頭像",
+    "description": "使用 AI 將您的照片或創意轉換為簡潔黑白頭像。",
+    "heroSubtitle": "幾秒鐘內將您的照片或文字描述轉換為獨特的簡潔黑白頭像",
     "heroCTA": "開始使用",
     "photo2avatar": "照片轉頭像",
     "text2avatar": "文字生成",
@@ -139,7 +139,7 @@
     "error": "出錯了，請重試。",
     "examples": {
       "photoTitle": "照片轉換效果",
-      "photoDesc": "看看 AI 如何將您的真實照片轉換為 Notion 風格頭像",
+      "photoDesc": "看看 AI 如何將您的真實照片轉換為簡潔黑白頭像",
       "textTitle": "文字生成示例",
       "textDesc": "只需描述您想要的頭像，AI 就能為您生成",
       "before": "原圖",
@@ -152,9 +152,9 @@
     "features": {
       "title": "強大的 AI 功能",
       "photo2avatarTitle": "照片轉頭像",
-      "photo2avatarDesc": "上傳您的照片，AI 會自動識別並轉換為 Notion 風格頭像，保留您的獨特特徵",
+      "photo2avatarDesc": "上傳您的照片，AI 會自動識別並轉換為簡潔黑白頭像，保留您的獨特特徵",
       "text2avatarTitle": "文字生成頭像",
-      "text2avatarDesc": "只需描述您想要的頭像特徵，AI 就會為您生成個性化的 Notion 風格頭像"
+      "text2avatarDesc": "只需描述您想要的頭像特徵，AI 就會為您生成個性化的簡潔黑白頭像"
     },
     "steps": {
       "title": "使用方法",
@@ -165,7 +165,7 @@
       "step3Title": "AI 生成",
       "step3Desc": "點擊生成，AI 將在幾秒鐘內創建您的頭像",
       "step4Title": "下載並使用",
-      "step4Desc": "下載您生成的頭像，可在 Notion、社交媒體等平台使用"
+      "step4Desc": "下載您生成的頭像，可在任意平台使用"
     },
     "pricing": {
       "title": "選擇您的方案",
@@ -195,13 +195,13 @@
       "q4": "生成的頭像可以商用嗎？",
       "a4": "可以，所有生成的頭像遵循 CC0 許可證，可用於商業用途，無需署名。"
     },
-    "seoKeywords": "AI 頭像生成器,AI 頭像製作,Notion AI 頭像,照片轉 AI 頭像,文字生成 AI 頭像,AI 頭像創建器,Notion 風格 AI 頭像,AI 生成頭像,免費 AI 頭像生成器,線上 AI 頭像製作,AI 頭像工具,人工智能頭像,AI 頭像生成,智能頭像生成器"
+    "seoKeywords": "AI 頭像生成器,AI 頭像製作,照片轉 AI 頭像,文字生成 AI 頭像,AI 頭像創建器,AI 生成頭像,免費 AI 頭像生成器,線上 AI 頭像製作,AI 頭像工具,人工智能頭像,智能頭像生成器"
   },
   "aiFeatureIntro": {
     "title": "全新 AI 頭像生成功能",
-    "description": "現在您可以使用 AI 技術快速生成 Notion 風格的頭像了！",
+    "description": "現在您可以使用 AI 技術快速生成簡潔黑白頭像了！",
     "feature1Title": "照片轉頭像",
-    "feature1Desc": "上傳您的照片，AI 會自動轉換為 Notion 風格的頭像",
+    "feature1Desc": "上傳您的照片，AI 會自動轉換為簡潔黑白頭像",
     "feature2Title": "文字生成頭像",
     "feature2Desc": "只需描述您想要的頭像，AI 就能為您生成",
     "tryNow": "立即體驗",
@@ -245,7 +245,7 @@
   },
   "account": {
     "title": "帳戶設定",
-    "pageTitle": "帳戶 | Notion Avatar Maker",
+    "pageTitle": "帳戶 | 頭像生成器",
     "profile": "個人資料",
     "subscription": "訂閱",
     "unlimitedGenerations": "Pro 訂閱無限生成",
@@ -289,7 +289,7 @@
     }
   },
   "pricing": {
-    "pageTitle": "價格 | Notion Avatar Maker",
+    "pageTitle": "價格 | 頭像生成器",
     "pageDescription": "選擇最適合您頭像建立需求的方案",
     "title": "簡單透明的價格",
     "description": "選擇最適合您的方案。隨時可以升級。",

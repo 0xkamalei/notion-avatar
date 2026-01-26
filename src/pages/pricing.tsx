@@ -9,6 +9,7 @@ import { Toaster } from 'react-hot-toast';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import FaviconLinks from '@/components/SEO/FaviconLinks';
+import { getCanonicalUrl } from '@/lib/seo';
 
 // 延迟加载非关键组件
 const AuthModal = dynamic(() => import('@/components/Auth/AuthModal'), {
@@ -29,54 +30,45 @@ export default function PricingPage() {
   const plans = useMemo(
     () => [
       {
-        name: t('pricing.plans.free.name'),
-        price: t('pricing.plans.free.price'),
-        period: t('pricing.plans.free.period'),
-        description: t('pricing.plans.free.description'),
-        features: [
-          t('pricing.plans.free.features.1'),
-          t('pricing.plans.free.features.2'),
-          t('pricing.plans.free.features.3'),
-          t('pricing.plans.free.features.4'),
-        ],
-        buttonText: t('pricing.plans.free.buttonText'),
+        name: t('pricing.packs.free.name'),
+        price: t('pricing.packs.free.price'),
+        period: t('pricing.packs.free.period'),
+        description: t('pricing.packs.free.description'),
+        features: [t('pricing.packs.free.features.1')],
+        buttonText: t('pricing.packs.free.buttonText'),
         buttonVariant: 'secondary' as const,
-        priceType: null,
+        packId: null,
       },
       {
-        name: t('pricing.plans.pro.name'),
-        price: t('pricing.plans.pro.price'),
-        period: t('pricing.plans.pro.period'),
-        description: t('pricing.plans.pro.description'),
-        features: [
-          t('pricing.plans.pro.features.1'),
-          t('pricing.plans.pro.features.2'),
-          t('pricing.plans.pro.features.3'),
-          t('pricing.plans.pro.features.4'),
-          t('pricing.plans.pro.features.5'),
-          t('pricing.plans.pro.features.6'),
-          t('pricing.plans.pro.features.7'),
-        ],
-        buttonText: t('pricing.plans.pro.buttonText'),
+        name: t('pricing.packs.small.name'),
+        price: t('pricing.packs.small.price'),
+        period: t('pricing.packs.small.period'),
+        description: t('pricing.packs.small.description'),
+        features: [t('pricing.packs.small.features.1')],
+        buttonText: t('pricing.packs.small.buttonText'),
         buttonVariant: 'primary' as const,
-        priceType: 'monthly',
+        packId: 'small' as const,
         popular: true,
       },
       {
-        name: t('pricing.plans.credits.name'),
-        price: t('pricing.plans.credits.price'),
-        period: t('pricing.plans.credits.period'),
-        description: t('pricing.plans.credits.description'),
-        features: [
-          t('pricing.plans.credits.features.1'),
-          t('pricing.plans.credits.features.2'),
-          t('pricing.plans.credits.features.3'),
-          t('pricing.plans.credits.features.4'),
-          t('pricing.plans.credits.features.5'),
-        ],
-        buttonText: t('pricing.plans.credits.buttonText'),
+        name: t('pricing.packs.medium.name'),
+        price: t('pricing.packs.medium.price'),
+        period: t('pricing.packs.medium.period'),
+        description: t('pricing.packs.medium.description'),
+        features: [t('pricing.packs.medium.features.1')],
+        buttonText: t('pricing.packs.medium.buttonText'),
         buttonVariant: 'secondary' as const,
-        priceType: 'credits',
+        packId: 'medium' as const,
+      },
+      {
+        name: t('pricing.packs.large.name'),
+        price: t('pricing.packs.large.price'),
+        period: t('pricing.packs.large.period'),
+        description: t('pricing.packs.large.description'),
+        features: [t('pricing.packs.large.features.1')],
+        buttonText: t('pricing.packs.large.buttonText'),
+        buttonVariant: 'secondary' as const,
+        packId: 'large' as const,
       },
     ],
     [t],
@@ -94,9 +86,7 @@ export default function PricingPage() {
         <meta name="googlebot" content="index, follow" />
         <link
           rel="canonical"
-          href={`https://notion-avatar.app${
-            router.locale && router.locale !== 'en' ? `/${router.locale}` : ''
-          }/pricing`}
+          href={getCanonicalUrl('/pricing', router.locale)}
         />
       </Head>
 

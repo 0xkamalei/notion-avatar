@@ -1,10 +1,11 @@
 import { useClickOutside } from '@/hooks/useClickOutside';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { useLayoutEffect, useState } from 'react';
+import type { ReactNode } from 'react';
 
 type PopoverProps = {
   triggerId: string;
-  children: JSX.Element;
+  children: ReactNode;
   onClose: () => void;
 };
 

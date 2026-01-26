@@ -1,4 +1,4 @@
-import { createContext, useContext, ReactNode } from 'react';
+import { createContext, useContext, ReactNode, useMemo } from 'react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 
 interface User {
@@ -246,23 +246,35 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   };
 
+  const contextValue = useMemo(
+    () => ({
+      user,
+      subscription: subscriptionData.subscription,
+      credits: subscriptionData.credits,
+      isLoading,
+      signInWithGoogle,
+      signInWithGithub,
+      signInWithEmail,
+      signUpWithEmail,
+      signOut,
+      refreshSubscription,
+    }),
+    [
+      isLoading,
+      refreshSubscription,
+      signInWithEmail,
+      signInWithGithub,
+      signInWithGoogle,
+      signOut,
+      signUpWithEmail,
+      subscriptionData.credits,
+      subscriptionData.subscription,
+      user,
+    ],
+  );
+
   return (
-    <AuthContext.Provider
-      value={{
-        user,
-        subscription: subscriptionData.subscription,
-        credits: subscriptionData.credits,
-        isLoading,
-        signInWithGoogle,
-        signInWithGithub,
-        signInWithEmail,
-        signUpWithEmail,
-        signOut,
-        refreshSubscription,
-      }}
-    >
-      {children}
-    </AuthContext.Provider>
+    <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>
   );
 }
 

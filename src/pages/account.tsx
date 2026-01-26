@@ -40,27 +40,17 @@ export default function AccountPage({
 }: AccountPageProps) {
   const { t } = useTranslation('common');
   const router = useRouter();
-  const {
-    user,
-    subscription,
-    credits,
-    isLoading,
-    signOut,
-    refreshSubscription,
-  } = useAuth();
+  const { user, credits, isLoading, signOut, refreshSubscription } = useAuth();
 
-  const isPro =
-    subscription?.plan_type === 'monthly' && subscription?.status === 'active';
   const {
     data: usageHistory = initialUsageHistory,
     isLoading: isLoadingHistory,
-  } = useUsageHistory(10, isPro);
+  } = useUsageHistory(10);
   const {
     data: purchasedPacks = initialPurchasedPacks,
     isLoading: isLoadingPacks,
   } = usePurchasedPacks(initialPurchasedPacks);
 
-  const [isManagingBilling, setIsManagingBilling] = useState(false);
   const [downloadingPack, setDownloadingPack] = useState<string | null>(null);
   const [previewImageUrl, setPreviewImageUrl] = useState<string | null>(null);
   const [downloadingImage, setDownloadingImage] = useState<string | null>(null);
@@ -80,27 +70,6 @@ export default function AccountPage({
       setLoadingImages(new Set(imageIds));
     }
   }, [usageHistory]);
-
-  const handleManageBilling = async () => {
-    setIsManagingBilling(true);
-    try {
-      const response = await fetch('/api/stripe/portal', {
-        method: 'POST',
-      });
-      const data = await response.json();
-
-      if (data.url) {
-        window.location.href = data.url;
-      } else {
-        throw new Error(data.error || t('account.failedToOpenBillingPortal'));
-      }
-    } catch (error) {
-      console.error('Billing portal error:', error);
-      toast.error(t('account.failedToOpenBillingPortal'));
-    } finally {
-      setIsManagingBilling(false);
-    }
-  };
 
   const handleDownload = async (packId: string) => {
     setDownloadingPack(packId);
@@ -180,10 +149,8 @@ export default function AccountPage({
       if (response.ok && data.success) {
         toast.success(t('account.promo.success', { credits: data.credits }));
         setPromoCode('');
-        // Refresh subscription data to update credits
         refreshSubscription();
       } else {
-        // Map error messages to i18n keys
         let errorKey = 'account.promo.error';
         if (data.error === 'Invalid promo code') {
           errorKey = 'account.promo.invalidCode';
@@ -216,7 +183,6 @@ export default function AccountPage({
     return null;
   }
 
-  const planLabel = isPro ? t('menu.pro') : t('menu.free');
   const avatarUrl = user.user_metadata?.avatar_url;
   const displayName =
     user.user_metadata?.full_name || user.user_metadata?.name || user.email;
@@ -287,107 +253,26 @@ export default function AccountPage({
               </div>
             </div>
 
-            {/* Subscription Section */}
             <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 mb-6">
-              <div className="flex items-center justify-between mb-4">
-                <h2 className="text-lg font-bold text-gray-900">
-                  {t('account.subscription')}
-                </h2>
-                <span
-                  className={`px-3 py-1 text-sm font-medium rounded-full ${
-                    isPro ? 'bg-black text-white' : 'bg-gray-100 text-gray-600'
-                  }`}
+              <h2 className="text-lg font-bold text-gray-900 mb-4">
+                {t('account.credits')}
+              </h2>
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-3xl font-bold text-gray-900">{credits}</p>
+                  <p className="text-gray-500">
+                    {t('account.creditsRemaining')}
+                  </p>
+                </div>
+                <Link
+                  href="/pricing"
+                  className="px-4 py-2 text-sm border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
                 >
-                  {planLabel}
-                </span>
+                  {t('account.buyMore')}
+                </Link>
               </div>
-
-              {isPro ? (
-                <div className="space-y-3">
-                  {subscription.cancel_at_period_end ? (
-                    <p className="text-yellow-600 text-sm font-medium">
-                      {t('account.subscriptionWillCancel')}
-                    </p>
-                  ) : (
-                    <p className="text-gray-600">
-                      {t('account.unlimitedGenerations')}
-                    </p>
-                  )}
-                  {subscription.current_period_end && (
-                    <p className="text-sm text-gray-500">
-                      {subscription.cancel_at_period_end
-                        ? `${t('account.expiresOn')} ${new Date(
-                            subscription.current_period_end,
-                          ).toLocaleDateString()}`
-                        : `${t('account.renewsOn')} ${new Date(
-                            subscription.current_period_end,
-                          ).toLocaleDateString()}`}
-                    </p>
-                  )}
-                  <button
-                    onClick={handleManageBilling}
-                    disabled={isManagingBilling}
-                    type="button"
-                    className="px-4 py-2 text-sm border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors disabled:opacity-50"
-                  >
-                    {isManagingBilling
-                      ? t('auth.loading')
-                      : t('account.manageBilling')}
-                  </button>
-                </div>
-              ) : subscription?.plan_type === 'monthly' &&
-                subscription?.status !== 'active' ? (
-                <div className="space-y-3">
-                  <p className="text-gray-600">
-                    {t('account.subscriptionCanceled')}
-                  </p>
-                  <Link
-                    href="/pricing"
-                    className="inline-block px-4 py-2 bg-black text-white text-sm font-medium rounded-lg hover:bg-gray-800 transition-colors"
-                  >
-                    {t('account.resubscribe')}
-                  </Link>
-                </div>
-              ) : (
-                <div className="space-y-3">
-                  <p className="text-gray-600">
-                    {t('account.freeGenerationPerDay')}
-                    {credits > 0 && ` + ${credits} ${t('menu.credits')}`}
-                  </p>
-                  <Link
-                    href="/pricing"
-                    className="inline-block px-4 py-2 bg-black text-white text-sm font-medium rounded-lg hover:bg-gray-800 transition-colors"
-                  >
-                    {t('account.upgradeToPro')}
-                  </Link>
-                </div>
-              )}
+              <p className="text-gray-600 mt-4">{t('account.siteFreeQuota')}</p>
             </div>
-
-            {/* Credits Section */}
-            {credits > 0 && (
-              <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 mb-6">
-                <h2 className="text-lg font-bold text-gray-900 mb-4">
-                  {t('account.credits')}
-                </h2>
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-3xl font-bold text-gray-900">
-                      {credits}
-                    </p>
-                    <p className="text-gray-500">
-                      {t('account.creditsRemaining')}
-                    </p>
-                  </div>
-                  <Link
-                    href="/pricing"
-                    className="px-4 py-2 text-sm border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
-                  >
-                    {t('account.buyMore')}
-                  </Link>
-                </div>
-              </div>
-            )}
 
             {/* Promo Code Section */}
             <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 mb-6">
@@ -489,37 +374,7 @@ export default function AccountPage({
               <h2 className="text-lg font-bold text-gray-900 mb-4">
                 {t('account.recentGenerations')}
               </h2>
-              {!isPro ? (
-                <div className="text-center py-8">
-                  <div className="mb-4">
-                    <svg
-                      className="w-16 h-16 mx-auto text-gray-400"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
-                      />
-                    </svg>
-                  </div>
-                  <p className="text-gray-600 mb-2">
-                    {t('account.generationHistoryProOnly')}
-                  </p>
-                  <p className="text-gray-500 text-sm mb-4">
-                    {t('account.upgradeToViewHistory')}
-                  </p>
-                  <Link
-                    href="/pricing"
-                    className="inline-block px-6 py-2 bg-black text-white text-sm font-medium rounded-lg hover:bg-gray-800 transition-colors"
-                  >
-                    {t('account.upgradeToPro')}
-                  </Link>
-                </div>
-              ) : isLoadingHistory ? (
+              {isLoadingHistory ? (
                 <div className="text-center py-8">
                   <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-black mx-auto" />
                 </div>
@@ -578,6 +433,7 @@ export default function AccountPage({
                                 type="button"
                                 className="opacity-0 group-hover:opacity-100 transition-opacity p-1.5 bg-white rounded-full hover:bg-gray-100"
                                 title="Preview"
+                                aria-label="Preview"
                               >
                                 <svg
                                   className="w-4 h-4 text-gray-900"
@@ -760,40 +616,24 @@ export async function getServerSideProps(
       };
     }
 
-    // 并行获取数据
-    const [purchasesResult, subscriptionResult, usageResult] =
-      await Promise.all([
-        // 获取购买的资源包
-        supabase
-          .from('resource_purchases')
-          .select('resource_pack_id')
-          .eq('user_id', user.id),
-        // 获取订阅信息
-        supabase
-          .from('subscriptions')
-          .select('plan_type, status')
-          .eq('user_id', user.id)
-          .single(),
-        // 获取使用历史（仅 Pro 用户）
-        supabase
-          .from('usage_records')
-          .select('id, generation_mode, created_at, image_path')
-          .eq('user_id', user.id)
-          .order('created_at', { ascending: false })
-          .limit(10),
-      ]);
+    const [purchasesResult, usageResult] = await Promise.all([
+      supabase
+        .from('resource_purchases')
+        .select('resource_pack_id')
+        .eq('user_id', user.id),
+      supabase
+        .from('usage_records')
+        .select('id, generation_mode, created_at, image_path')
+        .eq('user_id', user.id)
+        .order('created_at', { ascending: false })
+        .limit(10),
+    ]);
 
     if (purchasesResult.data) {
       purchasedPacks = purchasesResult.data.map((p) => p.resource_pack_id);
     }
 
-    // 检查是否为 Pro 用户
-    const isPro =
-      subscriptionResult.data?.plan_type === 'monthly' &&
-      subscriptionResult.data?.status === 'active';
-
-    // 如果是 Pro 用户，生成图片签名 URL
-    if (isPro && usageResult.data) {
+    if (usageResult.data) {
       const serviceClient = createServiceClient();
       usageHistory = await Promise.all(
         usageResult.data.map(async (record) => {

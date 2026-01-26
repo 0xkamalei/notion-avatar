@@ -10,6 +10,9 @@ export interface AIGenerateResponse {
   success: boolean;
   image?: string; // Base64 image
   error?: string;
+  requiredCredits?: number;
+  creditsCharged?: number;
+  usedFree?: boolean;
 }
 
 export interface AIUsageState {

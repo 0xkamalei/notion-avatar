@@ -1,7 +1,7 @@
 import { GoogleGenAI } from '@google/genai';
 import { AIGenerationMode } from '@/types/ai';
 
-// Mock Notion Avatar (Simple SVG)
+// Mock Avatar (Simple SVG)
 const MOCK_AVATAR_SVG = `<svg viewBox="0 0 1080 1080" fill="none" xmlns="http://www.w3.org/2000/svg">
   <rect width="1080" height="1080" fill="#fffefc"/>
   <path d="M540 200C350 200 200 350 200 540C200 730 350 880 540 880C730 880 880 730 880 540C880 350 730 200 540 200Z" stroke="black" stroke-width="20"/>
@@ -14,7 +14,7 @@ const MOCK_AVATAR_BASE64 = `data:image/svg+xml;base64,${Buffer.from(
   MOCK_AVATAR_SVG,
 ).toString('base64')}`;
 
-const PHOTO_PROMPT = `Transform this photo into a Notion Avatar style illustration with these exact characteristics:
+const PHOTO_PROMPT = `Transform this photo into a minimalist black-and-white avatar illustration with these exact characteristics:
 - Pure black and white color scheme only
 - Simple black outline strokes for facial contours
 - Solid black fill for hair (no gradients, no strokes)
@@ -26,7 +26,7 @@ const PHOTO_PROMPT = `Transform this photo into a Notion Avatar style illustrati
 - Head and shoulders composition only
 - Keep the person's key facial features recognizable but simplified`;
 
-const TEXT_PROMPT = `Generate a Notion Avatar style portrait illustration based on this description:
+const TEXT_PROMPT = `Generate a minimalist black-and-white portrait illustration based on this description:
 - Pure black and white color scheme only
 - Simple black outline strokes for facial contours  
 - Solid black fill for hair (no gradients)
@@ -47,7 +47,9 @@ export async function generateAvatar(
   if (process.env.USE_MOCK_AI === 'true' || !process.env.GEMINI_API_KEY) {
     // eslint-disable-next-line no-console
     console.log('[Mock AI] Generating avatar...');
-    await new Promise((resolve) => setTimeout(resolve, 2000)); // Simulate delay
+    await new Promise<void>((resolve) => {
+      setTimeout(resolve, 2000);
+    });
     return MOCK_AVATAR_BASE64;
   }
 

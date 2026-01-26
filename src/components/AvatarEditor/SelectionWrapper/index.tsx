@@ -1,6 +1,8 @@
+import type { ReactNode } from 'react';
+
 type WrapperProps = {
   className?: string;
-  children: JSX.Element;
+  children: ReactNode;
   tooltip: string;
   switchConfig?: () => void;
 };

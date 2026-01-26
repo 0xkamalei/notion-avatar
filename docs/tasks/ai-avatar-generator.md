@@ -6,16 +6,16 @@
 ## 📋 需求理解
 
 ### 核心需求
-用户希望实现一个功能：**通过 AI 生成 Notion Avatar 手绘风格的头像图片**，支持两种模式。
+用户希望实现一个功能：**通过 AI 生成手绘风格的黑白头像图片**，支持两种模式。
 
 ### 功能要点
 1. **Photo2Avatar**：用户上传照片 → AI 转换为手绘风格头像
 2. **Text2Avatar**：用户输入文字描述 → AI 生成手绘风格头像
 3. **UI 一致性**：新功能的界面风格需与现有网站保持一致
-4. **手绘风格**：生成的头像需要保持 Notion Avatar 特有的手绘风格
+4. **手绘风格**：生成的头像需要保持简洁黑白的手绘风格
 
-### Notion Avatar 风格特点（参考图）
-基于用户提供的参考图，Notion Avatar 风格具有以下特点：
+### 手绘风格特点（参考图）
+基于用户提供的参考图，手绘风格具有以下特点：
 - **纯黑白配色**：主要使用黑色线条和填充，白色/米白色背景
 - **简约线条**：使用简洁的黑色轮廓线勾勒面部轮廓
 - **实心填充**：头发等区域使用纯黑色实心填充
@@ -95,7 +95,7 @@ export default async function handler(req, res) {
     await new Promise(resolve => setTimeout(resolve, 2000));
     return res.json({
       success: true,
-      image: MOCK_AVATAR_BASE64, // 预设的 Notion Avatar 图片
+      image: MOCK_AVATAR_BASE64, // 预设头像图片
       mode: mode
     });
   }
@@ -140,7 +140,7 @@ export default async function handler(req, res) {
 
 #### Photo2Avatar Prompt
 ```
-Transform this photo into a Notion Avatar style illustration with these exact characteristics:
+Transform this photo into a minimalist black-and-white avatar illustration with these exact characteristics:
 - Pure black and white color scheme only
 - Simple black outline strokes for facial contours
 - Solid black fill for hair (no gradients, no strokes)
@@ -155,7 +155,7 @@ Transform this photo into a Notion Avatar style illustration with these exact ch
 
 #### Text2Avatar Prompt
 ```
-Generate a Notion Avatar style portrait illustration based on this description:
+Generate a minimalist black-and-white portrait illustration based on this description:
 - Pure black and white color scheme only
 - Simple black outline strokes for facial contours  
 - Solid black fill for hair (no gradients)

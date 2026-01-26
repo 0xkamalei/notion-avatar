@@ -1,15 +1,15 @@
 ---
-title: "Getting Started with Notion Avatar Maker"
-description: "Learn how to create your perfect Notion-style avatar in minutes. This guide covers all the basics of customizing facial features, hairstyles, accessories, and more."
+title: "Getting Started with Avatar Maker"
+description: "Learn how to create your avatar in minutes. This guide covers customizing facial features, hairstyles, accessories, and more."
 date: "2025-12-25"
 coverImage: "/image/scribble.png"
 ---
 
-Welcome to Notion Avatar Maker! Creating your unique hand-drawn style avatar has never been easier. In this guide, we'll walk you through everything you need to know to create the perfect avatar for your Notion workspace, social media profiles, or any other platform.
+Welcome to Avatar Maker! Creating your avatar has never been easier. In this guide, we'll walk you through everything you need to know to create the perfect avatar for your profile on any platform.
 
-## Why Use Notion-Style Avatars?
+## Why Use Minimalist Avatars?
 
-Notion-style avatars have become incredibly popular for several reasons:
+Minimalist black-and-white avatars work well for several reasons:
 
 - **Clean and minimalist design** that works in any context
 - **Hand-drawn aesthetic** that feels personal and approachable
@@ -74,7 +74,7 @@ Once you've created your perfect avatar, you can:
 
 ## Commercial Use
 
-All avatars created with Notion Avatar Maker are released under the **CC0 license**, which means:
+All avatars created with Avatar Maker are released under the **CC0 license**, which means:
 
 - ✅ Use for personal projects
 - ✅ Use for commercial projects
@@ -85,11 +85,10 @@ All avatars created with Notion Avatar Maker are released under the **CC0 licens
 
 Want something even more unique? Check out our AI Avatar Generator that can:
 
-- Transform your photos into Notion-style avatars
+- Transform your photos into clean black-and-white avatars
 - Generate avatars from text descriptions
 - Create truly one-of-a-kind designs
 
 ---
 
 Ready to create your avatar? Head back to the [homepage](/) and start designing! We can't wait to see what you create.
-

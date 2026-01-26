@@ -17,7 +17,8 @@ interface BlogLayoutProps {
   post: BlogPost;
 }
 
-const BASE_URL = 'https://notion-avatar.app';
+const BASE_URL = process.env.NEXT_PUBLIC_URL || 'https://avatar.leix.dev';
+const SITE_NAME = 'Avatar Maker';
 
 /**
  * Format a date string for display
@@ -43,9 +44,10 @@ export default function BlogLayout({ post }: BlogLayoutProps) {
     <>
       <Head>
         {/* Basic Meta Tags */}
-        <title>{post.title} | Notion Avatar Blog</title>
+        <title>
+          {post.title} | {SITE_NAME}
+        </title>
         <meta name="description" content={post.description} />
-        <meta name="author" content="Notion Avatar" />
         <meta name="robots" content="index, follow" />
         <meta name="googlebot" content="index, follow" />
 
@@ -55,7 +57,7 @@ export default function BlogLayout({ post }: BlogLayoutProps) {
         <meta property="og:description" content={post.description} />
         <meta property="og:url" content={canonicalUrl} />
         <meta property="og:image" content={coverImageUrl} />
-        <meta property="og:site_name" content="Notion Avatar Blog" />
+        <meta property="og:site_name" content={SITE_NAME} />
         <meta property="article:published_time" content={post.date} />
 
         {/* Twitter Card */}
@@ -63,7 +65,6 @@ export default function BlogLayout({ post }: BlogLayoutProps) {
         <meta name="twitter:title" content={post.title} />
         <meta name="twitter:description" content={post.description} />
         <meta name="twitter:image" content={coverImageUrl} />
-        <meta name="twitter:site" content="@phillzou" />
 
         {/* Canonical URL */}
         <link rel="canonical" href={canonicalUrl} />
@@ -81,17 +82,13 @@ export default function BlogLayout({ post }: BlogLayoutProps) {
               datePublished: post.date,
               author: {
                 '@type': 'Organization',
-                name: 'Notion Avatar',
+                name: SITE_NAME,
                 url: BASE_URL,
               },
               publisher: {
                 '@type': 'Organization',
-                name: 'Notion Avatar',
+                name: SITE_NAME,
                 url: BASE_URL,
-                logo: {
-                  '@type': 'ImageObject',
-                  url: `${BASE_URL}/logo.gif`,
-                },
               },
               mainEntityOfPage: {
                 '@type': 'WebPage',

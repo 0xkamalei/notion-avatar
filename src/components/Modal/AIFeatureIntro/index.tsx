@@ -74,7 +74,7 @@ export default function AIFeatureIntroModal({
           <div className="my-8">
             <Image
               src="/image/avatar-diff.png"
-              alt="Notion AI Avatar"
+              alt="AI Avatar"
               width={512}
               height={242}
               priority

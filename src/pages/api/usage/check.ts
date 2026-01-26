@@ -1,7 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { createClient } from '@/lib/supabase/server';
-
-const FREE_DAILY_LIMIT = 1;
+import { createClient, createServiceClient } from '@/lib/supabase/server';
+import { getPricingConfig } from '@/lib/billing';
 
 export default async function handler(
   req: NextApiRequest,
@@ -12,68 +11,27 @@ export default async function handler(
   }
 
   try {
+    const pricing = getPricingConfig();
     const supabase = createClient(req, res);
     const {
       data: { user },
     } = await supabase.auth.getUser();
 
     if (!user) {
-      // Return default free tier for unauthenticated users
       return res.status(200).json({
         remaining: 0,
-        total: FREE_DAILY_LIMIT,
+        total: pricing.siteFreeDailyLimit,
         isUnlimited: false,
         isAuthenticated: false,
+        freeRemaining: 0,
+        paidCredits: 0,
       });
     }
 
-    // Check subscription status
-    const { data: subscription } = await supabase
-      .from('subscriptions')
-      .select('*')
-      .eq('user_id', user.id)
-      .single();
-
-    // Check if subscription has expired
-    let isSubscriptionActive = false;
-    if (
-      subscription?.plan_type === 'monthly' &&
-      subscription?.status === 'active'
-    ) {
-      // If current_period_end is null, consider subscription as active
-      if (!subscription.current_period_end) {
-        isSubscriptionActive = true;
-      } else {
-        const periodEnd = new Date(subscription.current_period_end);
-        const now = new Date();
-        isSubscriptionActive = periodEnd >= now;
-
-        // If subscription has expired, update it
-        if (!isSubscriptionActive) {
-          await supabase
-            .from('subscriptions')
-            .update({
-              status: 'canceled',
-              plan_type: 'free',
-            })
-            .eq('user_id', user.id);
-        }
-      }
-    }
-
-    // If user has active paid subscription, they have unlimited usage
-    if (isSubscriptionActive) {
-      return res.status(200).json({
-        remaining: -1, // -1 indicates unlimited
-        total: -1,
-        isUnlimited: true,
-        isAuthenticated: true,
-        planType: 'monthly',
-      });
-    }
+    const serviceClient = createServiceClient();
 
     // Check credit packages
-    const { data: credits } = await supabase
+    const { data: credits } = await serviceClient
       .from('credit_packages')
       .select('credits_remaining')
       .eq('user_id', user.id)
@@ -82,26 +40,23 @@ export default async function handler(
     const totalCredits =
       credits?.reduce((sum, pkg) => sum + pkg.credits_remaining, 0) || 0;
 
-    // Check daily usage
     const today = new Date().toISOString().split('T')[0];
-    const { data: dailyUsage } = await supabase
-      .from('daily_usage')
+    const { data: siteUsage } = await serviceClient
+      .from('site_daily_usage')
       .select('count')
-      .eq('user_id', user.id)
       .eq('usage_date', today)
       .single();
 
-    const usedToday = dailyUsage?.count || 0;
-    const freeRemaining = Math.max(0, FREE_DAILY_LIMIT - usedToday);
+    const usedToday = siteUsage?.count || 0;
+    const freeRemaining = Math.max(0, pricing.siteFreeDailyLimit - usedToday);
 
     return res.status(200).json({
       remaining: freeRemaining + totalCredits,
       freeRemaining,
       paidCredits: totalCredits,
-      total: FREE_DAILY_LIMIT,
+      total: pricing.siteFreeDailyLimit,
       isUnlimited: false,
       isAuthenticated: true,
-      planType: subscription?.plan_type || 'free',
     });
   } catch (error) {
     console.error('Usage check error:', error);

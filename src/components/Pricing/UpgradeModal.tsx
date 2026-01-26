@@ -20,14 +20,14 @@ export default function UpgradeModal({
 
   if (!isOpen) return null;
 
-  const handlePurchase = async (priceType: 'monthly' | 'credits') => {
+  const handlePurchase = async (packId: 'small' | 'medium' | 'large') => {
     if (!user) {
       onClose();
       onLoginClick();
       return;
     }
 
-    setIsLoading(priceType);
+    setIsLoading(packId);
 
     try {
       const response = await fetch('/api/stripe/create-checkout', {
@@ -35,7 +35,7 @@ export default function UpgradeModal({
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ priceType }),
+        body: JSON.stringify({ packId }),
       });
 
       const data = await response.json();
@@ -71,6 +71,7 @@ export default function UpgradeModal({
           onClick={onClose}
           type="button"
           className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors"
+          aria-label="Close modal"
         >
           <svg
             className="w-6 h-6"
@@ -112,9 +113,8 @@ export default function UpgradeModal({
         </div>
 
         <div className="space-y-4">
-          {/* Pro Subscription */}
           <button
-            onClick={() => handlePurchase('monthly')}
+            onClick={() => handlePurchase('small')}
             disabled={isLoading !== null}
             type="button"
             className="w-full p-4 border-2 border-black rounded-xl hover:bg-gray-50 transition-colors disabled:opacity-50 text-left"
@@ -123,35 +123,34 @@ export default function UpgradeModal({
               <div>
                 <div className="flex items-center gap-2">
                   <span className="font-bold text-lg">
-                    {t('pricing.upgradeModal.proMonthly')}
+                    {t('pricing.packs.small.name')}
                   </span>
                   <span className="bg-gradient-to-r from-purple-500 to-pink-500 text-white text-xs font-medium px-2 py-0.5 rounded-full">
                     {t('pricing.upgradeModal.bestValue')}
                   </span>
                 </div>
                 <p className="text-gray-600 text-sm mt-1">
-                  {t('pricing.upgradeModal.unlimitedGenerations')}
+                  {t('pricing.packs.small.description')}
                 </p>
               </div>
               <div className="text-right">
                 <span className="text-2xl font-bold">
-                  {t('pricing.upgradeModal.proPrice')}
+                  {t('pricing.packs.small.price')}
                 </span>
                 <span className="text-gray-500 text-sm">
-                  {t('pricing.upgradeModal.proPeriod')}
+                  {t('pricing.packs.small.period')}
                 </span>
               </div>
             </div>
-            {isLoading === 'monthly' && (
+            {isLoading === 'small' && (
               <div className="mt-2 text-center text-sm text-gray-500">
                 {t('pricing.upgradeModal.redirecting')}
               </div>
             )}
           </button>
 
-          {/* Credit Pack */}
           <button
-            onClick={() => handlePurchase('credits')}
+            onClick={() => handlePurchase('medium')}
             disabled={isLoading !== null}
             type="button"
             className="w-full p-4 border-2 border-gray-200 rounded-xl hover:bg-gray-50 transition-colors disabled:opacity-50 text-left"
@@ -159,22 +158,53 @@ export default function UpgradeModal({
             <div className="flex items-center justify-between">
               <div>
                 <span className="font-bold text-lg">
-                  {t('pricing.upgradeModal.creditPack')}
+                  {t('pricing.packs.medium.name')}
                 </span>
                 <p className="text-gray-600 text-sm mt-1">
-                  {t('pricing.upgradeModal.creditPackDesc')}
+                  {t('pricing.packs.medium.description')}
                 </p>
               </div>
               <div className="text-right">
                 <span className="text-2xl font-bold">
-                  {t('pricing.upgradeModal.creditPackPrice')}
+                  {t('pricing.packs.medium.price')}
                 </span>
                 <span className="text-gray-500 text-sm">
-                  {t('pricing.upgradeModal.creditPackPeriod')}
+                  {t('pricing.packs.medium.period')}
                 </span>
               </div>
             </div>
-            {isLoading === 'credits' && (
+            {isLoading === 'medium' && (
+              <div className="mt-2 text-center text-sm text-gray-500">
+                {t('pricing.upgradeModal.redirecting')}
+              </div>
+            )}
+          </button>
+
+          <button
+            onClick={() => handlePurchase('large')}
+            disabled={isLoading !== null}
+            type="button"
+            className="w-full p-4 border-2 border-gray-200 rounded-xl hover:bg-gray-50 transition-colors disabled:opacity-50 text-left"
+          >
+            <div className="flex items-center justify-between">
+              <div>
+                <span className="font-bold text-lg">
+                  {t('pricing.packs.large.name')}
+                </span>
+                <p className="text-gray-600 text-sm mt-1">
+                  {t('pricing.packs.large.description')}
+                </p>
+              </div>
+              <div className="text-right">
+                <span className="text-2xl font-bold">
+                  {t('pricing.packs.large.price')}
+                </span>
+                <span className="text-gray-500 text-sm">
+                  {t('pricing.packs.large.period')}
+                </span>
+              </div>
+            </div>
+            {isLoading === 'large' && (
               <div className="mt-2 text-center text-sm text-gray-500">
                 {t('pricing.upgradeModal.redirecting')}
               </div>

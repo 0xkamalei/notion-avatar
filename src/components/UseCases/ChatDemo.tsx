@@ -48,7 +48,7 @@ export default function ChatDemo() {
         </div>
         <div>
           <h3 className="font-bold">Sofia Davis</h3>
-          <p className="text-sm text-gray-500">sofia@notion-avatar.app</p>
+          <p className="text-sm text-gray-500">sofia@example.com</p>
         </div>
       </div>
 

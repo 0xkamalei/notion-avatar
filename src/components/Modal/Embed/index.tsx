@@ -1,6 +1,5 @@
 import { AvatarConfig, ImageType } from '@/types';
 import { useState, useEffect } from 'react';
-import { useTranslation } from 'next-i18next';
 import Modal from '../Common';
 import Code from '../../Code';
 
@@ -19,13 +18,12 @@ export default function EmbedModal({
   onUpgrade,
 }: EmbedModalProps) {
   const [url, setUrl] = useState(``);
-  const { t } = useTranslation();
 
   useEffect(() => {
     setUrl(
       `${process.env.NEXT_PUBLIC_URL}/api/svg/${btoa(JSON.stringify(config))}`,
     );
-  }, []);
+  }, [config]);
 
   return (
     <Modal onCancel={onCancel}>

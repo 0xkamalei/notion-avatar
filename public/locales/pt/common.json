@@ -21,14 +21,14 @@
   "underDesign": "e sob",
   "designedBy": "projetado por",
   "license": "licença",
-  "coffeeUrl": "https://ko-fi.com/mayandev",
+  "coffeeUrl": "",
   "modalTitle": "Quase pronto",
   "modalHint": "Pressione e segure ou clique com o botão direito para salvar o avatar em seu álbum",
   "modalCancel": "Cancelar",
   "modalConfirm": "Confirmar",
-  "siteTitle": "Criador de Avatar Notion",
-  "siteDescription": "Uma ferramenta de criação de avatares no estilo desenhado à mão do Notion que permite personalizar características faciais, penteados, óculos, barbas e acessórios para gerar avatares únicos com um clique. Perfeito para Notion, GitHub, Twitter e outras plataformas sociais, ideal para colaboração em equipe e marca pessoal. Experimente agora e crie facilmente seu próprio avatar estilo Notion!",
-  "siteKeywords": "Avatar Notion,Criador de Avatar,Estilo Notion,Avatar Desenhado,Avatar Personalizado,Avatar Minimalista,Avatar de Equipe,Marca Pessoal,Avatar para Redes Sociais,Avatar SVG,Avatar PNG,Criador de Avatar Grátis,Gerador de Avatar Online,Avatar GitHub,Avatar Twitter",
+  "siteTitle": "Criador de Avatares",
+  "siteDescription": "Uma ferramenta para criar avatares minimalistas em preto e branco com personalização de rosto, cabelo, óculos, barba e acessórios.",
+  "siteKeywords": "criador de avatares,gerador de avatares,avatar desenhado,avatar personalizado,avatar minimalista,avatar de equipe,avatar para redes sociais,avatar SVG,avatar PNG,gerador de avatar online",
   "404Title": "Ops! Página não encontrada",
   "404Redirect": "Voltar para a página inicial",
   "copy": "Copiar",
@@ -45,9 +45,9 @@
   "christmas": "Natal",
   "avatarMaker": "Criador de Avatar",
   "whosUsing": "Quem está usando",
-  "whosUsingDescription": "Equipes e indivíduos em todo o mundo estão usando o Notion Avatar",
+  "whosUsingDescription": "Equipes e indivíduos em todo o mundo estão usando o criador de avatares",
   "useCases": "Casos de uso",
-  "useCasesDescription": "Explore as diversas aplicações dos avatares estilo Notion",
+  "useCasesDescription": "Explore as diversas aplicações dos avatares",
   "you": "Você",
   "chatDemo": {
     "message1": "Veja meu novo avatar!",
@@ -59,17 +59,17 @@
   },
   "socialDemo": {
     "name": "Phill Zou",
-    "handle": "phillzou",
+    "handle": "user",
     "bio": "Desenvolvedor Full-stack / Entusiasta Open Source",
-    "tweet": "Acabei de criar meu avatar com o Notion Avatar Maker! Amei esse estilo minimalista ✨",
-    "shareTitle": "Compartilhar meu avatar estilo Notion",
-    "shareText": "Confira meu novo avatar feito com o Notion Avatar Maker!"
+    "tweet": "Acabei de criar meu avatar! Amei esse estilo minimalista.",
+    "shareTitle": "Compartilhar meu avatar",
+    "shareText": "Confira meu novo avatar!"
   },
   "resourceStore": {
     "title": "Recursos de Design",
-    "description": "Obtenha o pacote completo de recursos de design para o Notion Avatar Maker, incluindo design do site e elementos decorativos. Grátis para usuários Pro.",
+    "description": "Obtenha o pacote completo de recursos de design, incluindo design do site e elementos decorativos.",
     "buyNow": "Comprar Agora",
-    "freeForPro": "Grátis para usuários Pro",
+    "freeForPro": "Incluído",
     "designPack": {
       "title": "Design Completo do Site",
       "description": "Inclui arquivos Figma para todas as páginas",
@@ -79,7 +79,7 @@
     },
     "scribblesPack": {
       "title": "Pacote de Elementos Desenhados à Mão",
-      "description": "Elementos decorativos estilo Notion desenhados à mão para adicionar diversão ao seu design",
+      "description": "Elementos decorativos desenhados à mão para adicionar diversão ao seu design",
       "features": {
         "1": "Mais de 100 elementos desenhados à mão"
       }
@@ -96,30 +96,30 @@
     "step2Title": "Personalizar recursos",
     "step2Desc": "Ajuste o penteado, traços faciais, acessórios e outros detalhes para criar um visual único",
     "step3Title": "Baixar e usar",
-    "step3Desc": "Clique no botão de download para obter seu avatar em alta resolução, pronto para usar no Notion ou outras plataformas",
+    "step3Desc": "Clique no botão de download para obter seu avatar em alta resolução, pronto para usar em qualquer lugar",
     "step4Title": "Compartilhe sua criação",
-    "step4Desc": "Compartilhe seu novo avatar Notion nas redes sociais e mostre aos seus amigos!"
+    "step4Desc": "Compartilhe seu novo avatar nas redes sociais e mostre aos seus amigos!"
   },
   "faq": {
     "title": "Perguntas Frequentes",
-    "whatIsAvatar": "O que é Notion Avatar Maker?",
-    "whatIsAvatarAnswer": "Notion Avatar Maker é uma ferramenta gratuita que permite criar avatares personalizados para usar no Notion, redes sociais ou qualquer outra plataforma digital.",
+    "whatIsAvatar": "O que é o Criador de Avatares?",
+    "whatIsAvatarAnswer": "O Criador de Avatares é uma ferramenta que permite criar avatares personalizados para usar em redes sociais ou qualquer plataforma digital.",
     "howToUse": "Como uso o editor de avatar?",
     "howToUseAnswer": "Simplesmente clique nas diferentes características faciais, penteados e acessórios para personalizar seu avatar. Use o botão de virar para mudar a orientação e o botão de fundo para ajustar o estilo de fundo.",
     "commercialUse": "Posso usar avatares para fins comerciais?",
-    "commercialUseAnswer": "Sim, todos os avatares criados com Notion Avatar são lançados sob a licença CC0, permitindo uso comercial sem atribuição.",
+    "commercialUseAnswer": "Sim, todos os avatares criados aqui são lançados sob a licença CC0, permitindo uso comercial sem atribuição.",
     "privacyConcerns": "Vocês coletam dados de usuários?",
     "privacyConcernsAnswer": "Não, não coletamos nem armazenamos dados de usuários. Toda a criação de avatar acontece localmente no seu navegador.",
     "supportedBrowsers": "Quais navegadores são suportados?",
-    "supportedBrowsersAnswer": "Notion Avatar funciona melhor em navegadores modernos, incluindo Chrome, Firefox, Safari e Edge. Internet Explorer não é suportado.",
-    "isBelongToNotion": "Notion Avatar Maker está afiliado ao Notion?",
-    "isBelongToNotionAnswer": "Não, Notion Avatar Maker não está afiliado ao Notion. É um projeto independente."
+    "supportedBrowsersAnswer": "Este app funciona melhor em navegadores modernos, incluindo Chrome, Firefox, Safari e Edge. Internet Explorer não é suportado.",
+    "isBelongToNotion": "O Criador de Avatares está afiliado a alguma empresa?",
+    "isBelongToNotionAnswer": "Não. É um projeto independente."
   },
   "ai": {
-    "title": "Avatar AI Notion",
-    "navTitle": "Notion AI Avatar",
-    "description": "Transforme suas fotos ou ideias em avatares estilo Notion com magia de AI.",
-    "heroSubtitle": "Transforme suas fotos ou descrições de texto em avatares únicos estilo Notion em apenas segundos",
+    "title": "Avatar IA",
+    "navTitle": "Avatar IA",
+    "description": "Transforme suas fotos ou ideias em avatares minimalistas em preto e branco com IA.",
+    "heroSubtitle": "Transforme suas fotos ou descrições em avatares únicos em preto e branco em apenas segundos",
     "heroCTA": "Começar",
     "photo2avatar": "Foto para Avatar",
     "text2avatar": "Texto para Avatar",
@@ -136,7 +136,7 @@
     "error": "Algo deu errado. Por favor, tente novamente.",
     "examples": {
       "photoTitle": "Transformação de Foto",
-      "photoDesc": "Veja como a AI transforma suas fotos reais em avatares estilo Notion",
+      "photoDesc": "Veja como a IA transforma suas fotos reais em avatares em preto e branco",
       "textTitle": "Exemplos de Geração de Texto",
       "textDesc": "Basta descrever o que você quer e a AI gerará para você",
       "before": "Antes",
@@ -149,9 +149,9 @@
     "features": {
       "title": "Recursos Poderosos de AI",
       "photo2avatarTitle": "Foto para Avatar",
-      "photo2avatarDesc": "Envie sua foto e a AI a reconhecerá e converterá automaticamente em um avatar estilo Notion, preservando suas características únicas",
+      "photo2avatarDesc": "Envie sua foto e a IA a reconhecerá e converterá automaticamente em um avatar em preto e branco, preservando suas características únicas",
       "text2avatarTitle": "Texto para Avatar",
-      "text2avatarDesc": "Simplesmente descreva as características do avatar que deseja e a AI gerará um avatar personalizado estilo Notion para você"
+      "text2avatarDesc": "Simplesmente descreva as características do avatar que deseja e a IA gerará um avatar personalizado em preto e branco para você"
     },
     "steps": {
       "title": "Como Funciona",
@@ -162,7 +162,7 @@
       "step3Title": "Geração de AI",
       "step3Desc": "Clique em gerar e a AI criará seu avatar em segundos",
       "step4Title": "Baixar e Usar",
-      "step4Desc": "Baixe seu avatar gerado e use-o no Notion, redes sociais e mais"
+      "step4Desc": "Baixe seu avatar gerado e use-o em qualquer lugar"
     },
     "pricing": {
       "title": "Escolha Seu Plano",
@@ -192,13 +192,13 @@
       "q4": "Posso usar avatares gerados comercialmente?",
       "a4": "Sim, todos os avatares gerados seguem a licença CC0 e podem ser usados para fins comerciais sem atribuição."
     },
-    "seoKeywords": "Gerador de Avatar AI,Criador de Avatar AI,Avatar AI Notion,Foto para Avatar AI,Texto para Avatar AI,Criador de Avatar AI,Avatar Estilo Notion AI,Avatar Gerado por AI,Gerador de Avatar AI Grátis,Criador de Avatar AI Online,Ferramenta de Avatar AI,Avatar de Inteligência Artificial,Gerador de Foto de Perfil AI,Design de Avatar AI,Gerador de Avatar Inteligente"
+    "seoKeywords": "Gerador de Avatar IA,Criador de Avatar IA,Foto para Avatar IA,Texto para Avatar IA,Avatar Gerado por IA,Gerador de Avatar IA Grátis,Criador de Avatar IA Online,Ferramenta de Avatar IA,Gerador de Foto de Perfil IA,Design de Avatar IA,Gerador de Avatar Inteligente"
   },
   "aiFeatureIntro": {
     "title": "Nova Funcionalidade de Gerador de Avatar AI",
-    "description": "Agora você pode usar tecnologia de AI para gerar rapidamente avatares estilo Notion!",
+    "description": "Agora você pode usar tecnologia de IA para gerar rapidamente avatares em preto e branco!",
     "feature1Title": "Foto para Avatar",
-    "feature1Desc": "Envie sua foto e a AI a converterá automaticamente em um avatar estilo Notion",
+    "feature1Desc": "Envie sua foto e a IA a converterá automaticamente em um avatar em preto e branco",
     "feature2Title": "Texto para Avatar",
     "feature2Desc": "Basta descrever o avatar que deseja e a AI o gerará para você",
     "tryNow": "Experimentar Agora",
@@ -242,7 +242,7 @@
   },
   "account": {
     "title": "Configurações da Conta",
-    "pageTitle": "Conta | Notion Avatar Maker",
+    "pageTitle": "Conta | Criador de Avatares",
     "profile": "Perfil",
     "subscription": "Assinatura",
     "unlimitedGenerations": "Gerações ilimitadas com assinatura Pro",
@@ -286,7 +286,7 @@
     }
   },
   "pricing": {
-    "pageTitle": "Preços | Notion Avatar Maker",
+    "pageTitle": "Preços | Criador de Avatares",
     "pageDescription": "Escolha o plano perfeito para suas necessidades de criação de avatar",
     "title": "Preços Simples e Transparentes",
     "description": "Escolha o plano que funciona melhor para você. Atualize a qualquer momento.",

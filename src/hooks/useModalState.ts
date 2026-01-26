@@ -1,9 +1,11 @@
 import { useState } from 'react';
 
-export const useModalStates = <T>(modalKeyMap: T) => {
-  const initModalStates = Object.keys(modalKeyMap).reduce(
-    (prev, cur) => Object.assign(prev, { [cur]: false }),
-    {} as { [key in keyof T]: boolean },
+export const useModalStates = <T extends Record<string, unknown>>(
+  modalKeyMap: T,
+) => {
+  const initModalStates = (Object.keys(modalKeyMap) as Array<keyof T>).reduce(
+    (prev, cur) => ({ ...prev, [cur]: false }),
+    {} as Record<keyof T, boolean>,
   );
   const [modalStates, setModalStates] = useState(initModalStates);
 

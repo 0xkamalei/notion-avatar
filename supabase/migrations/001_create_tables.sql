@@ -1,5 +1,5 @@
 -- =====================================================
--- Notion Avatar Maker - Database Schema
+-- Avatar Maker - Database Schema
 -- =====================================================
 
 -- 1. Create profiles table
@@ -214,4 +214,3 @@ INSERT INTO public.subscriptions (user_id, status, plan_type)
 SELECT id, 'inactive', 'free' FROM auth.users
 WHERE id NOT IN (SELECT user_id FROM public.subscriptions)
 ON CONFLICT (user_id) DO NOTHING;
-

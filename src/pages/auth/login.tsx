@@ -9,7 +9,7 @@ import toast, { Toaster } from 'react-hot-toast';
 import { useAuth } from '@/contexts/AuthContext';
 
 export default function LoginPage() {
-  useTranslation('common');
+  const { t } = useTranslation('common');
   const router = useRouter();
   const {
     signInWithGoogle,
@@ -88,7 +88,9 @@ export default function LoginPage() {
   return (
     <>
       <Head>
-        <title>{isSignUp ? 'Sign Up' : 'Login'} | Notion Avatar Maker</title>
+        <title>
+          {isSignUp ? t('auth.signUp') : t('auth.signIn')} | {t('siteTitle')}
+        </title>
       </Head>
 
       <div className="min-h-screen flex items-center justify-center bg-[#fffefc] px-4">
@@ -98,11 +100,11 @@ export default function LoginPage() {
           <div className="text-center mb-8">
             <Link href="/" className="inline-block">
               <h1 className="text-3xl font-bold text-gray-900">
-                Notion Avatar Maker
+                {t('siteTitle')}
               </h1>
             </Link>
             <p className="text-gray-600 mt-2">
-              {isSignUp ? 'Create your account' : 'Welcome back!'}
+              {isSignUp ? t('auth.createAccount') : t('auth.welcomeBack')}
             </p>
           </div>
 
