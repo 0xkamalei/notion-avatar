@@ -109,7 +109,7 @@ export default async function handler(
           quantity: 1,
         },
       ],
-      success_url: `${req.headers.origin}/ai-generator?success=true`,
+      success_url: `${req.headers.origin}/ai-avatar?success=true`,
       cancel_url: `${req.headers.origin}/pricing?canceled=true`,
       metadata: {
         user_id: user.id,

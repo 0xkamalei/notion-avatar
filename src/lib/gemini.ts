@@ -1,5 +1,5 @@
 import { GoogleGenAI } from '@google/genai';
-import { AIGenerationMode } from '@/types/ai';
+import { AIGenerationMode, AvatarStyle } from '@/types/ai';
 
 // Mock Avatar (Simple SVG)
 const MOCK_AVATAR_SVG = `<svg viewBox="0 0 1080 1080" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -14,7 +14,9 @@ const MOCK_AVATAR_BASE64 = `data:image/svg+xml;base64,${Buffer.from(
   MOCK_AVATAR_SVG,
 ).toString('base64')}`;
 
-const PHOTO_PROMPT = `Transform this photo into a minimalist black-and-white avatar illustration with these exact characteristics:
+const PROMPTS: Record<AvatarStyle, { photo: string; text: string }> = {
+  notion: {
+    photo: `Transform this photo into a minimalist black-and-white avatar illustration with these exact characteristics:
 - Pure black and white color scheme only
 - Simple black outline strokes for facial contours
 - Solid black fill for hair (no gradients, no strokes)
@@ -24,9 +26,8 @@ const PHOTO_PROMPT = `Transform this photo into a minimalist black-and-white ava
 - Completely flat design with NO shadows or gradients
 - Slight hand-drawn imperfection in lines
 - Head and shoulders composition only
-- Keep the person's key facial features recognizable but simplified`;
-
-const TEXT_PROMPT = `Generate a minimalist black-and-white portrait illustration based on this description:
+- Keep the person's key facial features recognizable but simplified`,
+    text: `Generate a minimalist black-and-white portrait illustration based on this description:
 - Pure black and white color scheme only
 - Simple black outline strokes for facial contours  
 - Solid black fill for hair (no gradients)
@@ -37,11 +38,60 @@ const TEXT_PROMPT = `Generate a minimalist black-and-white portrait illustration
 - Slight hand-drawn imperfection in lines
 - Head and shoulders composition only
 
-User description: `;
+User description: `,
+  },
+  ghibli: {
+    photo: `Transform this photo into a Studio Ghibli style anime character. Key characteristics:
+- Hand-drawn anime aesthetic similar to Miyazaki films
+- Soft, vibrant colors and lush palette
+- Expressive, wide eyes typical of the style
+- Detailed, painterly hair and clothes
+- Simple but atmospheric background (sky blue or grassy green tones)
+- Gentle lighting and shading
+- Whimsical and charming feel
+- Head and shoulders composition
+- Keep the person's key facial features recognizable but stylized`,
+    text: `Generate a Studio Ghibli style anime character portrait based on this description:
+- Hand-drawn anime aesthetic similar to Miyazaki films
+- Soft, vibrant colors and lush palette
+- Expressive, wide eyes
+- Detailed, painterly hair and clothes
+- Simple but atmospheric background
+- Gentle lighting and shading
+- Whimsical and charming feel
+- Head and shoulders composition
+
+User description: `,
+  },
+  oil_painting: {
+    photo: `Transform this photo into a classic oil painting portrait. Key characteristics:
+- Visible brush strokes and rich texture
+- Deep, resonant colors and tonal depth
+- Classical lighting (chiaroscuro) with dramatic shadows
+- Realistic proportions but painterly execution
+- Canvas texture effect
+- Elegant and timeless look
+- Neutral, dark, or textured background appropriate for a portrait
+- Head and shoulders composition
+- Maintain resemblance but with artistic interpretation`,
+    text: `Generate a classic oil painting portrait based on this description:
+- Visible brush strokes and rich texture
+- Deep, resonant colors and tonal depth
+- Classical lighting (chiaroscuro)
+- Realistic proportions but painterly execution
+- Canvas texture effect
+- Elegant and timeless look
+- Neutral, dark, or textured background
+- Head and shoulders composition
+
+User description: `,
+  },
+};
 
 export async function generateAvatar(
   mode: AIGenerationMode,
   input: string,
+  style: AvatarStyle = 'notion',
 ): Promise<string> {
   // 1. Mock Mode Check
   if (process.env.USE_MOCK_AI === 'true' || !process.env.GEMINI_API_KEY) {
@@ -65,6 +115,7 @@ export async function generateAvatar(
 
   try {
     let result;
+    const promptConfig = PROMPTS[style] || PROMPTS.notion;
 
     if (mode === 'photo2avatar') {
       // Input is base64 image (removed data:image/xxx;base64, prefix if needed)
@@ -76,7 +127,7 @@ export async function generateAvatar(
           {
             role: 'user',
             parts: [
-              { text: PHOTO_PROMPT },
+              { text: promptConfig.photo },
               { inlineData: { mimeType: 'image/jpeg', data: base64Data } },
             ],
           },
@@ -85,12 +136,13 @@ export async function generateAvatar(
       });
     } else {
       // Input is text description
+      const promptText = promptConfig.text;
       result = await genai.models.generateContent({
         model,
         contents: [
           {
             role: 'user',
-            parts: [{ text: `${TEXT_PROMPT}${input}` }],
+            parts: [{ text: `${promptText}${input}` }],
           },
         ],
         config: { responseModalities: ['IMAGE'] },

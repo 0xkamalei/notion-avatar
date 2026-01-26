@@ -1,7 +1,5 @@
 import type { GetServerSidePropsContext, NextPage } from 'next';
 import Head from 'next/head';
-import Link from 'next/link';
-import Image from 'next/legacy/image';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
@@ -13,9 +11,8 @@ import {
 } from '@/lib/seo';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import AvatarEditor from '@/components/AvatarEditor';
 
-const UseCases = dynamic(() => import('@/components/UseCases'), {
+const StyleExamples = dynamic(() => import('@/components/StyleExamples'), {
   loading: () => null,
 });
 
@@ -138,123 +135,8 @@ const Home: NextPage = () => {
 
       <Header />
       <main className="my-5">
-        <AvatarEditor />
-        <section className="py-16 my-12">
-          <div className="container mx-auto px-4 md:px-8">
-            <h2 className="text-2xl font-bold text-center mb-12 text-gray-900 ">
-              {t('steps.title')}
-            </h2>
-            <div className="max-w-3xl mx-auto space-y-8">
-              <div className="flex">
-                <div className="flex-shrink-0 w-10 h-10 rounded-full bg-black flex items-center justify-center text-white font-bold mr-4">
-                  1
-                </div>
-                <div>
-                  <h3 className="text-xl font-semibold text-gray-800 mb-2">
-                    {t('steps.step1Title')}
-                  </h3>
-                  <p className="text-gray-700 leading-relaxed">
-                    {t('steps.step1Desc')}
-                  </p>
-                </div>
-              </div>
-              <div className="flex">
-                <div className="flex-shrink-0 w-10 h-10 rounded-full bg-black flex items-center justify-center text-white font-bold mr-4">
-                  2
-                </div>
-                <div>
-                  <h3 className="text-xl font-semibold text-gray-800 mb-2">
-                    {t('steps.step2Title')}
-                  </h3>
-                  <p className="text-gray-700 leading-relaxed">
-                    {t('steps.step2Desc')}
-                  </p>
-                </div>
-              </div>
-              <div className="flex">
-                <div className="flex-shrink-0 w-10 h-10 rounded-full bg-black flex items-center justify-center text-white font-bold mr-4">
-                  3
-                </div>
-                <div>
-                  <h3 className="text-xl font-semibold text-gray-800 mb-2">
-                    {t('steps.step3Title')}
-                  </h3>
-                  <p className="text-gray-700 leading-relaxed">
-                    {t('steps.step3Desc')}
-                  </p>
-                </div>
-              </div>
-              <div className="flex">
-                <div className="flex-shrink-0 w-10 h-10 rounded-full bg-black flex items-center justify-center text-white font-bold mr-4">
-                  4
-                </div>
-                <div>
-                  <h3 className="text-xl font-semibold text-gray-800 mb-2">
-                    {t('steps.step4Title')}
-                  </h3>
-                  <p className="text-gray-700 leading-relaxed">
-                    {t('steps.step4Desc')}
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
         {/* Notion Avatar Hero Section */}
-        <section className="py-16 my-12">
-          <div className="container mx-auto px-4 md:px-8">
-            <div className="text-center mb-8">
-              <div className="relative inline-block mb-6">
-                <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 relative">
-                  {t('ai.title')}
-                </h2>
-                <div className="absolute -right-6 -top-4 md:-top-8 md:-right-12">
-                  <Image
-                    src="/icon/ai-stars.svg"
-                    width={48}
-                    height={48}
-                    alt="Stars"
-                  />
-                </div>
-              </div>
-              <p className="text-lg md:text-xl text-gray-700 max-w-2xl mx-auto mb-8 leading-relaxed">
-                {t('ai.heroSubtitle')}
-              </p>
-              <div className="mb-8">
-                <Image
-                  src="/image/avatar-diff.png"
-                  alt="Notion Avatar"
-                  width={1024}
-                  height={485}
-                  className="mx-auto"
-                  priority
-                  loading="eager"
-                />
-              </div>
-              <Link
-                href="/ai-generator"
-                className="inline-flex items-center gap-2 py-3 px-8 rounded-full bg-black text-white font-bold text-lg hover:scale-105 active:scale-95 transition-all shadow-lg hover:shadow-xl"
-              >
-                {t('ai.heroCTA')}
-                <svg
-                  className="w-5 h-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M13 7l5 5m0 0l-5 5m5-5H6"
-                  />
-                </svg>
-              </Link>
-            </div>
-          </div>
-        </section>
-
-        <UseCases />
+        <StyleExamples />
 
         <section className="py-16 my-12">
           <div className="container mx-auto px-4 md:px-8">

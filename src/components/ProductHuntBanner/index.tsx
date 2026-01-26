@@ -95,7 +95,7 @@ export default function ProductHuntBanner() {
           </div>
           <div className="flex items-center gap-2">
             <Link
-              href={buildLinkWithRef('/ai-generator')}
+              href={buildLinkWithRef('/ai-avatar')}
               className="px-3 py-1.5 bg-black text-white text-sm font-medium rounded-lg hover:bg-gray-800 transition-colors whitespace-nowrap"
             >
               {t('productHunt.tryAI')}

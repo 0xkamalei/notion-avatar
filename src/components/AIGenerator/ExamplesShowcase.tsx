@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { useTranslation } from 'next-i18next';
 import Image from 'next/legacy/image';
+import { AvatarStyle } from '@/types/ai';
 
 interface Example {
   before?: string;
@@ -10,6 +11,7 @@ interface Example {
 }
 
 interface ExamplesShowcaseProps {
+  style: AvatarStyle;
   onApplyPrompt?: (prompt: string) => void;
 }
 
@@ -125,56 +127,144 @@ function ImageComparison({
 }
 
 export default function ExamplesShowcase({
+  style,
   onApplyPrompt,
 }: ExamplesShowcaseProps) {
   const { t } = useTranslation('common');
 
-  // 示例数据 - 图片转换前后对比
-  const photoExamples: Example[] = [
+  // Notion Style Examples
+  const notionPhotoExamples: Example[] = [
     {
-      before:
-        'https://uclqvnpqvartezdtmgpn.supabase.co/storage/v1/object/public/static-resource/ai-image-demo1-final.png',
-      after:
-        'https://uclqvnpqvartezdtmgpn.supabase.co/storage/v1/object/public/static-resource/ai-image-demo1-original.png',
+      before: '/image/angelina.jpg',
+      after: '/examples/notion-1.png',
       type: 'photo2avatar',
     },
     {
-      before:
-        'https://uclqvnpqvartezdtmgpn.supabase.co/storage/v1/object/public/static-resource/ai-image-demo2-final.png',
-      after:
-        'https://uclqvnpqvartezdtmgpn.supabase.co/storage/v1/object/public/static-resource/ai-image-demo2-original.png',
+      before: '/image/jack-chen.jpeg',
+      after: '/examples/notion-2.png',
       type: 'photo2avatar',
     },
     {
-      before:
-        'https://uclqvnpqvartezdtmgpn.supabase.co/storage/v1/object/public/static-resource/ai-image-demo3-final.png',
-      after:
-        'https://uclqvnpqvartezdtmgpn.supabase.co/storage/v1/object/public/static-resource/ai-image-demo3-original.png',
+      before: '/image/smith.jpg',
+      after: '/examples/notion-3.png',
       type: 'photo2avatar',
     },
   ];
 
-  // 示例数据 - 提示词生成结果
-  const textExamples: Example[] = [
+  const notionTextExamples: Example[] = [
     {
-      after:
-        'https://uclqvnpqvartezdtmgpn.supabase.co/storage/v1/object/public/static-resource/notion-avatar-ai-1767027617275.png',
+      after: '/examples/notion-text-1.png',
       prompt: t('ai.examples.prompt1'),
       type: 'text2avatar',
     },
     {
-      after:
-        'https://uclqvnpqvartezdtmgpn.supabase.co/storage/v1/object/public/static-resource/notion-avatar-ai-1767027711321.png',
+      after: '/examples/notion-text-2.png',
       prompt: t('ai.examples.prompt2'),
       type: 'text2avatar',
     },
     {
-      after:
-        'https://uclqvnpqvartezdtmgpn.supabase.co/storage/v1/object/public/static-resource/notion-avatar-ai-1767027802302.png',
+      after: '/examples/notion-text-3.png',
       prompt: t('ai.examples.prompt3'),
       type: 'text2avatar',
     },
   ];
+
+  const ghibliPhotoExamples: Example[] = [
+    {
+      before: '/image/angelina.jpg',
+      after: '/examples/ghibli-1.png',
+      type: 'photo2avatar',
+    },
+    {
+      before: '/image/jack-chen.jpeg',
+      after: '/examples/ghibli-2.png',
+      type: 'photo2avatar',
+    },
+    {
+      before: '/image/smith.jpg',
+      after: '/examples/ghibli-3.png',
+      type: 'photo2avatar',
+    },
+  ];
+
+  const ghibliTextExamples: Example[] = [
+    {
+      after: '/examples/ghibli-text-1.png',
+      prompt: t('ai.examples.ghibliPrompt1'),
+      type: 'text2avatar',
+    },
+    {
+      after: '/examples/ghibli-text-2.png',
+      prompt: t('ai.examples.ghibliPrompt2'),
+      type: 'text2avatar',
+    },
+    {
+      after: '/examples/ghibli-text-3.png',
+      prompt: t('ai.examples.ghibliPrompt3'),
+      type: 'text2avatar',
+    },
+  ];
+
+  const oilPhotoExamples: Example[] = [
+    {
+      before: '/image/angelina.jpg',
+      after: '/examples/oil_painting-1.png',
+      type: 'photo2avatar',
+    },
+    {
+      before: '/image/jack-chen.jpeg',
+      after: '/examples/oil_painting-2.png',
+      type: 'photo2avatar',
+    },
+    {
+      before: '/image/smith.jpg',
+      after: '/examples/oil_painting-3.png',
+      type: 'photo2avatar',
+    },
+  ];
+
+  const oilTextExamples: Example[] = [
+    {
+      after: '/examples/oil_painting-text-1.png',
+      prompt: t('ai.examples.oilPrompt1'),
+      type: 'text2avatar',
+    },
+    {
+      after: '/examples/oil_painting-text-2.png',
+      prompt: t('ai.examples.oilPrompt2'),
+      type: 'text2avatar',
+    },
+    {
+      after: '/examples/oil_painting-text-3.png',
+      prompt: t('ai.examples.oilPrompt3'),
+      type: 'text2avatar',
+    },
+  ];
+
+  const getPhotoExamples = () => {
+    switch (style) {
+      case 'ghibli':
+        return ghibliPhotoExamples;
+      case 'oil_painting':
+        return oilPhotoExamples;
+      default:
+        return notionPhotoExamples;
+    }
+  };
+
+  const getTextExamples = () => {
+    switch (style) {
+      case 'ghibli':
+        return ghibliTextExamples;
+      case 'oil_painting':
+        return oilTextExamples;
+      default:
+        return notionTextExamples;
+    }
+  };
+
+  const photoExamples = getPhotoExamples();
+  const textExamples = getTextExamples();
 
   return (
     <section className="py-16 relative animate-in fade-in slide-in-from-bottom-4 duration-500">
@@ -183,7 +273,9 @@ export default function ExamplesShowcase({
         <div className="mb-20">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900 mb-4 inline-block relative">
-              <span className="relative">{t('ai.examples.photoTitle')}</span>
+              <span className="relative">
+                {t('ai.examples.photoTitle')} ({t(`ai.style.${style}`)})
+              </span>
               <span className="absolute top-[-32px] left-[-32px]">
                 <Image
                   src="/icon/bling.svg"
@@ -198,30 +290,15 @@ export default function ExamplesShowcase({
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {photoExamples.map((example) => (
-              <div
-                key={`photo-${example.before}-${example.after}`}
-                className="bg-white border-3 border-black rounded-lg p-6 transition-transform duration-200 shadow-sm"
-              >
-                {example.before ? (
-                  <ImageComparison
-                    before={example.before}
-                    after={example.after}
-                    beforeLabel={t('ai.examples.before')}
-                    afterLabel={t('ai.examples.after')}
-                  />
-                ) : (
-                  <div className="relative w-full aspect-square bg-white rounded-lg overflow-hidden border-3 border-black">
-                    <Image
-                      src={example.after}
-                      alt="After"
-                      layout="fill"
-                      objectFit="cover"
-                      className="rounded-lg"
-                    />
-                  </div>
-                )}
+              <div key={example.after} className="flex flex-col items-center">
+                <ImageComparison
+                  before={example.before!}
+                  after={example.after}
+                  beforeLabel={t('ai.examples.original')}
+                  afterLabel={t('ai.examples.generated')}
+                />
               </div>
             ))}
           </div>
@@ -229,75 +306,63 @@ export default function ExamplesShowcase({
 
         {/* Text to Avatar Examples */}
         <div>
-          <div className="text-center mb-12 relative">
+          <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900 mb-4 inline-block relative">
-              <span className="relative">{t('ai.examples.textTitle')}</span>
+              <span className="relative">
+                {t('ai.examples.textTitle')} ({t(`ai.style.${style}`)})
+              </span>
+              <span className="absolute top-[-32px] right-[-32px]">
+                <Image
+                  src="/icon/ai-magic.svg"
+                  width={32}
+                  height={32}
+                  alt="Magic"
+                />
+              </span>
             </h2>
             <p className="mt-4 text-gray-600 max-w-2xl mx-auto">
               {t('ai.examples.textDesc')}
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            {textExamples.map((example) => (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {textExamples.map((example, index) => (
               <div
-                key={`text-${example.after}-${example.prompt || ''}`}
-                className="bg-white border-3 border-black rounded-xl p-6 transition-transform duration-200 flex flex-col shadow-sm"
+                key={example.after}
+                className="group relative bg-white rounded-xl shadow-sm border-2 border-black overflow-hidden hover:shadow-xl transition-all duration-300"
               >
-                {/* Prompt */}
-                {example.prompt && (
-                  <div className="mb-4">
-                    <div className="bg-gray-50 border-3 border-gray-300 rounded-lg p-4">
-                      <div className="flex items-start gap-3">
-                        <div className="flex-shrink-0 mt-0.5">
-                          <svg
-                            className="w-5 h-5 text-black"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"
-                            />
-                          </svg>
-                        </div>
-                        <p className="text-sm text-gray-800 leading-relaxed flex-1 font-medium">
-                          &ldquo;{example.prompt}&rdquo;
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                )}
-
-                {/* Generated Avatar */}
-                <div className="relative flex-1 flex items-center justify-center mb-4">
-                  <div className="relative w-full aspect-square bg-white rounded-lg overflow-hidden border-3 border-black">
-                    <Image
-                      src={example.after}
-                      alt="Generated Avatar"
-                      layout="fill"
-                      objectFit="cover"
-                    />
-                  </div>
+                <div className="relative aspect-square overflow-hidden bg-gray-50">
+                  <Image
+                    src={example.after}
+                    alt={`Example ${index + 1}`}
+                    layout="fill"
+                    objectFit="cover"
+                    className="group-hover:scale-105 transition-transform duration-500"
+                  />
+                  {/* Overlay on hover */}
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-300" />
                 </div>
-
-                {/* Apply Button */}
-                {example.prompt && onApplyPrompt && (
+                <div className="p-5 bg-white border-t-2 border-black">
+                  <p className="text-sm text-gray-600 italic line-clamp-3 mb-4 min-h-[60px]">
+                    &quot;{example.prompt}&quot;
+                  </p>
                   <button
-                    onClick={() => {
-                      if (example.prompt) {
-                        onApplyPrompt(example.prompt);
-                      }
-                    }}
                     type="button"
-                    className="w-full py-3 px-4 rounded-full bg-black text-white font-bold text-sm transition-all border-3 border-black shadow-sm hover:shadow-md"
+                    onClick={() =>
+                      example.prompt && onApplyPrompt?.(example.prompt)
+                    }
+                    className="w-full py-2 px-4 bg-gray-50 hover:bg-black hover:text-white border-2 border-black rounded-lg text-sm font-bold transition-all duration-200 flex items-center justify-center gap-2"
                   >
+                    <Image
+                      src="/icon/ai-magic.svg"
+                      width={16}
+                      height={16}
+                      alt="Magic"
+                      className="group-hover:invert"
+                    />
                     {t('ai.examples.apply')}
                   </button>
-                )}
+                </div>
               </div>
             ))}
           </div>

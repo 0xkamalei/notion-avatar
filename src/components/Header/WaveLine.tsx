@@ -6,7 +6,7 @@ interface WaveLineProps {
 
 export default function WaveLine({ className = '' }: WaveLineProps) {
   const router = useRouter();
-  const isAIPage = router.pathname === '/ai-generator';
+  const isAIPage = router.pathname === '/ai-avatar';
 
   return (
     <svg

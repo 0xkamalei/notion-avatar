@@ -26,7 +26,7 @@
   "modalHint": "长按图片或者右键保存头像至本地相册",
   "modalCancel": "关闭",
   "modalConfirm": "确认",
-  "siteTitle": "头像生成器",
+  "siteTitle": "AI 头像",
   "siteDescription": "一个手绘风格头像制作工具，支持自定义面部特征、发型、眼镜、胡须和配饰，一键生成独特的个人头像。",
   "404Title": "啊哦！页面走丢了。",
   "404Redirect": "返回主页",
@@ -104,6 +104,17 @@
     "description": "使用 AI 将照片或文字描述转换为简洁黑白头像。",
     "heroSubtitle": "几秒钟内把照片或文字描述转换为简洁黑白头像",
     "heroCTA": "开始使用",
+    "styleTitles": {
+      "notion": "Notion 风格头像",
+      "ghibli": "吉卜力风格头像",
+      "oil_painting": "油画风格头像"
+    },
+    "style": {
+      "label": "选择风格",
+      "notion": "Notion 风格",
+      "ghibli": "吉卜力风格",
+      "oil_painting": "油画风格"
+    },
     "photo2avatar": "照片转头像",
     "text2avatar": "文字生成",
     "uploadTitle": "上传照片",
@@ -133,7 +144,13 @@
       "apply": "应用此提示词",
       "prompt1": "一个戴眼镜的长发女孩，微笑",
       "prompt2": "一个留着胡须的男性，戴帽子",
-      "prompt3": "一个短发女性，戴耳环，自信的表情"
+      "prompt3": "一个短发女性，戴耳环，自信的表情",
+      "ghibliPrompt1": "吉卜力风格的短发少女",
+      "ghibliPrompt2": "大眼睛微笑的男孩",
+      "ghibliPrompt3": "带有自然背景的魔法角色",
+      "oilPrompt1": "经典的男性肖像",
+      "oilPrompt2": "戴珍珠耳环的优雅女性",
+      "oilPrompt3": "留着胡须的老人"
     },
     "features": {
       "title": "强大的 AI 功能",
@@ -280,7 +297,7 @@
         "period": "每日",
         "description": "全站共享每日免费额度（每日重置）",
         "features": {
-          "1": "全站每天 1 次免费生成"
+          "1": "每天 1 次免费生成"
         },
         "buttonText": "已包含"
       },
@@ -396,5 +413,19 @@
     "redeemNow": "立即兑换",
     "signInToRedeem": "登录兑换",
     "tryAI": "试试 AI 头像"
+  },
+  "styleExamples": {
+    "title": "全新头像风格",
+    "description": "探索我们新增的 AI 艺术风格",
+    "ghibli": {
+      "title": "吉卜力风格",
+      "desc": "梦幻生动的吉卜力动画风格"
+    },
+    "oil": {
+      "title": "油画风格",
+      "desc": "经典质感的油画肖像"
+    },
+    "getStarted": "开始生成",
+    "moreComing": "更多风格敬请期待..."
   }
 }

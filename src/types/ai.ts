@@ -1,7 +1,9 @@
 export type AIGenerationMode = 'photo2avatar' | 'text2avatar';
+export type AvatarStyle = 'notion' | 'ghibli' | 'oil_painting';
 
 export interface AIGenerateRequest {
   mode: AIGenerationMode;
+  style?: AvatarStyle;
   image?: string; // Base64 for photo2avatar
   description?: string; // Text prompt for text2avatar
 }

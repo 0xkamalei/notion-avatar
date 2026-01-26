@@ -47,13 +47,45 @@ export default function Header() {
         {/* Desktop Navigation */}
         <nav className="hidden sm:flex items-center gap-4 relative z-10 mr-5">
           <Link
-            href="/ai-generator"
-            className="group flex items-center gap-2 px-4 py-2 transition-all relative text-black font-bold"
+            href="/ai-avatar"
+            className="group flex items-center gap-2 px-4 py-2 transition-all relative text-black font-bold hover:opacity-80"
           >
-            <span className="relative z-10">{t('ai.navTitle')}</span>
+            <span className="relative z-10">{t('ai.style.notion')}</span>
             <span
               className={`absolute top-[-24px] left-[-24px] pointer-events-none transition-all duration-300 ease-out ${
-                router.pathname === '/ai-generator'
+                router.asPath === '/ai-avatar'
+                  ? 'opacity-100 scale-100'
+                  : 'opacity-0 scale-0 group-hover:opacity-100 group-hover:scale-100'
+              }`}
+            >
+              <Image src="/icon/bling.svg" width={32} height={34} alt="Bling" />
+            </span>
+          </Link>
+
+          <Link
+            href="/ai-avatar/ghibli"
+            className="group flex items-center gap-2 px-4 py-2 transition-all relative text-black font-bold hover:opacity-80"
+          >
+            <span className="relative z-10">{t('ai.style.ghibli')}</span>
+            <span
+              className={`absolute top-[-24px] left-[-24px] pointer-events-none transition-all duration-300 ease-out ${
+                router.asPath === '/ai-avatar/ghibli'
+                  ? 'opacity-100 scale-100'
+                  : 'opacity-0 scale-0 group-hover:opacity-100 group-hover:scale-100'
+              }`}
+            >
+              <Image src="/icon/bling.svg" width={32} height={34} alt="Bling" />
+            </span>
+          </Link>
+
+          <Link
+            href="/ai-avatar/oil_painting"
+            className="group flex items-center gap-2 px-4 py-2 transition-all relative text-black font-bold hover:opacity-80"
+          >
+            <span className="relative z-10">{t('ai.style.oil_painting')}</span>
+            <span
+              className={`absolute top-[-24px] left-[-24px] pointer-events-none transition-all duration-300 ease-out ${
+                router.asPath === '/ai-avatar/oil_painting'
                   ? 'opacity-100 scale-100'
                   : 'opacity-0 scale-0 group-hover:opacity-100 group-hover:scale-100'
               }`}
@@ -190,21 +222,54 @@ export default function Header() {
                   <span>{t('menu.home')}</span>
                 </Link>
 
-                {/* AI Generator Link */}
-                <Link
-                  href="/ai-generator"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="group flex items-center gap-3 px-4 py-3 transition-all relative text-black font-bold rounded-lg hover:bg-gray-50 active:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2"
-                >
-                  <Image
-                    src="/icon/ai-stars.svg"
-                    alt="AI Stars"
-                    width={20}
-                    height={20}
-                    className="drop-shadow-sm"
-                  />
-                  <span className="relative z-10">{t('ai.title')}</span>
-                </Link>
+                {/* AI Generator Section */}
+                <div className="space-y-1">
+                  <div className="px-4 py-3 flex items-center gap-3 text-black font-bold">
+                    <Image
+                      src="/icon/ai-stars.svg"
+                      alt="AI Stars"
+                      width={20}
+                      height={20}
+                      className="drop-shadow-sm"
+                    />
+                    <span>{t('ai.title')}</span>
+                  </div>
+                  <div className="pl-11 pr-4 space-y-1">
+                    <Link
+                      href="/ai-avatar"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className={`block py-2 px-3 rounded-lg text-sm transition-colors ${
+                        router.asPath === '/ai-avatar'
+                          ? 'bg-gray-100 font-medium text-black'
+                          : 'text-gray-600 hover:bg-gray-50'
+                      }`}
+                    >
+                      {t('ai.style.notion')}
+                    </Link>
+                    <Link
+                      href="/ai-avatar/ghibli"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className={`block py-2 px-3 rounded-lg text-sm transition-colors ${
+                        router.asPath === '/ai-avatar/ghibli'
+                          ? 'bg-gray-100 font-medium text-black'
+                          : 'text-gray-600 hover:bg-gray-50'
+                      }`}
+                    >
+                      {t('ai.style.ghibli')}
+                    </Link>
+                    <Link
+                      href="/ai-avatar/oil_painting"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className={`block py-2 px-3 rounded-lg text-sm transition-colors ${
+                        router.asPath === '/ai-avatar/oil_painting'
+                          ? 'bg-gray-100 font-medium text-black'
+                          : 'text-gray-600 hover:bg-gray-50'
+                      }`}
+                    >
+                      {t('ai.style.oil_painting')}
+                    </Link>
+                  </div>
+                </div>
 
                 {/* Pricing Link */}
                 <Link

@@ -21,7 +21,7 @@ export default async function handler(
   }
 
   try {
-    const { mode, image, description } = req.body as AIGenerateRequest;
+    const { mode, style, image, description } = req.body as AIGenerateRequest;
 
     if (!mode || (mode !== 'photo2avatar' && mode !== 'text2avatar')) {
       return res.status(400).json({
@@ -119,7 +119,7 @@ export default async function handler(
 
     let generatedImage: string;
     try {
-      generatedImage = await generateAvatar(mode, input);
+      generatedImage = await generateAvatar(mode, input, style);
     } catch (generationError) {
       if (usedFree) {
         await serviceClient.rpc('refund_site_free_usage', { p_date: today });
