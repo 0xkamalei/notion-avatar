@@ -1,5 +1,19 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { createClient } from '@/lib/supabase/server';
+import { z } from 'zod';
+import { getSiteUrl } from '@/lib/site-url';
+
+const oauthSchema = z.object({
+  provider: z.enum(['google', 'github']),
+  next: z.string().optional(),
+});
+
+const passwordSchema = z.object({
+  email: z.string().email(),
+  password: z.string().min(1),
+});
+
+const requestSchema = z.union([oauthSchema, passwordSchema]);
 
 export default async function handler(
   req: NextApiRequest,
@@ -9,19 +23,20 @@ export default async function handler(
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const { provider, email, password } = req.body;
+  const parseResult = requestSchema.safeParse(req.body);
+  if (!parseResult.success) {
+    return res.status(400).json({ error: parseResult.error.issues[0].message });
+  }
 
   try {
     const supabase = createClient(req, res);
 
-    // OAuth login (Google/GitHub)
-    if (provider === 'google' || provider === 'github') {
-      const origin =
-        req.headers.origin || req.headers.referer?.replace(/\/$/, '') || '';
-      const { next } = req.body;
+    if ('provider' in parseResult.data) {
+      const siteUrl = getSiteUrl(req);
+      const { provider, next } = parseResult.data;
       const redirectTo = next
-        ? `${origin}/api/auth/callback?next=${encodeURIComponent(next)}`
-        : `${origin}/api/auth/callback`;
+        ? `${siteUrl}/api/auth/callback?next=${encodeURIComponent(next)}`
+        : `${siteUrl}/api/auth/callback`;
 
       const { data, error } = await supabase.auth.signInWithOAuth({
         provider,
@@ -38,8 +53,8 @@ export default async function handler(
       return res.status(200).json({ url: data.url });
     }
 
-    // Email/Password login
-    if (email && password) {
+    if ('email' in parseResult.data) {
+      const { email, password } = parseResult.data;
       const { data, error } = await supabase.auth.signInWithPassword({
         email,
         password,

@@ -1,6 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import Stripe from 'stripe';
 import { createClient } from '@/lib/supabase/server';
+import { getSiteUrl } from '@/lib/site-url';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: '2025-12-15.clover',
@@ -35,10 +36,12 @@ export default async function handler(
       return res.status(400).json({ error: 'No billing information found' });
     }
 
+    const siteUrl = getSiteUrl(req);
+
     // Create portal session
     const session = await stripe.billingPortal.sessions.create({
       customer: profile.stripe_customer_id,
-      return_url: `${req.headers.origin}/account`,
+      return_url: `${siteUrl}/account`,
     });
 
     return res.status(200).json({ url: session.url });

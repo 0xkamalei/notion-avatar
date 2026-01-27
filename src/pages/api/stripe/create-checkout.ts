@@ -1,9 +1,16 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import Stripe from 'stripe';
 import { createClient } from '@/lib/supabase/server';
+import { z } from 'zod';
+import { getSiteUrl } from '@/lib/site-url';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: '2025-12-15.clover',
+});
+
+const requestSchema = z.object({
+  packId: z.enum(['small', 'medium', 'large']).optional(),
+  priceType: z.literal('credits').optional().default('credits'),
 });
 
 export default async function handler(
@@ -15,6 +22,13 @@ export default async function handler(
   }
 
   try {
+    const parseResult = requestSchema.safeParse(req.body);
+    if (!parseResult.success) {
+      return res
+        .status(400)
+        .json({ error: parseResult.error.issues[0].message });
+    }
+
     const supabase = createClient(req, res);
     const {
       data: { user },
@@ -24,10 +38,7 @@ export default async function handler(
       return res.status(401).json({ error: 'Unauthorized' });
     }
 
-    const { packId, priceType } = req.body as {
-      packId?: 'small' | 'medium' | 'large';
-      priceType?: string;
-    };
+    const { packId, priceType } = parseResult.data;
 
     const resolvedPackId: 'small' | 'medium' | 'large' =
       packId || (priceType === 'credits' ? 'small' : 'small');
@@ -51,11 +62,12 @@ export default async function handler(
     };
 
     // Get or create Stripe customer
-    const { data: profile } = await supabase
+    const { data: profile, error: profileError } = await supabase
       .from('profiles')
       .select('stripe_customer_id')
       .eq('id', user.id)
       .single();
+    if (profileError && profileError.code !== 'PGRST116') throw profileError;
 
     let customerId = profile?.stripe_customer_id;
     let needsCreate = !customerId;
@@ -86,10 +98,11 @@ export default async function handler(
       customerId = customer.id;
 
       // Save customer ID to profile
-      await supabase
+      const { error: updateProfileError } = await supabase
         .from('profiles')
         .update({ stripe_customer_id: customerId })
         .eq('id', user.id);
+      if (updateProfileError) throw updateProfileError;
     }
 
     const { priceId, credits } = packConfig[resolvedPackId];
@@ -97,6 +110,8 @@ export default async function handler(
     if (!priceId) {
       return res.status(500).json({ error: 'Price not configured' });
     }
+
+    const siteUrl = getSiteUrl(req);
 
     // Create checkout session
     const session = await stripe.checkout.sessions.create({
@@ -109,8 +124,8 @@ export default async function handler(
           quantity: 1,
         },
       ],
-      success_url: `${req.headers.origin}/ai-avatar?success=true`,
-      cancel_url: `${req.headers.origin}/pricing?canceled=true`,
+      success_url: `${siteUrl}/ai-avatar?success=true`,
+      cancel_url: `${siteUrl}/pricing?canceled=true`,
       metadata: {
         user_id: user.id,
         price_type: 'credits',

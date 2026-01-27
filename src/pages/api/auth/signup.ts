@@ -1,6 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { createClient } from '@/lib/supabase/server';
 import { z } from 'zod';
+import { getSiteUrl } from '@/lib/site-url';
 
 const signupSchema = z.object({
   username: z
@@ -29,14 +30,13 @@ export default async function handler(
 
   try {
     const supabase = createClient(req, res);
-    const origin =
-      req.headers.origin || req.headers.referer?.replace(/\/$/, '') || '';
+    const siteUrl = getSiteUrl(req);
 
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
       options: {
-        emailRedirectTo: `${origin}/api/auth/callback`,
+        emailRedirectTo: `${siteUrl}/api/auth/callback`,
         data: {
           name: username,
           full_name: username,

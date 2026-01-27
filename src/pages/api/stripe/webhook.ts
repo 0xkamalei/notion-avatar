@@ -7,7 +7,7 @@ const stripeSecretKey = process.env.STRIPE_SECRET_KEY || '';
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET || '';
 
 const stripe = new Stripe(stripeSecretKey, {
-  apiVersion: '2025-05-28.basil' as Stripe.LatestApiVersion,
+  apiVersion: '2025-12-15.clover' as Stripe.LatestApiVersion,
 });
 
 export const config = {
@@ -16,13 +16,38 @@ export const config = {
   },
 };
 
-async function getRawBody(req: NextApiRequest): Promise<Buffer> {
+async function getRawBody(
+  req: NextApiRequest,
+  limitBytes = 1024 * 1024,
+): Promise<Buffer> {
   return new Promise((resolve, reject) => {
     const chunks: Uint8Array[] = [];
-    req.on('data', (chunk: Uint8Array) => chunks.push(chunk));
+    let totalBytes = 0;
+    req.on('data', (chunk: Uint8Array) => {
+      totalBytes += chunk.byteLength;
+      if (totalBytes > limitBytes) {
+        reject(new Error('Payload too large'));
+        req.destroy();
+        return;
+      }
+      chunks.push(chunk);
+    });
     req.on('end', () => resolve(Buffer.concat(chunks)));
     req.on('error', reject);
   });
+}
+
+function isUniqueViolation(error: unknown): boolean {
+  if (!error || typeof error !== 'object') return false;
+  const anyError = error as { code?: unknown; message?: unknown };
+  if (anyError.code === '23505') return true;
+  if (
+    typeof anyError.message === 'string' &&
+    anyError.message.includes('duplicate')
+  ) {
+    return true;
+  }
+  return false;
 }
 
 export default async function handler(
@@ -34,7 +59,8 @@ export default async function handler(
   }
 
   const buf = await getRawBody(req);
-  const sig = req.headers['stripe-signature'] || '';
+  const sigHeader = req.headers['stripe-signature'];
+  const sig = Array.isArray(sigHeader) ? sigHeader[0] : sigHeader || '';
 
   let event: Stripe.Event;
 
@@ -50,6 +76,20 @@ export default async function handler(
   const supabase = createServiceClient();
 
   try {
+    const { error: eventInsertError } = await supabase
+      .from('stripe_webhook_events')
+      .insert({
+        event_id: event.id,
+        event_type: event.type,
+        livemode: event.livemode,
+      });
+    if (eventInsertError) {
+      if (isUniqueViolation(eventInsertError)) {
+        return res.status(200).json({ received: true });
+      }
+      throw eventInsertError;
+    }
+
     switch (event.type) {
       case 'checkout.session.completed': {
         const session = event.data.object as Stripe.Checkout.Session;
@@ -95,10 +135,18 @@ export default async function handler(
 
           if (upsertError) {
             console.error('Subscription upsert error:', upsertError);
+            throw upsertError;
           } else {
             console.log('Subscription updated successfully for user:', userId);
           }
         } else if (priceType === 'credits') {
+          if (
+            !session.payment_intent ||
+            typeof session.payment_intent !== 'string'
+          ) {
+            break;
+          }
+
           const creditsAmount = Number.parseInt(
             session.metadata?.credits_amount || '0',
             10,
@@ -108,12 +156,19 @@ export default async function handler(
               ? creditsAmount
               : 100;
 
-          await supabase.from('credit_packages').insert({
-            user_id: userId,
-            credits_purchased: creditsToGrant,
-            credits_remaining: creditsToGrant,
-            stripe_payment_intent_id: session.payment_intent as string,
-          });
+          const { error: creditsInsertError } = await supabase
+            .from('credit_packages')
+            .insert({
+              user_id: userId,
+              credits_purchased: creditsToGrant,
+              credits_remaining: creditsToGrant,
+              stripe_payment_intent_id: session.payment_intent,
+            });
+          if (creditsInsertError) {
+            if (!isUniqueViolation(creditsInsertError)) {
+              throw creditsInsertError;
+            }
+          }
         }
         break;
       }
@@ -163,7 +218,7 @@ export default async function handler(
           planType = 'monthly';
         }
 
-        await supabase
+        const { error: subscriptionUpdateError } = await supabase
           .from('subscriptions')
           .update({
             status,
@@ -173,19 +228,21 @@ export default async function handler(
             cancel_at_period_end: subscriptionData.cancel_at_period_end,
           })
           .eq('stripe_subscription_id', subscriptionData.id);
+        if (subscriptionUpdateError) throw subscriptionUpdateError;
         break;
       }
 
       case 'customer.subscription.deleted': {
         const subscriptionData = event.data.object as any;
 
-        await supabase
+        const { error: subscriptionDeleteError } = await supabase
           .from('subscriptions')
           .update({
             status: 'canceled',
             plan_type: 'free',
           })
           .eq('stripe_subscription_id', subscriptionData.id);
+        if (subscriptionDeleteError) throw subscriptionDeleteError;
         break;
       }
 
@@ -193,12 +250,13 @@ export default async function handler(
         const invoiceData = event.data.object as any;
 
         if (invoiceData.subscription) {
-          await supabase
+          const { error: invoiceUpdateError } = await supabase
             .from('subscriptions')
             .update({
               status: 'past_due',
             })
             .eq('stripe_subscription_id', invoiceData.subscription as string);
+          if (invoiceUpdateError) throw invoiceUpdateError;
         }
         break;
       }

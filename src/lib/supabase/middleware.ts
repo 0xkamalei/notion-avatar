@@ -1,11 +1,9 @@
 import { createServerClient } from '@supabase/ssr';
 import { NextResponse, NextRequest } from 'next/server';
 
-// 从 request.cookies 中获取所有 cookies（兼容旧版 Next.js）
 function getAllCookies(request: NextRequest) {
   const cookies: { name: string; value: string }[] = [];
 
-  // 从 Cookie header 解析
   const cookieHeader = request.headers.get('cookie') || '';
   cookieHeader.split(';').forEach((cookie) => {
     const [name, ...rest] = cookie.split('=');

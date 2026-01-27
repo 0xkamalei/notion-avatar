@@ -8,10 +8,7 @@ import type { GetServerSidePropsContext } from 'next';
 import toast, { Toaster } from 'react-hot-toast';
 import Image from 'next/legacy/image';
 import { useAuth } from '@/contexts/AuthContext';
-import {
-  createServerSideClient,
-  createServiceClient,
-} from '@/lib/supabase/server';
+import { createServerSideClient } from '@/lib/supabase/server';
 import {
   getCanonicalUrl,
   getHreflangLinks,
@@ -560,6 +557,7 @@ export async function getServerSideProps(
       .limit(10);
 
     if (usageData) {
+      const { createServiceClient } = await import('@/lib/supabase/server');
       const serviceClient = createServiceClient();
       usageHistory = await Promise.all(
         usageData.map(async (record) => {
