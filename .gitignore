@@ -45,3 +45,5 @@ scripts/local
 .env
 
 config.toml
+
+.idea/

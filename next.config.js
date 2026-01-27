@@ -1,5 +1,20 @@
-const withPWA = require('next-pwa');
-const runtimeCaching = require('next-pwa/cache');
+const withPWA = require('@ducanh2912/next-pwa').default({
+  dest: 'public',
+  register: true,
+  skipWaiting: true,
+  disable: process.env.NODE_ENV === 'development',
+  buildExcludes: [
+    /middleware-manifest\.json$/,
+    /middleware-build-manifest\.js$/,
+    /.*\/middleware-build-manifest\.js$/,
+    /.*\/server\/.*\.js$/,
+    /.*\/server\/.*\.json$/,
+    /.*\/_next\/server\/.*/,
+    /.*\/_next\/server\/middleware.*/,
+  ],
+  publicExcludes: ['!**/server/**', '!**/_next/server/**'],
+});
+
 const { i18n } = require('./next-i18next.config');
 
 module.exports = withPWA({
@@ -70,32 +85,12 @@ module.exports = withPWA({
       },
     ];
   },
-  pwa: {
-    dest: 'public',
-    register: true,
-    skipWaiting: true,
-    disable: process.env.NODE_ENV === 'development',
-    runtimeCaching,
-    buildExcludes: [
-      /middleware-manifest\.json$/,
-      /middleware-build-manifest\.js$/,
-      /.*\/middleware-build-manifest\.js$/,
-      /.*\/server\/.*\.js$/,
-      /.*\/server\/.*\.json$/,
-      /.*\/_next\/server\/.*/,
-      /.*\/_next\/server\/middleware.*/,
-    ],
-    publicExcludes: ['!**/server/**', '!**/_next/server/**'],
-  },
   webpack: (config) => {
     config.module.rules.push({
       test: /\.svg$/,
       use: 'raw-loader',
     });
     return config;
-  },
-  eslint: {
-    ignoreDuringBuilds: true,
   },
   typescript: {
     ignoreBuildErrors: true,
