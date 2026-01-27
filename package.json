@@ -26,6 +26,9 @@
     "./src/**/*.{ts,js,jsx,tsx}": [
       "bun run lint --fix",
       "bun run format"
+    ],
+    "public/icon/**/*.svg": [
+      "svgo"
     ]
   },
   "dependencies": {
