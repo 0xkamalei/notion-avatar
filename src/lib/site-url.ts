@@ -4,7 +4,10 @@ export function getSiteUrl(
   req?: Pick<NextApiRequest, 'headers'>,
   fallback = 'http://localhost:3000',
 ): string {
-  const explicit = process.env.NEXT_PUBLIC_SITE_URL || process.env.SITE_URL;
+  const explicit =
+    process.env.NEXT_PUBLIC_SITE_URL ||
+    process.env.NEXT_PUBLIC_URL ||
+    process.env.SITE_URL;
   if (explicit) return explicit.replace(/\/$/, '');
 
   const host = req?.headers?.host;
