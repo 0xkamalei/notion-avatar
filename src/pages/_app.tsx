@@ -8,6 +8,8 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import Script from 'next/script';
 
 import { Toaster } from 'react-hot-toast';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { Agentation } from 'agentation';
 import { AuthProvider } from '@/contexts/AuthContext';
 import * as ga from '../lib/ga';
 
@@ -46,17 +48,18 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
     <>
       {/* Google Analytics - 使用 Script 组件延迟加载以减少强制重排 */}
-      {process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS && (
-        <>
-          <Script
-            strategy="afterInteractive"
-            src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
-          />
-          <Script
-            id="google-analytics"
-            strategy="afterInteractive"
-            dangerouslySetInnerHTML={{
-              __html: `
+      {process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS &&
+        process.env.NODE_ENV === 'production' && (
+          <>
+            <Script
+              strategy="afterInteractive"
+              src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
+            />
+            <Script
+              id="google-analytics"
+              strategy="afterInteractive"
+              dangerouslySetInnerHTML={{
+                __html: `
                 window.dataLayer = window.dataLayer || [];
                 function gtag(){dataLayer.push(arguments);}
                 gtag('js', new Date());
@@ -64,14 +67,15 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
                   page_path: window.location.pathname,
                 });
               `,
-            }}
-          />
-        </>
-      )}
+              }}
+            />
+          </>
+        )}
       <QueryClientProvider client={queryClient}>
         <AuthProvider>
           <AnyComponent {...pageProps} />
           <Toaster />
+          <Agentation />
         </AuthProvider>
       </QueryClientProvider>
     </>

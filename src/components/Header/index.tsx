@@ -232,7 +232,7 @@ export default function Header() {
                       height={20}
                       className="drop-shadow-sm"
                     />
-                    <span>{t('ai.title')}</span>
+                    <span>{t('ai.navTitle')}</span>
                   </div>
                   <div className="pl-11 pr-4 space-y-1">
                     <Link
